@@ -3,12 +3,9 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/Users/maxnethercott/NetBeansProjects/XYZ%20Web%20Application/src/java/control/LoginServlet.java</file>
-            <file>file:/Users/maxnethercott/NetBeansProjects/XYZ%20Web%20Application/src/java/model/Member.java</file>
-            <file>file:/Users/maxnethercott/NetBeansProjects/XYZ%20Web%20Application/web/memberPage.jsp</file>
-            <file>file:/Users/maxnethercott/NetBeansProjects/XYZ%20Web%20Application/web/login.jsp</file>
-            <file>file:/Users/maxnethercott/NetBeansProjects/XYZ%20Web%20Application/src/java/model/LoginController.java</file>
-            <file>file:/Users/maxnethercott/NetBeansProjects/XYZ%20Web%20Application/web/WEB-INF/web.xml</file>
+            <file>file:/C:/Users/James%20Harris/Documents/GitHub/XYZ-Web-Application/web/WEB-INF/web.xml</file>
+            <file>file:/C:/Users/James%20Harris/Documents/GitHub/XYZ-Web-Application/nbproject/build-impl.xml</file>
+            <file>file:/C:/Users/James%20Harris/Documents/GitHub/XYZ-Web-Application/web/memberPage.jsp</file>
         </group>
     </open-files>
 </project-private>
