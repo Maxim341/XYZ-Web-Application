@@ -26,6 +26,8 @@ body{
 	font-size: 12px;
 }
 
+
+
 .body{
 	position: absolute;
 	top: -20px;
@@ -150,6 +152,9 @@ body{
 ::-moz-input-placeholder{
    color: rgba(255,255,255,0.6);
 }
+
+
+
     </style>
      
      
@@ -159,8 +164,12 @@ body{
   <div class="body"></div>
 		<div class="grad"></div>
 		<div class="header">
-<div>XYZ<span>Registration</span></div>
-		</div>
+                    
+                    <h1>XYZ Registration</h1>
+		
+                
+                </div>
+                
 		<br>
 		<div class="login">
                     <form action="LoginServlet" method="post">
