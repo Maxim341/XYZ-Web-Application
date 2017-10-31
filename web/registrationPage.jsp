@@ -1,13 +1,16 @@
+<%-- 
+    Document   : registrationPage
+    Created on : 31-Oct-2017, 11:00:42
+    Author     : maxnethercott
+--%>
 
-
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html >
-<head>
-  <meta charset="UTF-8">
-  <title>XYZ Login Form</title>
-  
-  
-  
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+     <title>JSP Page</title>
+     
       <style>
       /* NOTE: The styles were added inline because Prefixfree needs access to your styles and they must be inlined if they are on local disk! */
       @import url(https://fonts.googleapis.com/css?family=Exo:100,200,400);
@@ -31,10 +34,7 @@ body{
 	bottom: -40px;
 	width: auto;
 	height: auto;
-	background-image: url(http://ginva.com/wp-content/uploads/2012/07/city-skyline-wallpapers-008.jpg);
-	background-size: cover;
-	-webkit-filter: blur(5px);
-	z-index: 0;
+	
 }
 
 .grad{
@@ -151,29 +151,24 @@ body{
    color: rgba(255,255,255,0.6);
 }
     </style>
-
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/prefixfree/1.0.7/prefixfree.min.js"></script>
-
-</head>
-
-<body>
+     
+     
+     
+    </head>
+   <body>
   <div class="body"></div>
 		<div class="grad"></div>
 		<div class="header">
-			<div>XYZ<span>Login</span></div>
+<div>XYZ<span>Registration</span></div>
 		</div>
 		<br>
 		<div class="login">
                     <form action="LoginServlet" method="post">
-				<input type="text" placeholder="username" name="username"><br>
-				<input type="password" placeholder="password" name="password"><br>
-				<input type="Submit" value="Login">   
-                                </form>
-                    
-                    
-                    <form action="registrationPage.jsp" class="inline">
-                        <button class="float-left submit-button" >register</button>
-                    </form>
+                                    <input type="text" placeholder="Full Name" name="name"><br>
+                                    <input type="text" placeholder="address" name="address"><br>
+                                    <input type="text" placeholder="DOB" name="DOB"><br>
+                                    <input type="Submit" value="Register">
+                                    </form>
 		</div>
   <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
 
