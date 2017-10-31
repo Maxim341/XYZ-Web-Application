@@ -79,7 +79,7 @@ public class JDBCWrapper {
     public Statement getStatement() {
         return statement;
     }
-
+    
     public void setStatement(Statement statement) {
         this.statement = statement;
     }
