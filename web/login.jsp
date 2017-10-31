@@ -167,8 +167,13 @@ body{
                     <form action="LoginServlet" method="post">
 				<input type="text" placeholder="username" name="username"><br>
 				<input type="password" placeholder="password" name="password"><br>
-				<input type="Submit" value="Login">
+				<input type="Submit" value="Login">   
                                 </form>
+                    
+                    
+                    <form action="registrationPage.jsp" class="inline">
+                        <button class="float-left submit-button" >register</button>
+                    </form>
 		</div>
   <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
 
