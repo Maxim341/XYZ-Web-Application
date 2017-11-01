@@ -2,6 +2,7 @@ package model;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Random;
 
 /**
  *
@@ -46,4 +47,23 @@ public class LoginController {
         }      
         return false;
     }
+    
+    
+    public String createPassword() {
+        String password = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
+        StringBuilder builder = new StringBuilder();
+        Random rnd = new Random();
+        while (builder.length() < 6) { // length of the random string.
+            int index = (int) (rnd.nextFloat() * password.length());
+            builder.append(password.charAt(index));
+        }
+        String finalPass = builder.toString();
+        System.out.println(finalPass);
+        return finalPass;
+
+    }
+    
+    
+    
+    
 }
