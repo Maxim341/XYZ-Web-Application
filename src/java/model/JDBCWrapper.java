@@ -50,6 +50,16 @@ public class JDBCWrapper {
         return ret;
     }
     
+    public void createStatement()
+    {
+        try {
+            statement = con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+        } catch (SQLException ex) {
+            Logger.getLogger(JDBCWrapper.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    //The resultSet requires an initalised statement. Call createStatment first.
     public void createResultSet(String query) throws NullPointerException
     {
         try {
@@ -58,15 +68,6 @@ public class JDBCWrapper {
             Logger.getLogger(JDBCWrapper.class.getName()).log(Level.SEVERE, null, ex);
         } catch (NullPointerException ex){
             System.err.println("A STATEMENT HAS NOT BEEN INITALISED. CALL CREATESTATEMENT ON OBJECT FIRST BEFORE CREATING A RESULT SET.");
-        }
-    }
-    
-    public void createStatement()
-    {
-        try {
-            statement = con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-        } catch (SQLException ex) {
-            Logger.getLogger(JDBCWrapper.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

@@ -19,9 +19,8 @@ public class LoginController {
         try {
             // create connection
             JDBCWrapper wrapper = new JDBCWrapper("org.apache.derby.jdbc.ClientDriver", "jdbc:derby://localhost:1527/XYZ Web Application DB", "root", "root");
+            wrapper.createStatement();
             wrapper.createResultSet("select * from USERS");
-                        wrapper.createStatement();
-
 
             // iterate through the java resultset
             while (wrapper.getResultSet().next()) {
