@@ -20,7 +20,8 @@ public class LoginController {
             // create connection
             JDBCWrapper wrapper = new JDBCWrapper("org.apache.derby.jdbc.ClientDriver", "jdbc:derby://localhost:1527/XYZ Web Application DB", "root", "root");
             wrapper.createResultSet("select * from USERS");
-            wrapper.createStatement();
+                        wrapper.createStatement();
+
 
             // iterate through the java resultset
             while (wrapper.getResultSet().next()) {
@@ -30,6 +31,10 @@ public class LoginController {
 
                 users.add(new User(id,password,status));
                 
+            }
+            for(int i = 0; i != users.size(); ++i)
+            {
+                System.out.println("Username " + i + ": " + users.get(i).getPassword());
             }
             wrapper.getStatement().close();
         } catch (SQLException e) {

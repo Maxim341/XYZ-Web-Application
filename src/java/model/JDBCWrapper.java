@@ -50,12 +50,14 @@ public class JDBCWrapper {
         return ret;
     }
     
-    public void createResultSet(String query)
+    public void createResultSet(String query) throws NullPointerException
     {
         try {
             resultSet = statement.executeQuery(query);
         } catch (SQLException ex) {
             Logger.getLogger(JDBCWrapper.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (NullPointerException ex){
+            System.err.println("A STATEMENT HAS NOT BEEN INITALISED. CALL CREATESTATEMENT ON OBJECT FIRST BEFORE CREATING A RESULT SET.");
         }
     }
     
