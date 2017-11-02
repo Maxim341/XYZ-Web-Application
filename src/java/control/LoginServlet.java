@@ -42,8 +42,8 @@ public class LoginServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
-        LoginController lc = new LoginController();
-        lc.readUsers();
+        // LoginController lc = new LoginController();
+       // lc.readUsers();
         
         String username, password;
 
@@ -51,6 +51,7 @@ public class LoginServlet extends HttpServlet {
         password = request.getParameter("password");
 
         LoginController loginService = new LoginController();
+        loginService.readUsers();
         boolean result = loginService.authenticate(username, password);
 
         if (result == true) {
