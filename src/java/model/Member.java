@@ -11,36 +11,52 @@ import javax.mail.Address;
 public class Member {
     
     //variables
-    private Address address;
+    private String username;
+    private String fullName;
+    
+    private String address;
     private Date DOB;
     private Date registration;
     
-    private String username;
-    private String password;
-    
-    
-    
-    
+    private String status;
+    private float balance;
+  
     //Constructor
-
-    public Member(String username, String password, Address address, Date DOB, Date registration) {
+    public Member(String username, String fullName, String address, Date DOB, Date registration, String status, float balance) {
         this.username = username;
-        this.password = password;
+        this.fullName = fullName;
         this.DOB=DOB;
         this.address = address;
         this.registration = registration;
+        this.status = status;
+        this.balance = balance;
     }
+    
+   
 
-    
-    
-    //Getters and Setters
-    
-    public Address getAddress() {
+    public String getAddress() {
         return address;
     }
 
-    public void setAddress(Address address) {
+    public void setAddress(String address) {
         this.address = address;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public float getBalance() {
+        return balance;
+    }
+
+    //Getters and Setters
+    public void setBalance(float balance) {
+        this.balance = balance;
     }
 
     public Date getDOB() {
@@ -67,12 +83,12 @@ public class Member {
         this.username = username;
     }
 
-    public String getPassword() {
-        return password;
+    public String getFullName() {
+        return fullName;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setFullName(String password) {
+        this.fullName = password;
     }
     
     
