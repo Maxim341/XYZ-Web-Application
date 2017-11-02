@@ -34,10 +34,6 @@ public class LoginController {
                 users.add(new User(id,password,status));
                 
             }
-            for(int i = 0; i != users.size(); ++i)
-            {
-                System.out.println("Username " + i + ": " + users.get(i).getPassword());
-            }
             wrapper.getStatement().close();
         } catch (SQLException e) {
             System.err.println("Got an exception! ");
@@ -45,11 +41,13 @@ public class LoginController {
         }
     }
 
-    public boolean authenticate(String username, String password) {
-        if (password == null || password.trim().isEmpty()) {
-            return false;
-        }
-        return true;
+    public boolean authenticate(String id, String password) {
+        for(int i = 0; i != users.size(); ++i)
+        {
+            if(password.equals(users.get(i).getPassword()) && id.equals(users.get(i).getId()))
+                return true;
+        }      
+        return false;
     }
     
     
