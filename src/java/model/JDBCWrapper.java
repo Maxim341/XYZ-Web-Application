@@ -70,6 +70,19 @@ public class JDBCWrapper {
             System.err.println("A STATEMENT HAS NOT BEEN INITALISED. CALL CREATESTATEMENT ON OBJECT FIRST BEFORE CREATING A RESULT SET.");
         }
     }
+    
+    //Takes the table name, column and value to search for. If found returns true and result set to the record.
+    public boolean findRecord(String table, String column, String searchValue)
+    {
+        createResultSet("select * from "+table+" where \""+column+"\" = '" + searchValue + "'");
+        try {
+            if(this.getResultSet().next())
+                return true;
+        } catch (SQLException ex) {
+            Logger.getLogger(JDBCWrapper.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
+    }
 
     public Connection getCon() {
         return con;

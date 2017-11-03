@@ -2,6 +2,9 @@ package control;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -49,13 +52,13 @@ public class LoginServlet extends HttpServlet {
 
         LoginController loginService = new LoginController();
         loginService.readUsers();
-        boolean result = loginService.authenticate(username, password);
+        boolean result = authenticate(username, password);
 
-        if (result == true) {
+        if (result) {
             response.sendRedirect("memberPage.jsp");
             return;
         } else {
-            response.sendRedirect("login.jsp");
+            response.sendRedirect("login.jsp");            
         }
     }
 
@@ -69,4 +72,13 @@ public class LoginServlet extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
+    public boolean authenticate(String id, String password)
+    {
+        JDBCWrapper wrapper = new JDBCWrapper("org.apache.derby.jdbc.ClientDriver", "jdbc:derby://localhost:1527/XYZ Web Application DB", "root", "root");
+        wrapper.createStatement();
+        if(wrapper.findRecord("users", "id", id) && wrapper.findRecord("users", "password", password))
+            return true;
+        return false;
+    }
+    
 }
