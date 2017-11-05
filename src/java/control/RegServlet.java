@@ -18,9 +18,11 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import model.JDBCWrapper;
 import model.LoginController;
 import model.Member;
 import model.User;
+import model.XYZWebApplicationDB;
 
 /**
  *
@@ -71,7 +73,7 @@ public class RegServlet extends HttpServlet {
         userID = request.getParameter("user ID");
         fullName = request.getParameter("full name");
         address = request.getParameter("address");
-        DateFormat df = new SimpleDateFormat("dd/mm/yyyy");
+        DateFormat df = new SimpleDateFormat("dd/MM/yy");
         try {
             dob = df.parse(request.getParameter("DOB"));
         } catch (ParseException ex) {
@@ -81,6 +83,9 @@ public class RegServlet extends HttpServlet {
 
         lc.members.add(new Member(userID, fullName, address, dob, dor, "APPROVED", 0));
         lc.users.add(new User(userID, lc.createPassword(), "APPROVED"));
+        
+        //Inserting members with data provided above^^
+        new XYZWebApplicationDB().insertMember(lc.members.get(0));
         
         response.sendRedirect("login.jsp");
 
