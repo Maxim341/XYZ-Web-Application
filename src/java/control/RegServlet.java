@@ -86,6 +86,7 @@ public class RegServlet extends HttpServlet {
         
         //Inserting members with data provided above^^
         new XYZWebApplicationDB().insertMember(lc.members.get(0));
+        new XYZWebApplicationDB().insertUser(lc.users.get(0));
         
         response.sendRedirect("login.jsp");
 
