@@ -7,7 +7,7 @@
     </head>
     <body>
         <div class="login">
-            <form method="post" action="RegServlet">
+            <form method="post" action="Registration">
                 <center>
                     <table border="1" width="30%" cellpadding="5">
                         <thead>

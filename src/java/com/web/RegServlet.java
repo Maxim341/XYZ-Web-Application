@@ -70,8 +70,9 @@ public class RegServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        LoginController lc = new LoginController();
 
+        LoginController lc = new LoginController();
+        
         String userID, fullName, address;
         Date dob = new Date();
 
@@ -86,14 +87,17 @@ public class RegServlet extends HttpServlet {
         }
         Date dor = new Date();
 
-        lc.members.add(new Member(userID, fullName, address, dob, dor, "APPROVED", 0));
-        lc.users.add(new User(userID, lc.createPassword(), "APPROVED"));
+        Member m = new Member(userID, fullName, address, dob, dor, "APPROVED", 0);
+        User u = new User(userID, lc.createPassword(), "APPROVED");
         
         //Inserting members with data provided above^^
-        new XYZWebApplicationDB().insertMember(lc.members.get(0));
-        new XYZWebApplicationDB().insertUser(lc.users.get(0));
+        new XYZWebApplicationDB().insertMember(m);
+        new XYZWebApplicationDB().insertUser(u);
         
-        RequestDispatcher view = request.getRequestDispatcher("login.jsp");
+        request.setAttribute("username", u.getId());
+        request.setAttribute("password", u.getPassword());
+        
+        RequestDispatcher view = request.getRequestDispatcher("RegistrationSuccess.jsp");
         view.forward(request, response);
 
     }
