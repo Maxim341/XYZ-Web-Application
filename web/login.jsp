@@ -164,7 +164,7 @@ body{
 		</div>
 		<br>
 		<div class="login">
-                    <form action="LoginServlet" method="post">
+                    <form action="Login" method="post">
 				<input type="text" placeholder="username" name="username"><br>
 				<input type="password" placeholder="password" name="password"><br>
 				<input type="Submit" value="Login">   

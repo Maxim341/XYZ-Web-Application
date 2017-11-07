@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package control;
+package com.web;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -13,22 +13,27 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import model.JDBCWrapper;
-import model.LoginController;
-import model.Member;
-import model.User;
-import model.XYZWebApplicationDB;
+import com.model.JDBCWrapper;
+import com.model.LoginController;
+import com.model.LoginController;
+import com.model.Member;
+import com.model.Member;
+import com.model.User;
+import com.model.User;
+import com.model.XYZWebApplicationDB;
+import com.model.XYZWebApplicationDB;
 
 /**
  *
  * @author Fraser
  */
-@WebServlet(name = "RegServlet", urlPatterns = {"/RegServlet"})
+@WebServlet(name = "RegServlet", urlPatterns = {"/Registration"})
 public class RegServlet extends HttpServlet {
 
     /**
@@ -88,7 +93,8 @@ public class RegServlet extends HttpServlet {
         new XYZWebApplicationDB().insertMember(lc.members.get(0));
         new XYZWebApplicationDB().insertUser(lc.users.get(0));
         
-        response.sendRedirect("login.jsp");
+        RequestDispatcher view = request.getRequestDispatcher("login.jsp");
+        view.forward(request, response);
 
     }
 

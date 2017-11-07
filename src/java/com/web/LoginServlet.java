@@ -1,21 +1,26 @@
-package control;
+package com.web;
 
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import model.JDBCWrapper;
-import model.LoginController;
+import com.model.JDBCWrapper;
+import com.model.JDBCWrapper;
+import com.model.LoginController;
+import com.model.LoginController;
 
 /**
  *
  * @author BMT
  */
+@WebServlet(name = "LoginServlet", urlPatterns = {"/Login"})
 public class LoginServlet extends HttpServlet {
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -55,10 +60,11 @@ public class LoginServlet extends HttpServlet {
         boolean result = authenticate(username, password);
 
         if (result) {
-            response.sendRedirect("memberPage.jsp");
-            return;
+            RequestDispatcher view = request.getRequestDispatcher("memberPage.jsp");
+            view.forward(request, response);
         } else {
-            response.sendRedirect("login.jsp");            
+            RequestDispatcher view = request.getRequestDispatcher("login.jsp");
+            view.forward(request, response);           
         }
     }
 

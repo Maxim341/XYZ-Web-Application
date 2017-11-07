@@ -172,7 +172,7 @@ body{
 
         <br>
         <div class="login">
-            <form action="RegServlet" method="post">
+            <form action="Registration" method="post">
                 <input type="text" placeholder="User ID" name="user ID"><br>
                 <input type="text" placeholder="Full Name" name="full name"><br>
                 <input type="text" placeholder="address" name="address"><br>

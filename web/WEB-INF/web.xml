@@ -2,23 +2,27 @@
 <web-app metadata-complete="true" version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
     <servlet>
         <servlet-name>LoginServlet</servlet-name>
-        <servlet-class>control.LoginServlet</servlet-class>
+        <servlet-class>com.web.LoginServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>RegServlet</servlet-name>
-        <servlet-class>control.RegServlet</servlet-class>
+        <servlet-class>com.web.RegServlet</servlet-class>
     </servlet>
+    
+    <!-- _________________Mappings___________________ -->
+    
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
-        <url-pattern>/LoginServlet</url-pattern>
+        <url-pattern>/Login</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>RegServlet</servlet-name>
-        <url-pattern>/RegServlet</url-pattern>
+        <url-pattern>/Registration</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
             30
         </session-timeout>
     </session-config>
+    
 </web-app>
