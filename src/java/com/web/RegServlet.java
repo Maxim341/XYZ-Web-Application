@@ -70,35 +70,40 @@ public class RegServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
         LoginController lc = new LoginController();
-        
-        String userID, fullName, address;
-        Date dob = new Date();
+        String button = request.getParameter("button");
 
-        userID = request.getParameter("user ID");
-        fullName = request.getParameter("full name");
-        address = request.getParameter("address");
-        DateFormat df = new SimpleDateFormat("dd/MM/yy");
-        try {
-            dob = df.parse(request.getParameter("DOB"));
-        } catch (ParseException ex) {
-            System.out.println("Parse exception");
+        if (button.equals("Register")) {
+            String userID, fullName, address;
+            Date dob = new Date();
+
+            userID = request.getParameter("user ID");
+            fullName = request.getParameter("full name");
+            address = request.getParameter("address");
+            DateFormat df = new SimpleDateFormat("dd/MM/yy");
+            try {
+                dob = df.parse(request.getParameter("DOB"));
+            } catch (ParseException ex) {
+                System.out.println("Parse exception");
+            }
+            Date dor = new Date();
+
+            Member m = new Member(userID, fullName, address, dob, dor, "APPROVED", 0);
+            User u = new User(userID, lc.createPassword(), "APPROVED");
+
+            //Inserting members with data provided above^^
+            new XYZWebApplicationDB().insertMember(m);
+            new XYZWebApplicationDB().insertUser(u);
+
+            request.setAttribute("username", u.getId());
+            request.setAttribute("password", u.getPassword());
+
+            RequestDispatcher view = request.getRequestDispatcher("RegistrationSuccess.jsp");
+            view.forward(request, response);
+        } else if (button.equals("login")) {
+            RequestDispatcher view = request.getRequestDispatcher("login.jsp");
+            view.forward(request, response);
         }
-        Date dor = new Date();
-
-        Member m = new Member(userID, fullName, address, dob, dor, "APPROVED", 0);
-        User u = new User(userID, lc.createPassword(), "APPROVED");
-        
-        //Inserting members with data provided above^^
-        new XYZWebApplicationDB().insertMember(m);
-        new XYZWebApplicationDB().insertUser(u);
-        
-        request.setAttribute("username", u.getId());
-        request.setAttribute("password", u.getPassword());
-        
-        RequestDispatcher view = request.getRequestDispatcher("RegistrationSuccess.jsp");
-        view.forward(request, response);
 
     }
 

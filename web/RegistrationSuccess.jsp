@@ -22,6 +22,12 @@
         <h1>
             <% out.print("Welcome: " + request.getAttribute("username") + " Your unique Password is: " + request.getAttribute("password")); %> 
         </h1>
+        <form action="Registration" method="post">
+                <button type="Sumbit" value="login" name="button">
+                    Login
+                </button>
+            </form> 
+        
                 
 
     </body>

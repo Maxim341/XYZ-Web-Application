@@ -49,22 +49,25 @@ public class LoginServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-        String username, password;
-
-        username = request.getParameter("username");
-        password = request.getParameter("password");
-
         LoginController loginService = new LoginController();
-        loginService.readUsers();
-        boolean result = authenticate(username, password);
+        String button = request.getParameter("button");
 
-        if (result) {
-            RequestDispatcher view = request.getRequestDispatcher("memberPage.jsp");
+        if (button.equals("Login")) {
+            String username = request.getParameter("username");
+            String password = request.getParameter("password");
+
+            loginService.readUsers();
+            boolean success = authenticate(username, password);
+            if (success) {
+                RequestDispatcher view = request.getRequestDispatcher("memberPage.jsp");
+                view.forward(request, response);
+            } else {
+                RequestDispatcher view = request.getRequestDispatcher("login.jsp");
+                view.forward(request, response);
+            }
+        } else if (button.equals("registration")) {
+            RequestDispatcher view = request.getRequestDispatcher("registrationPage.jsp");
             view.forward(request, response);
-        } else {
-            RequestDispatcher view = request.getRequestDispatcher("login.jsp");
-            view.forward(request, response);           
         }
     }
 
@@ -78,13 +81,13 @@ public class LoginServlet extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
-    public boolean authenticate(String id, String password)
-    {
+    public boolean authenticate(String id, String password) {
         JDBCWrapper wrapper = new JDBCWrapper("org.apache.derby.jdbc.ClientDriver", "jdbc:derby://localhost:1527/XYZ Web Application DB", "root", "root");
         wrapper.createStatement();
-        if(wrapper.findRecord("users", "id", id) && wrapper.findRecord("users", "password", password))
+        if (wrapper.findRecord("users", "id", id) && wrapper.findRecord("users", "password", password)) {
             return true;
+        }
         return false;
     }
-    
+
 }
