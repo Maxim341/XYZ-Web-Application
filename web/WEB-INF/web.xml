@@ -28,6 +28,9 @@
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/Login</url-pattern>
     </servlet-mapping>
+    
+   
+
     <servlet-mapping>
         <servlet-name>RegServlet</servlet-name>
         <url-pattern>/Registration</url-pattern>

@@ -49,22 +49,25 @@ public class LoginServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-        String username, password;
-
-        username = request.getParameter("username");
-        password = request.getParameter("password");
-
         LoginController loginService = new LoginController();
-        loginService.readUsers();
-        boolean result = authenticate(username, password);
+        String button = request.getParameter("button");
 
-        if (result) {
-            RequestDispatcher view = request.getRequestDispatcher("memberPage.jsp");
+        if (button.equals("Login")) {
+            String username = request.getParameter("username");
+            String password = request.getParameter("password");
+
+            loginService.readUsers();
+            boolean success = authenticate(username, password);
+            if (success) {
+                RequestDispatcher view = request.getRequestDispatcher("memberPage.jsp");
+                view.forward(request, response);
+            } else {
+                RequestDispatcher view = request.getRequestDispatcher("login.jsp");
+                view.forward(request, response);
+            }
+        } else if (button.equals("registration")) {
+            RequestDispatcher view = request.getRequestDispatcher("registrationPage.jsp");
             view.forward(request, response);
-        } else {
-            RequestDispatcher view = request.getRequestDispatcher("login.jsp");
-            view.forward(request, response);           
         }
     }
 
@@ -82,9 +85,10 @@ public class LoginServlet extends HttpServlet {
     {
         JDBCWrapper wrapper = (JDBCWrapper)getServletContext().getAttribute("database");
         wrapper.createStatement();
-        if(wrapper.findRecord("users", "id", id) && wrapper.findRecord("users", "password", password))
+        if (wrapper.findRecord("users", "id", id) && wrapper.findRecord("users", "password", password)) {
             return true;
+        }
         return false;
     }
-    
+
 }

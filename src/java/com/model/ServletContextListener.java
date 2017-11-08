@@ -15,7 +15,7 @@ import javax.servlet.ServletContextEvent;
  *
  * @author Harri Renney
  */
-public class ServletContextListener implements javax.servlet.ServletContextListener, ServletContextAttributeListener {
+public class ServletContextListener implements javax.servlet.ServletContextListener {
 
     @Override
     public void contextInitialized(ServletContextEvent sce) {    
@@ -27,21 +27,6 @@ public class ServletContextListener implements javax.servlet.ServletContextListe
 
     @Override
     public void contextDestroyed(ServletContextEvent sce) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void attributeAdded(ServletContextAttributeEvent event) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void attributeRemoved(ServletContextAttributeEvent event) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void attributeReplaced(ServletContextAttributeEvent arg0) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }
