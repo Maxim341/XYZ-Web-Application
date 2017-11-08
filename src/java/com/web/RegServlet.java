@@ -91,15 +91,15 @@ public class RegServlet extends HttpServlet {
         User u = new User(userID, lc.createPassword(), "APPROVED");
         
         //Inserting members with data provided above^^
-        new XYZWebApplicationDB().insertMember(m);
-        new XYZWebApplicationDB().insertUser(u);
+        JDBCWrapper wrapper = (JDBCWrapper)getServletContext().getAttribute("database");
+        new XYZWebApplicationDB(wrapper).insertMember(m);
+        new XYZWebApplicationDB(wrapper).insertUser(u);
         
         request.setAttribute("username", u.getId());
         request.setAttribute("password", u.getPassword());
         
         RequestDispatcher view = request.getRequestDispatcher("RegistrationSuccess.jsp");
         view.forward(request, response);
-
     }
 
     /**

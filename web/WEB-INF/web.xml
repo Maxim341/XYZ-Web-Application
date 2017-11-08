@@ -6,8 +6,23 @@
     </servlet>
     <servlet>
         <servlet-name>RegServlet</servlet-name>
-        <servlet-class>com.web.RegServlet</servlet-class>
+        <servlet-class>com.web.RegServlet</servlet-class>    
     </servlet>
+    
+    <context-param>
+        <param-name>adminEmail</param-name>
+        <param-value>h2-renney@uwe.ac.uk</param-value>
+    </context-param>
+    
+    <context-param>
+        <param-name>databaseName</param-name>
+        <param-value>org.apache.derby.jdbc.ClientDriver</param-value>
+    </context-param>
+    <listener>
+        <listener-class>
+            com.model.ServletContextListener
+        </listener-class> 
+    </listener>
     <!-- _________________Mappings___________________ -->
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
@@ -17,6 +32,7 @@
         <servlet-name>RegServlet</servlet-name>
         <url-pattern>/Registration</url-pattern>
     </servlet-mapping>
+    
     <session-config>
         <session-timeout>
             30

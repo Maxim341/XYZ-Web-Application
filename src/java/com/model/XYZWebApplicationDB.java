@@ -7,9 +7,9 @@ import java.util.logging.Logger;
 public class XYZWebApplicationDB {
     JDBCWrapper wrapper;
     
-    public XYZWebApplicationDB()
+    public XYZWebApplicationDB(JDBCWrapper w)
     {
-        wrapper = new JDBCWrapper("org.apache.derby.jdbc.ClientDriver", "jdbc:derby://localhost:1527/XYZ Web Application DB", "root", "root");
+        wrapper = w;
     }
     
     public void insertMember(Member m)

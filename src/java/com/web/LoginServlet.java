@@ -80,7 +80,7 @@ public class LoginServlet extends HttpServlet {
 
     public boolean authenticate(String id, String password)
     {
-        JDBCWrapper wrapper = new JDBCWrapper("org.apache.derby.jdbc.ClientDriver", "jdbc:derby://localhost:1527/XYZ Web Application DB", "root", "root");
+        JDBCWrapper wrapper = (JDBCWrapper)getServletContext().getAttribute("database");
         wrapper.createStatement();
         if(wrapper.findRecord("users", "id", id) && wrapper.findRecord("users", "password", password))
             return true;

@@ -22,6 +22,10 @@
         <h1>
             <% out.print("Welcome: " + request.getAttribute("username") + " Your unique Password is: " + request.getAttribute("password")); %> 
         </h1>
+        
+        <p>
+            <% out.print("Any problems, please contact: " + getServletContext().getInitParameter("adminEmail")); %> 
+        </p>
                 
 
     </body>
