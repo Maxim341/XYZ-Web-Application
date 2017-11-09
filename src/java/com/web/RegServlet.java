@@ -72,6 +72,7 @@ public class RegServlet extends HttpServlet {
                 String userID = request.getParameter("user ID");
                 String fullName = request.getParameter("full name");
                 String houseNumber = request.getParameter("houseNumber");
+                houseNumber = houseNumber.trim();
                 String streetName = request.getParameter("streetName");
                 String city = request.getParameter("city");
                 String county = request.getParameter("county");
