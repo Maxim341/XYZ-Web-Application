@@ -2,7 +2,7 @@
 package com.model;
 
 import java.util.Date;
-import javax.mail.Address;
+
 
 /**
  *
@@ -14,7 +14,7 @@ public class Member {
     private String username;
     private String fullName;
     
-    private String address;
+    private Address address;
     private Date DOB;
     private Date registration;
     
@@ -22,7 +22,7 @@ public class Member {
     private float balance;
   
     //Constructor
-    public Member(String username, String fullName, String address, Date DOB, Date registration, String status, float balance) {
+    public Member(String username, String fullName, Address address, Date DOB, Date registration, String status, float balance) {
         this.username = username;
         this.fullName = fullName;
         this.DOB=DOB;
@@ -34,11 +34,11 @@ public class Member {
     
    
 
-    public String getAddress() {
+    public Address getAddress() {
         return address;
     }
 
-    public void setAddress(String address) {
+    public void setAddress(Address address) {
         this.address = address;
     }
 
