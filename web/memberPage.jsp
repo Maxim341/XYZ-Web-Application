@@ -12,6 +12,9 @@
         <title>XYZ Drivers Association - Members Dashboard</title>
     </head>
     <body>
+        <h1>
+            <% HttpSession s = request.getSession(); out.print("Welcome " + session.getAttribute("username")); %> 
+        </h1>
         <table cellspacing="0" cellpadding="0" width="100%" style="font-family: Arial">
             <tr>
                 <td>&nbsp;</td>

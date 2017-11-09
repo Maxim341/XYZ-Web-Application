@@ -20,7 +20,7 @@
     <body>
         <h1>Registration successful.</h1>
         <h1>
-            <% out.print("Welcome: " + request.getAttribute("username") + " Your unique Password is: " + request.getAttribute("password")); %> 
+            <%= ("Welcome: " + request.getAttribute("username") + " Your unique Password is: " + request.getAttribute("password")) %> 
         </h1>
         
         <form action="Registration" method="post">
@@ -30,7 +30,7 @@
         </form> 
         
         <p>
-            <% out.print("Any problems, please contact: " + getServletContext().getInitParameter("adminEmail")); %> 
+            <%= ("Any problems, please contact: " + getServletContext().getInitParameter("adminEmail")) %> 
         </p>
                 
 

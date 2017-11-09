@@ -1,27 +1,40 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app metadata-complete="true" version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
+    
+    <welcome-file-list>
+        <welcome-file>login.jsp</welcome-file>
+    </welcome-file-list>
+    
     <servlet>
         <servlet-name>LoginServlet</servlet-name>
         <servlet-class>com.web.LoginServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>RegServlet</servlet-name>
-        <servlet-class>com.web.RegServlet</servlet-class>    
+        <servlet-class>com.web.RegServlet</servlet-class>
     </servlet>
     
     <context-param>
         <param-name>adminEmail</param-name>
-        <param-value>h2-renney@uwe.ac.uk</param-value>
+        <param-value>support@XYZ.co.uk</param-value>
     </context-param>
     
     <context-param>
         <param-name>databaseName</param-name>
         <param-value>jdbc:derby://localhost:1527/XYZ Web Application DB</param-value>
     </context-param>
+    <filter>
+        <filter-name>authentificationFilter</filter-name>
+        <filter-class>com.web.authentificationFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>authentificationFilter</filter-name>
+        <url-pattern>/adminPage.jsp</url-pattern>
+    </filter-mapping>
     <listener>
         <listener-class>
             com.model.ServletContextListener
-        </listener-class> 
+        </listener-class>
     </listener>
     <!-- _________________Mappings___________________ -->
     <servlet-mapping>
@@ -33,6 +46,11 @@
         <servlet-name>RegServlet</servlet-name>
         <url-pattern>/Registration</url-pattern>
     </servlet-mapping>
+    
+    <error-page>
+        <error-code>404</error-code>
+        <location>/errorPage.jsp</location>
+    </error-page>
     
     <session-config>
         <session-timeout>

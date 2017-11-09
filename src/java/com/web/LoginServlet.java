@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import com.model.JDBCWrapper;
 import com.model.LoginController;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -52,6 +53,11 @@ public class LoginServlet extends HttpServlet {
                 String password = request.getParameter("password");
                 boolean success = authenticate(username, password);
                 if (success) {
+                    //Be nice to change this to setting a user object instead.
+                    HttpSession session = request.getSession();
+                    session.setAttribute("username", username);
+                    session.setAttribute("password", password);
+                    //session.setAttribute("status", status);
                     RequestDispatcher view = request.getRequestDispatcher("memberPage.jsp");
                     view.forward(request, response);
                 } else {
