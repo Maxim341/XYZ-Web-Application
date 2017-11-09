@@ -59,6 +59,20 @@
             }
             %>
         </p1>
+        <p2>
+            <%
+            if (null != request.getAttribute("errorMessage2")) {
+                out.println(request.getAttribute("errorMessage2"));
+            }
+            %>
+        </p2>
+        <p3>
+            <%
+            if (null != request.getAttribute("errorMessage3")) {
+                out.println(request.getAttribute("errorMessage3"));
+            }
+            %>
+        </p3>
     </center>
 </body>
 </html>

@@ -47,23 +47,25 @@ public class LoginServlet extends HttpServlet {
         LoginController loginService = new LoginController();
         String button = request.getParameter("button");
 
-        if (button.equals("Login")) {
-            String username = request.getParameter("username");
-            String password = request.getParameter("password");
-
-            loginService.readUsers();
-            boolean success = authenticate(username, password);
-            if (success) {
-                RequestDispatcher view = request.getRequestDispatcher("memberPage.jsp");
+        switch (button) {
+            case "Login":
+                String username = request.getParameter("username");
+                String password = request.getParameter("password");
+                loginService.readUsers();
+                boolean success = authenticate(username, password);
+                if (success) {
+                    RequestDispatcher view = request.getRequestDispatcher("memberPage.jsp");
+                    view.forward(request, response);
+                } else {
+                    RequestDispatcher view = request.getRequestDispatcher("login.jsp");
+                    view.forward(request, response);
+                }   break;
+            case "registration":
+                RequestDispatcher view = request.getRequestDispatcher("registrationPage.jsp");
                 view.forward(request, response);
-            } else {
-                RequestDispatcher view = request.getRequestDispatcher("login.jsp");
-                view.forward(request, response);
-            }
-        } else if (button.equals("registration")) {
-            RequestDispatcher view = request.getRequestDispatcher("registrationPage.jsp");
-            view.forward(request, response);
-            return;
+                break;
+            default:
+                break;
         }
     }
 
