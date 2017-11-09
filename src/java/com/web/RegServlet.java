@@ -75,7 +75,7 @@ public class RegServlet extends HttpServlet {
                 String streetName = request.getParameter("streetName");
                 String city = request.getParameter("city");
                 String county = request.getParameter("county");
-                String postCode = request.getParameter("postCode");
+                String postCode = request.getParameter(new String("postCode").toUpperCase());
                 Date dob = makeDate(request.getParameter("DOB"));
 
                 // Error check
