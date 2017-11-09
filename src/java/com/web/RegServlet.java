@@ -5,6 +5,7 @@
  */
 package com.web;
 
+import com.model.Address;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.DateFormat;
@@ -36,15 +37,6 @@ import com.model.XYZWebApplicationDB;
 @WebServlet(name = "RegServlet", urlPatterns = {"/Registration"})
 public class RegServlet extends HttpServlet {
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
@@ -74,37 +66,59 @@ public class RegServlet extends HttpServlet {
         String button = request.getParameter("button");
 
         if (button.equals("Register")) {
-            String userID, fullName, address;
-            Date dob = new Date();
+            // Get parameters
+            String userID = request.getParameter("user ID");
+            String fullName = request.getParameter("full name");
+            String houseNumber = request.getParameter("houseNumber");
+            String streetName = request.getParameter("steetName");
+            String city = request.getParameter("city");
+            String county = request.getParameter("county");
+            String postCode = request.getParameter("postCode");
 
-            userID = request.getParameter("user ID");
-            fullName = request.getParameter("full name");
-            address = request.getParameter("address");
-            DateFormat df = new SimpleDateFormat("dd/MM/yy");
-            try {
-                dob = df.parse(request.getParameter("DOB"));
-            } catch (ParseException ex) {
-                System.out.println("Parse exception");
-            }
-            Date dor = new Date();
+            // Error check 
+            if (isEmpty(userID, fullName, houseNumber, streetName, city, county, postCode)) {
+                request.setAttribute("errorMessage", "1 or more fields has been left blank");
+                RequestDispatcher rd = request.getRequestDispatcher("registrationPage.jsp");
+                rd.forward(request, response);
+            } else {
 
-            Member m = new Member(userID, fullName, address, dob, dor, "APPROVED", 0);
-            User u = new User(userID, lc.createPassword(), "APPROVED");
-        
-            //Inserting members with data provided above^^
-            JDBCWrapper wrapper = (JDBCWrapper)getServletContext().getAttribute("database");
-            new XYZWebApplicationDB(wrapper).insertMember(m);
-            new XYZWebApplicationDB(wrapper).insertUser(u);
+                Date dob = makeDate(request.getParameter("DOB"));
+                Date dor = new Date();
 
-            request.setAttribute("username", u.getId());
-            request.setAttribute("password", u.getPassword());
+                Member m = new Member(userID, fullName, new Address(Integer.parseInt(houseNumber), streetName, city, county, postCode), dob, dor, "APPROVED", 0);
+                User u = new User(userID, lc.createPassword(), "APPROVED");
 
-            RequestDispatcher view = request.getRequestDispatcher("RegistrationSuccess.jsp");
-            view.forward(request, response);
-            } else if (button.equals("login")) {
-                RequestDispatcher view = request.getRequestDispatcher("login.jsp");
+                //Inserting members with data provided above^^
+                JDBCWrapper wrapper = (JDBCWrapper) getServletContext().getAttribute("database");
+                new XYZWebApplicationDB(wrapper).insertMember(m);
+                new XYZWebApplicationDB(wrapper).insertUser(u);
+
+                request.setAttribute("username", u.getId());
+                request.setAttribute("password", u.getPassword());
+
+                RequestDispatcher view = request.getRequestDispatcher("RegistrationSuccess.jsp");
                 view.forward(request, response);
+            }
+        } else if (button.equals("login")) {
+            RequestDispatcher view = request.getRequestDispatcher("login.jsp");
+            view.forward(request, response);
         }
+    }
+
+    public Date makeDate(String dateParam) {
+        Date dob = new Date();
+        DateFormat df = new SimpleDateFormat("dd/MM/yy");
+        try {
+            dob = df.parse(dateParam);
+        } catch (ParseException ex) {
+            System.out.println("Parse exception");
+        }
+        return dob;
+    }
+
+    public boolean isEmpty(String userID, String fullName, String houseNumber, String streetName, String city, String county, String postCode) {
+        return userID.trim().isEmpty() || fullName.trim().isEmpty() || houseNumber.trim().isEmpty()
+                || streetName.trim().isEmpty() || city.trim().isEmpty() || county.trim().isEmpty() || postCode.trim().isEmpty();
     }
 
     /**

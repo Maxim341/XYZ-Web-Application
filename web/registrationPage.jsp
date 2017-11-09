@@ -24,19 +24,41 @@
                         <td><input type="text" name="full name" placeholder="Full Name"></td>
                     </tr>
                     <tr>
-                        <td>Address</td>
-                        <td><input type="text" name="address" placeholder="address"></td>
+                        <td>House Number</td>
+                        <td><input type="text" name="houseNumber" placeholder="'1'"></td>
+                    </tr>
+                    <tr>
+                        <td>Street Name</td>
+                        <td><input type="text" name="streetName" placeholder="'Filton Avenue'"></td>
+                    </tr>
+                    <tr>
+                        <td>City</td>
+                        <td><input type="text" name="city" placeholder="'Bristol'"></td>
+                    </tr>
+                    <tr>
+                        <td>County</td>
+                        <td><input type="text" name="county" placeholder="'Avon'"></td>
+                    </tr>
+                    <tr>
+                        <td>Post Code</td>
+                        <td><input type="text" name="postCode" placeholder="'BS1 1AB'"></td>
                     </tr>
                     <tr>
                         <td>DOB</td>
                         <td><input type="text" name="DOB" placeholder="DD/MM/YY"></td>
                     </tr>
                     <tr>
-                        <td><input type="Submit" value="Register" name="button" /></td>
+                        <td><input type="Submit" value="Register" name="button"></td>
                     </tr> 
                 </tbody>
             </table>
         </form>
+        <p1><%
+            if (null != request.getAttribute("errorMessage")) {
+                out.println(request.getAttribute("errorMessage"));
+            }
+            %>
+        </p1>
     </center>
 </body>
 </html>
