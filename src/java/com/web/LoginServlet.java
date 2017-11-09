@@ -44,14 +44,12 @@ public class LoginServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        LoginController loginService = new LoginController();
         String button = request.getParameter("button");
 
         switch (button) {
             case "Login":
                 String username = request.getParameter("username");
                 String password = request.getParameter("password");
-                loginService.readUsers();
                 boolean success = authenticate(username, password);
                 if (success) {
                     RequestDispatcher view = request.getRequestDispatcher("memberPage.jsp");

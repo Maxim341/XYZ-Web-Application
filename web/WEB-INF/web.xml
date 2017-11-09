@@ -16,7 +16,7 @@
     
     <context-param>
         <param-name>databaseName</param-name>
-        <param-value>org.apache.derby.jdbc.ClientDriver</param-value>
+        <param-value>jdbc:derby://localhost:1527/XYZ Web Application DB</param-value>
     </context-param>
     <listener>
         <listener-class>

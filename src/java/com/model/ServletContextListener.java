@@ -21,7 +21,7 @@ public class ServletContextListener implements javax.servlet.ServletContextListe
     public void contextInitialized(ServletContextEvent sce) {    
         ServletContext sc = sce.getServletContext();
         String databaseName = sc.getInitParameter("databaseName");
-        JDBCWrapper wrapper = new JDBCWrapper(databaseName, "jdbc:derby://localhost:1527/XYZ Web Application DB", "root", "root");
+        JDBCWrapper wrapper = new JDBCWrapper("org.apache.derby.jdbc.ClientDriver", databaseName, "root", "root");
         sc.setAttribute("database", wrapper);
     }
 

@@ -1,6 +1,8 @@
 
 package com.model;
 
+import java.util.Random;
+
 /**
  *
  * @author BMT
@@ -18,13 +20,19 @@ public class User {
         this.password = password;
         this.status = status;
     }
-
-    @Override
-    public String toString() {
-        return "Users{" + "id=" + id + ", password=" + password + ", status=" + status + '}';
-    }
     
-    
+    public static String createPassword() {
+        String password = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
+        StringBuilder builder = new StringBuilder();
+        Random rnd = new Random();
+        while (builder.length() < 6) { // length of the random string.
+            int index = (int) (rnd.nextFloat() * password.length());
+            builder.append(password.charAt(index));
+        }
+        String finalPass = builder.toString();
+        System.out.println(finalPass);
+        return finalPass;
+    }    
 
     public String getId() {
         return id;
@@ -50,4 +58,8 @@ public class User {
         this.status = status;
     }   
        
+    @Override
+    public String toString() {
+        return "Users{" + "id=" + id + ", password=" + password + ", status=" + status + '}';
+    }
 }

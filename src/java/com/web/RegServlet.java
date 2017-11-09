@@ -64,7 +64,6 @@ public class RegServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        LoginController lc = new LoginController();
         String button = request.getParameter("button");
 
         switch (button) {
@@ -91,7 +90,7 @@ public class RegServlet extends HttpServlet {
                 } else {
                     Date dor = new Date();
                     Member m = new Member(userID, fullName, new Address(Integer.parseInt(houseNumber), streetName, city, county, postCode), dob, dor, "APPROVED", 0);
-                    User u = new User(userID, lc.createPassword(), "APPROVED");
+                    User u = new User(userID, User.createPassword(), "APPROVED");
 
                     //Inserting members with data provided above^^
                     JDBCWrapper wrapper = (JDBCWrapper) getServletContext().getAttribute("database");
