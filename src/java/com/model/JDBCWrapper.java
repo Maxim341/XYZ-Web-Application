@@ -1,13 +1,17 @@
-package model;
+package com.model;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.Date;
+
 
 /**
  *
@@ -69,6 +73,19 @@ public class JDBCWrapper {
         } catch (NullPointerException ex){
             System.err.println("A STATEMENT HAS NOT BEEN INITALISED. CALL CREATESTATEMENT ON OBJECT FIRST BEFORE CREATING A RESULT SET.");
         }
+    }
+    
+    //Takes the table name, column and value to search for. If found returns true and result set to the record.
+    public boolean findRecord(String table, String column, String searchValue)
+    {
+        createResultSet("select * from "+table+" where \""+column+"\" = '" + searchValue + "'");
+        try {
+            if(this.getResultSet().next())
+                return true;
+        } catch (SQLException ex) {
+            Logger.getLogger(JDBCWrapper.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
     }
 
     public Connection getCon() {

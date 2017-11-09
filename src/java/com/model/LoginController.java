@@ -1,4 +1,4 @@
-package model;
+package com.model;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -12,12 +12,14 @@ public class LoginController {
 
     public ArrayList<User> users;
     public ArrayList<Member> members;
+    public User activeUser;
 
     public LoginController() {
         users = new ArrayList<>();
         members = new ArrayList<>();
+        activeUser = null;
     }
-
+    
     public void readUsers() {
         try {
             // create connection
