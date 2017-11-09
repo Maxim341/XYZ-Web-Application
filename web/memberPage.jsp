@@ -3,7 +3,7 @@
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-		<title>Fixed Width 2 Blue</title>
+		<title>XYZ Members Dashboard</title>
 		<style type="text/css">
 			html, #page { padding:0; margin:0;}
 			body { margin:0; padding:0; width:100%; color:#959595; font:normal 12px/2.0em Sans-Serif;} 
@@ -11,7 +11,7 @@
 			#page { background:#eee;}
 			#header, #footer, #top-nav, #content, #content #contentbar, #content #sidebar { margin:0; padding:0;}
 						
-			/* Logo */  
+			/* Logo */
 			#logo { padding:10px; width:auto; float:left;}
 			#logo h1 a, h1 a:hover { color:darkblue; text-decoration:none;}
 			#logo h1 span { color:#d3d3f9;}
@@ -58,12 +58,10 @@
 			/* Clear both sides to assist with div alignment  */
 			.clr { clear:both; padding:0; margin:0; width:100%; font-size:0px; line-height:0px;}
 		</style>
+                
+
 	</head>
-	
-        
-        
-        
-        <body>
+	<body>
 		<div id="page">
 			<header id="header">
 				<div id="header-inner">	
@@ -79,68 +77,49 @@
 					<div class="clr"></div>
 				</div>
 			</header>
-                    
 			<div class="feature">
 				<div class="feature-inner">
-				<h1>Members Dashboard</h1>
+				<h1>XYZ Members Dashboard</h1>
 				</div>
 			</div>
 		
-                    
-                    
-                    
-                    
-                    
-                    
 	
 			<div id="content">
 				<div id="content-inner">
 				
 					<main id="contentbar">
 						<div class="article">
-							
+							<p>
+                                        <br>Username: <input type="text" name="username" />
+                                                        </p>
+                                                        
+                                                        <br>Password: <input type="password" name="password" />
+                                    <input type="submit" />
+                                </form>
+                                <p>User: </p>
+                                <p>Check for outstanding Balance:</p>
+                                <p>Make a Payment</p>
+                                <p>Submit a Claim</p>
+                                <p>List all claims and payments to date<br/><br/><br/></p>
+                                <p>Logout<br/><br/><br/></p>
+
+
 						</div>
 					</main>
 					
-					<nav id="sidebar">
-						<div class="widget">
-							<h3>Left heading</h3>
-							<ul>
-							<li><a href="#">Link 1</a></li>
-							<li><a href="#">Link 2</a></li>
-							<li><a href="#">Link 3</a></li>
-							<li><a href="#">Link 4</a></li>
-							<li><a href="#">Link 5</a></li>
-							</ul>
-						</div>
-					</nav>
-					
+										
 					<div class="clr"></div>
 				</div>
 			</div>
 		
 			<div id="footerblurb">
 				<div id="footerblurb-inner">
-				
-					<div class="column">
-						<h2><span>Heading</span></h2>
-						<p><script>generateText(2)</script></p>
-					</div>	
-					<div class="column">
-						<h2><span>Heading</span></h2>
-						<p><script>generateText(2)</script></p>
-					</div>
-					<div class="column">
-						<h2><span>Heading</span></h2>
-						<p><script>generateText(2)</script></p>
-					</div>	
-					
-					<div class="clr"></div>
+				<div class="clr"></div>
 				</div>
 			</div>
 			<footer id="footer">
 				<div id="footer-inner">
-					<p>&copy; Copyright <a href="#">Your Site</a> &#124; <a href="#">Terms of Use</a> &#124; <a href="#">Privacy Policy</a></p>
+					<p>&copy; Copyright XYZ LTD</p>
 					<div class="clr"></div>
 				</div>
 			</footer>
