@@ -93,14 +93,14 @@
                                 <br>Username: <input type="text" name="username" />
                             </p>
 
-                            <br>Password: <input type="password" name="password" />
+                            <br>Password TEST: <input type="password" name="password" />
                             <input type="submit" />
                             </form>
                             <p>User: </p>
                             <p>Check for outstanding Balance:</p>
                             <p>Make a Payment</p>
                             <p>Submit a Claim</p>
-                            <p>List all claims and payments to date<br/><br/><br/></p>
+                            <p>List all claims and payments to date<br/><br/><br/></p>             
                             <p>Logout<br/><br/><br/></p>
 
 
