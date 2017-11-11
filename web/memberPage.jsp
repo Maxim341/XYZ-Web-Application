@@ -147,7 +147,9 @@
                             </h1>
 
                             <br>
+                            <form action="OutstandingBalance.jsp">
                             <a href='#' class='button'>Check for outstanding balance</a>
+                            </form>
                             <br>
                               <br>
                                
