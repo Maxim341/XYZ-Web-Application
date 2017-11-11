@@ -143,7 +143,7 @@
                         <div class="article">
                            
                             <h1>
-                                Welcome:  <%= request.getAttribute("username") %>  
+                                Welcome:  <%= session.getAttribute("username") %>  
                             </h1>
 
                             <br>
