@@ -1,10 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app metadata-complete="true" version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
-    
     <welcome-file-list>
         <welcome-file>login.jsp</welcome-file>
     </welcome-file-list>
-    
     <servlet>
         <servlet-name>LoginServlet</servlet-name>
         <servlet-class>com.web.LoginServlet</servlet-class>
@@ -13,15 +11,17 @@
         <servlet-name>RegServlet</servlet-name>
         <servlet-class>com.web.RegServlet</servlet-class>
     </servlet>
-    
     <context-param>
         <param-name>adminEmail</param-name>
         <param-value>support@XYZ.co.uk</param-value>
     </context-param>
-    
     <context-param>
         <param-name>databaseName</param-name>
         <param-value>jdbc:derby://localhost:1527/XYZ Web Application DB</param-value>
+    </context-param>
+    <context-param>
+        <param-name>databaseDriver</param-name>
+        <param-value>org.apache.derby.jdbc.ClientDriver</param-value>
     </context-param>
     <filter>
         <filter-name>authentificationFilter</filter-name>
@@ -37,21 +37,26 @@
         </listener-class>
     </listener>
     <!-- _________________Mappings___________________ -->
+    <servlet>
+        <servlet-name>MemberDashboardServlet</servlet-name>
+        <servlet-class>com.web.MemberDashboardServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/Login</url-pattern>
     </servlet-mapping>
-      
     <servlet-mapping>
         <servlet-name>RegServlet</servlet-name>
         <url-pattern>/Registration</url-pattern>
     </servlet-mapping>
-    
     <error-page>
         <error-code>404</error-code>
         <location>/errorPage.jsp</location>
     </error-page>
-    
+    <servlet-mapping>
+        <servlet-name>MemberDashboardServlet</servlet-name>
+        <url-pattern>/MemberDashboardServlet</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
             30
