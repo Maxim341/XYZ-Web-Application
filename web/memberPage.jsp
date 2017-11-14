@@ -1,3 +1,4 @@
+<%@page import="com.model.User"%>
 <!DOCTYPE html>
 <!-- Template by html.am -->
 <html>
@@ -143,7 +144,7 @@
                         <div class="article">
 
                             <h1>
-                                Welcome:  <%= session.getAttribute("username")%>  
+                                Welcome:  <%= ((User)session.getAttribute("user")).getId()%>  
                             </h1>
 
                             <br>

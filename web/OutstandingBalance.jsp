@@ -1,3 +1,5 @@
+<%@page import="com.model.User"%>
+<%@page import="com.model.JDBCWrapper"%>
 <!DOCTYPE html>
 <!-- Template by html.am -->
 <html>
@@ -144,7 +146,16 @@
 
                            
 
-                           -->Add text here  <--
+                            <% 
+                                JDBCWrapper wrapper = (JDBCWrapper) getServletContext().getAttribute("database");
+                                //HttpSession session = request.getSession();
+                                wrapper.createStatement();
+                                wrapper.findRecord("payments", "mem_id", ((User)session.getAttribute("user")).getId());
+                                do
+                                {
+                                    out.println(wrapper.getResultSet().getString("type_of_payment") + ": " + wrapper.getResultSet().getString("amount") + " Date: " + wrapper.getResultSet().getString("date") + "\n");  
+                                }while(wrapper.getResultSet().next());
+                            %>
 
 
                         </div>
