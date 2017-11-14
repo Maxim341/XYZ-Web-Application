@@ -3,7 +3,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-        <title>XYZ Submit Claim</title>
+        <title>XYZ Reg Success</title>
         <style type="text/css">
             html, #page { padding:0; margin:0;}
             body { margin:0; padding:0; width:100%; color:#959595; font:normal 12px/2.0em Sans-Serif;} 
@@ -131,7 +131,7 @@
             </header>
             <div class="feature">
                 <div class="feature-inner">
-                    <h1>XYZ Submit Claim</h1>
+                    <h1>XYZ Successful Registration</h1>
                 </div>
             </div>
 
