@@ -5,6 +5,7 @@
  */
 package com.web;
 
+import com.model.User;
 import java.io.IOException;
 import java.io.PrintStream;
 import java.io.PrintWriter;
@@ -63,11 +64,10 @@ public class authentificationFilter implements Filter {
             throws IOException, ServletException {
         //Obtain session from casting ServletRequest to HttpServletRequest.
         HttpSession session = ((HttpServletRequest)request).getSession();
-        //Might change this to get a object of user instead.
-        String password = (String)session.getAttribute("password");  
+        User u = (User)session.getAttribute("user");  
         
         //Check if password equals admin. (We will want this to check if status is an admin in future)
-        if(password.equals("admin")){  
+        if(u.getStatus().trim().equals("ADMIN")){  
             chain.doFilter(request, response);//sends request to next resource  
         }  
         else{  

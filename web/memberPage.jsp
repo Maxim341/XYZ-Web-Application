@@ -57,58 +57,58 @@
 
             /* Clear both sides to assist with div alignment  */
             .clr { clear:both; padding:0; margin:0; width:100%; font-size:0px; line-height:0px;}
-            
-            
-            
+
+
+
             .button {
-   border: 1px solid #0a3c59;
-   background: #3e779d;
-   background: -webkit-gradient(linear, left top, left bottom, from(#65a9d7), to(#3e779d));
-   background: -webkit-linear-gradient(top, #65a9d7, #3e779d);
-   background: -moz-linear-gradient(top, #65a9d7, #3e779d);
-   background: -ms-linear-gradient(top, #65a9d7, #3e779d);
-   background: -o-linear-gradient(top, #65a9d7, #3e779d);
-   background-image: -ms-linear-gradient(top, #65a9d7 0%, #3e779d 100%);
-   padding: 17.5px 35px;
-   -webkit-border-radius: 6px;
-   -moz-border-radius: 6px;
-   border-radius: 6px;
-   -webkit-box-shadow: rgba(255,255,255,0.4) 0 1px 0, inset rgba(255,255,255,0.4) 0 1px 0;
-   -moz-box-shadow: rgba(255,255,255,0.4) 0 1px 0, inset rgba(255,255,255,0.4) 0 1px 0;
-   box-shadow: rgba(255,255,255,0.4) 0 1px 0, inset rgba(255,255,255,0.4) 0 1px 0;
-   text-shadow: #7ea4bd 0 1px 0;
-   color: #06426c;
-   font-size: 15px;
-   font-family: helvetica, serif;
-   text-decoration: none;
-   vertical-align: middle;
-   }
-.button:hover {
-   border: 1px solid #0a3c59;
-   text-shadow: #1e4158 0 1px 0;
-   background: #3e779d;
-   background: -webkit-gradient(linear, left top, left bottom, from(#65a9d7), to(#3e779d));
-   background: -webkit-linear-gradient(top, #65a9d7, #3e779d);
-   background: -moz-linear-gradient(top, #65a9d7, #3e779d);
-   background: -ms-linear-gradient(top, #65a9d7, #3e779d);
-   background: -o-linear-gradient(top, #65a9d7, #3e779d);
-   background-image: -ms-linear-gradient(top, #65a9d7 0%, #3e779d 100%);
-   color: #fff;
-   }
-.button:active {
-   text-shadow: #1e4158 0 1px 0;
-   border: 1px solid #0a3c59;
-   background: #65a9d7;
-   background: -webkit-gradient(linear, left top, left bottom, from(#3e779d), to(#3e779d));
-   background: -webkit-linear-gradient(top, #3e779d, #65a9d7);
-   background: -moz-linear-gradient(top, #3e779d, #65a9d7);
-   background: -ms-linear-gradient(top, #3e779d, #65a9d7);
-   background: -o-linear-gradient(top, #3e779d, #65a9d7);
-   background-image: -ms-linear-gradient(top, #3e779d 0%, #65a9d7 100%);
-   color: #fff;
-   }
-            
-            
+                border: 1px solid #0a3c59;
+                background: #3e779d;
+                background: -webkit-gradient(linear, left top, left bottom, from(#65a9d7), to(#3e779d));
+                background: -webkit-linear-gradient(top, #65a9d7, #3e779d);
+                background: -moz-linear-gradient(top, #65a9d7, #3e779d);
+                background: -ms-linear-gradient(top, #65a9d7, #3e779d);
+                background: -o-linear-gradient(top, #65a9d7, #3e779d);
+                background-image: -ms-linear-gradient(top, #65a9d7 0%, #3e779d 100%);
+                padding: 17.5px 35px;
+                -webkit-border-radius: 6px;
+                -moz-border-radius: 6px;
+                border-radius: 6px;
+                -webkit-box-shadow: rgba(255,255,255,0.4) 0 1px 0, inset rgba(255,255,255,0.4) 0 1px 0;
+                -moz-box-shadow: rgba(255,255,255,0.4) 0 1px 0, inset rgba(255,255,255,0.4) 0 1px 0;
+                box-shadow: rgba(255,255,255,0.4) 0 1px 0, inset rgba(255,255,255,0.4) 0 1px 0;
+                text-shadow: #7ea4bd 0 1px 0;
+                color: #06426c;
+                font-size: 15px;
+                font-family: helvetica, serif;
+                text-decoration: none;
+                vertical-align: middle;
+            }
+            .button:hover {
+                border: 1px solid #0a3c59;
+                text-shadow: #1e4158 0 1px 0;
+                background: #3e779d;
+                background: -webkit-gradient(linear, left top, left bottom, from(#65a9d7), to(#3e779d));
+                background: -webkit-linear-gradient(top, #65a9d7, #3e779d);
+                background: -moz-linear-gradient(top, #65a9d7, #3e779d);
+                background: -ms-linear-gradient(top, #65a9d7, #3e779d);
+                background: -o-linear-gradient(top, #65a9d7, #3e779d);
+                background-image: -ms-linear-gradient(top, #65a9d7 0%, #3e779d 100%);
+                color: #fff;
+            }
+            .button:active {
+                text-shadow: #1e4158 0 1px 0;
+                border: 1px solid #0a3c59;
+                background: #65a9d7;
+                background: -webkit-gradient(linear, left top, left bottom, from(#3e779d), to(#3e779d));
+                background: -webkit-linear-gradient(top, #3e779d, #65a9d7);
+                background: -moz-linear-gradient(top, #3e779d, #65a9d7);
+                background: -ms-linear-gradient(top, #3e779d, #65a9d7);
+                background: -o-linear-gradient(top, #3e779d, #65a9d7);
+                background-image: -ms-linear-gradient(top, #3e779d 0%, #65a9d7 100%);
+                color: #fff;
+            }
+
+
         </style>
 
 
@@ -141,45 +141,67 @@
 
                     <main id="contentbar">
                         <div class="article">
-                           
+
                             <h1>
-                                Welcome:  <%= session.getAttribute("username") %>  
+                                Welcome:  <%= session.getAttribute("username")%>  
                             </h1>
 
                             <br>
-                            <form action="OutstandingBalance.jsp">
-                            <a href='#' class='button'>Check for outstanding balance</a>
+
+
+
+                            <form action="DashboardServlet" method="post">
+                                <button type="Submit" Value="outstandingBalance" name="button" class='button'>
+                                    Check for outstanding balance 
+                                </button>
+                            </form>
+
+                            <br>
+                            <br>
+
+
+
+                            <br>
+                            <form action="DashboardServlet" method="post">
+                                <button type="Submit" Value="makePayment" name="button" class='button'>
+                                    Make a payment 
+                                </button>
                             </form>
                             <br>
-                              <br>
-                               
-                            
-                            
-                             <br>
-                            <a href='#' class='button'>Make a payment</a>
-                             <br>
-                              <br>
-                              
-                            
-                             <br>
-                            <a href='#' class='button'>Submit a claim</a>
-                             <br>
-                              <br>
-                              
-                            
-                             <br>
-                            <a href='#' class='button'>List all claims</a>
                             <br>
-                              <br>
-                              
-                            
-                             <br>
-                            <a href='#' class='button'>Change password</a>
-                           <br>
-                              <br>
-                              
-                      
-                              
+
+
+                            <br>
+                            <form action="DashboardServlet" method="post">
+                                <button type="Submit" Value="submitClaim" name="button" class='button'>
+                                    Submit a claim
+                                </button>
+                            </form>
+                            <br>
+                            <br>
+
+
+                            <br>
+                            <form action="DashboardServlet" method="post">
+                                <button type="Submit" Value="listAllClaims" name="button" class='button'>
+                                    List all claims
+                                </button>
+                            </form>
+                            <br>
+                            <br>
+
+
+                            <br>
+                            <form action="DashboardServlet" method="post">
+                                <button type="Submit" Value="changePassword" name="button" class='button'>
+                                    Change Password
+                                </button>
+                            </form>
+                            <br>
+                            <br>
+
+
+
                         </div>
                     </main>
 

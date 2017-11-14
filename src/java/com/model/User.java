@@ -14,11 +14,20 @@ public class User {
     private String id;
     private String password;
     private String status;
+    
+    public User()
+    { }
 
     public User(String id, String password, String status) {
         this.id = id;
         this.password = password;
         this.status = status;
+    }
+    
+    public User(User u) {
+        this.id = u.id;
+        this.password = u.password;
+        this.status = u.status;
     }
     
     public static String createPassword() {

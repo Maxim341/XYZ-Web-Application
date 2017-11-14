@@ -33,4 +33,19 @@ public class XYZWebApplicationDB {
             Logger.getLogger(JDBCWrapper.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    
+    public User getUser(String id)
+    {
+        User ret = new User();
+        wrapper.createStatement();
+        wrapper.findRecord("users", "id", id);
+        try {
+            ret.setId(wrapper.getResultSet().getString("id"));
+            ret.setPassword(wrapper.getResultSet().getString("password"));
+            ret.setStatus(wrapper.getResultSet().getString("status"));
+        } catch (SQLException ex) {
+            Logger.getLogger(XYZWebApplicationDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return ret;
+    }
 }

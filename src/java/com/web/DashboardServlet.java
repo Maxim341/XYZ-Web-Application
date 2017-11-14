@@ -1,24 +1,23 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package com.web;
 
 import java.io.IOException;
-
+import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import com.model.JDBCWrapper;
-import com.model.User;
-import com.model.XYZWebApplicationDB;
-import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author BMT
+ * @author Fraser
  */
-@WebServlet(name = "LoginServlet", urlPatterns = {"/Login"})
-public class LoginServlet extends HttpServlet {
+public class DashboardServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -34,27 +33,25 @@ public class LoginServlet extends HttpServlet {
         String button = request.getParameter("button");
 
         switch (button) {
-            case "Login":
-                String username = request.getParameter("username");
-                String password = request.getParameter("password");
-                boolean success = authenticate(username, password);
-                if (success) {
-                    //Be nice to change this to setting a user object instead.
-                    HttpSession session = request.getSession();
-                    User u = (new XYZWebApplicationDB((JDBCWrapper) getServletContext().getAttribute("database"))).getUser(username);
-                    session.setAttribute("user", u);
-                    RequestDispatcher view = request.getRequestDispatcher("memberPage.jsp");
-                    view.forward(request, response);
-                } else {
-                    RequestDispatcher view = request.getRequestDispatcher("login.jsp");
-                    view.forward(request, response);
-                }
-                break;
-            case "registration":
-                RequestDispatcher view = request.getRequestDispatcher("registrationPage.jsp");
+            case "outstandingBalance":
+                RequestDispatcher view = request.getRequestDispatcher("OutstandingBalance.jsp");
                 view.forward(request, response);
                 break;
-            default:
+            case "makePayment":
+                RequestDispatcher view2 = request.getRequestDispatcher("MakePayment.jsp");
+                view2.forward(request, response);
+                break;
+            case "submitClaim":
+                RequestDispatcher view3 = request.getRequestDispatcher("SubmitClaim.jsp");
+                view3.forward(request, response);
+                break;
+            case "listAllClaims":
+                RequestDispatcher view4 = request.getRequestDispatcher("ListClaims.jsp");
+                view4.forward(request, response);
+                break;
+            case "changePassword":
+                RequestDispatcher view5 = request.getRequestDispatcher("ChangePassword.jsp");
+                view5.forward(request, response);
                 break;
         }
     }
@@ -72,7 +69,6 @@ public class LoginServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
-
     }
 
     /**
@@ -98,14 +94,5 @@ public class LoginServlet extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
-
-    public boolean authenticate(String id, String password) {
-        JDBCWrapper wrapper = (JDBCWrapper) getServletContext().getAttribute("database");
-        wrapper.createStatement();
-        if (wrapper.findRecord("users", "id", id) && wrapper.findRecord("users", "password", password)) {
-            return true;
-        }
-        return false;
-    }
 
 }
