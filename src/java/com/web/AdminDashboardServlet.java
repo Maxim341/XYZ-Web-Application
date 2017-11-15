@@ -7,6 +7,7 @@ package com.web;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -29,18 +30,41 @@ public class AdminDashboardServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet AdminDashboardServlet</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet AdminDashboardServlet at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+        String button = request.getParameter("button");
+
+        switch (button) {
+            case "listAllMembers":
+                RequestDispatcher view = request.getRequestDispatcher("adminListAllMembers.jsp");
+                view.forward(request, response);
+                break;
+            case "listAllOutstanding":
+                RequestDispatcher view2 = request.getRequestDispatcher("adminListAllOutstanding.jsp");
+                view2.forward(request, response);
+                break;
+            case "listAllClaims":
+                RequestDispatcher view3 = request.getRequestDispatcher("adminListAllClaims.jsp");
+                view3.forward(request, response);
+                break;
+            case "listApplications":
+                RequestDispatcher view4 = request.getRequestDispatcher("adminListApplications.jsp");
+                view4.forward(request, response);
+                break;
+            case "processClaim":
+                RequestDispatcher view5 = request.getRequestDispatcher("adminProcessClaim.jsp");
+                view5.forward(request, response);
+                break;
+            case "processApplication":
+                RequestDispatcher view6 = request.getRequestDispatcher("adminProcessApplication.jsp");
+                view6.forward(request, response);
+                break;
+            case "suspendResumeMember":
+                RequestDispatcher view7 = request.getRequestDispatcher("adminSuspendResumeMember.jsp");
+                view7.forward(request, response);
+                break;
+            case "annualReport":
+                RequestDispatcher view8 = request.getRequestDispatcher("adminAnnualReport.jsp");
+                view8.forward(request, response);
+                break;
         }
     }
 
