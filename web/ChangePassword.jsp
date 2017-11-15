@@ -231,7 +231,7 @@ function myFunction() {
                             
                             <div class="popup" onclick="myFunction()">Submit
                                 
-                                <span class="popuptext" id="myPopup">HELLO</span>
+                                <span class="popuptext" id="myPopup">New Password: </span>
                             </div>
                             
                             

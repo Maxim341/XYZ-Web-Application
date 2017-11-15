@@ -95,4 +95,15 @@ public class XYZWebApplicationDB {
         }
         return dob;
     }
+    
+    public void changePassword(){
+       
+        wrapper.findRecord("Users", "password", "TBC");
+        
+        
+    }
+    
+    
+    
+    
 }
