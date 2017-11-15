@@ -62,6 +62,7 @@
 
 
             .button {
+                width: 300px;
                 border: 1px solid #0a3c59;
                 background: #3e779d;
                 background: -webkit-gradient(linear, left top, left bottom, from(#65a9d7), to(#3e779d));
@@ -132,7 +133,7 @@
             </header>
             <div class="feature">
                 <div class="feature-inner">
-                    <h1>XYZ Members Dashboard</h1>
+                    <h1>Members Dashboard</h1>
                 </div>
             </div>
 

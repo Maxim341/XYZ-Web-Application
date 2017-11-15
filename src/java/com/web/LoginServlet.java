@@ -43,7 +43,18 @@ public class LoginServlet extends HttpServlet {
                     HttpSession session = request.getSession();
                     User u = (new XYZWebApplicationDB((JDBCWrapper) getServletContext().getAttribute("database"))).getUser(username);
                     session.setAttribute("user", u);
-                    RequestDispatcher view = request.getRequestDispatcher("memberPage.jsp");
+                    
+                    // Modified below section of code to direct the user to the admin or member page, depending on the status of their
+                    // account.
+                    
+                    RequestDispatcher view;
+                    
+                    if (u.getStatus().contains("ADMIN")){
+                        view = request.getRequestDispatcher("adminPage.jsp");
+                    } else {
+                        view = request.getRequestDispatcher("memberPage.jsp");
+                    }
+                    
                     view.forward(request, response);
                 } else {
                     RequestDispatcher view = request.getRequestDispatcher("login.jsp");

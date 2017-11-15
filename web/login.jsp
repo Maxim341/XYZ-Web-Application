@@ -31,9 +31,10 @@
                 bottom: -40px;
                 width: auto;
                 height: auto;
-                background-image: url(http://ginva.com/wp-content/uploads/2012/07/city-skyline-wallpapers-008.jpg);
+                background-image: url(http://www.publicdomainpictures.net/pictures/210000/velka/new-york-night-skyline-1485446344nIH.jpg);
+                <!--background-image: url(http://ginva.com/wp-content/uploads/2012/07/city-skyline-wallpapers-008.jpg);-->
                 background-size: cover;
-                -webkit-filter: blur(5px);
+                -webkit-filter: blur(3px);
                 z-index: 0;
             }
 
