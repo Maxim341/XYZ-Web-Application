@@ -220,16 +220,17 @@ function myFunction() {
 
                             <form>
                                 <label for="OPass">Current Password</label>
-                                <input type="text" id="OPass" name="fname">
+                                <input type="text" id="OPass" name="currentP">
                                 <label for="lname">New Password</label>
-                                <input type="text" id="NPass" name="lname">
+                                <input type="text" id="NPass" name="newP">
                             </form>
                            
 
                             
                             
-
+                            
                             <div class="popup" onclick="myFunction()">Submit
+                                
                                 <span class="popuptext" id="myPopup">HELLO</span>
                             </div>
                             
