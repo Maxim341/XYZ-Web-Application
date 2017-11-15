@@ -71,7 +71,7 @@ public class RegServlet extends HttpServlet {
                 } else {
                     Date dor = new Date();
                     Member m = new Member(userID, fullName, new Address(Integer.parseInt(houseNumber), streetName, city, county, postCode), dob, dor, "APPROVED", 0);
-                    User u = new User(userID, User.createPassword(), "APPROVED");
+                    User u = new User(userID, User.createPassword(), "PROV");
 
                     //Inserting members with data provided above^^
                     JDBCWrapper wrapper = (JDBCWrapper) getServletContext().getAttribute("database");

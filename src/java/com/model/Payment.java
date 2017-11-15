@@ -15,7 +15,7 @@ import java.util.Date;
 public class Payment {
     private int id;
     
-    private int memId;
+    private String memId;
     
     private String typeOfPayment;
     
@@ -25,7 +25,7 @@ public class Payment {
     
     private Date date;
 
-    public Payment(int id, int memid, String typeOfPayment, float amount, Time time, Date date) {
+    public Payment(int id, String memid, String typeOfPayment, float amount, Time time, Date date) {
         this.id = id;
         this.memId = memid;
         this.typeOfPayment = typeOfPayment;
@@ -42,11 +42,11 @@ public class Payment {
         this.id = id;
     }
 
-    public int getMemid() {
+    public String getMemid() {
         return memId;
     }
 
-    public void setMemid(int memid) {
+    public void setMemid(String memid) {
         this.memId = memid;
     }
 

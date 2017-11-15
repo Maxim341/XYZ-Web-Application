@@ -1,6 +1,12 @@
 package com.model;
 
 import java.sql.SQLException;
+import java.sql.Time;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -47,5 +53,46 @@ public class XYZWebApplicationDB {
             Logger.getLogger(XYZWebApplicationDB.class.getName()).log(Level.SEVERE, null, ex);
         }
         return ret;
+    }
+    
+    public ArrayList<Payment> getUserPayments(String id)
+    {
+        ArrayList ret = new ArrayList<Payment>();
+        wrapper.findRecord("payments", "mem_id", id);
+        try { 
+            do
+            {
+               ret.add(new Payment(wrapper.getResultSet().getInt("id"), wrapper.getResultSet().getString("mem_id"), wrapper.getResultSet().getString("type_of_payment"), wrapper.getResultSet().getFloat("amount"), Time.valueOf(wrapper.getResultSet().getString("time")), makeDate(wrapper.getResultSet().getString("date"))));
+            }while(wrapper.getResultSet().next());
+        } catch (SQLException ex) {
+            Logger.getLogger(XYZWebApplicationDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return ret;
+    }
+    
+    public ArrayList<Claim> getUserClaims(String id)
+    {
+        ArrayList ret = new ArrayList<Claim>();
+        wrapper.findRecord("claims", "mem_id", id);
+        try { 
+            do
+            {
+               ret.add(new Claim(wrapper.getResultSet().getInt("id"), wrapper.getResultSet().getString("mem_id"), makeDate(wrapper.getResultSet().getString("date")), wrapper.getResultSet().getString("rationale"),wrapper.getResultSet().getString("status"), wrapper.getResultSet().getFloat("amount")));
+            }while(wrapper.getResultSet().next());
+        } catch (SQLException ex) {
+            Logger.getLogger(XYZWebApplicationDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return ret;
+    }
+    
+    public Date makeDate(String dateParam) {
+        Date dob = new Date();
+        DateFormat df = new SimpleDateFormat("dd/MM/yy");
+        try {
+            dob = df.parse(dateParam);
+        } catch (ParseException ex) {
+            System.out.println("Parse exception");
+        }
+        return dob;
     }
 }

@@ -1,3 +1,9 @@
+<%@page import="java.util.ArrayList"%>
+<%@page import="com.model.Claim"%>
+<%@page import="com.model.XYZWebApplicationDB"%>
+<%@page import="com.model.User"%>
+<%@page import="com.model.User"%>
+<%@page import="com.model.JDBCWrapper"%>
 <!DOCTYPE html>
 <!-- Template by html.am -->
 <html>
@@ -144,7 +150,16 @@
 
                             
 
-                           -->Add text here  <--
+                            <% 
+                                JDBCWrapper wrapper = (JDBCWrapper) getServletContext().getAttribute("database");
+                                //HttpSession session = request.getSession();
+                                wrapper.createStatement();
+                                ArrayList<Claim> c = (new XYZWebApplicationDB(wrapper).getUserClaims(((User)session.getAttribute("user")).getId()));
+                                for(int i = 0; i != c.size(); ++i)
+                                {
+                                    out.println("RATIONALE: " + c.get(i).getRationale() + " : " + c.get(i).getDate() + " AMOUNT: " + c.get(i).getAmount() + " STATUS: " + c.get(i).getStatus() + "<br />");
+                                }
+                            %>
 
 
                         </div>
