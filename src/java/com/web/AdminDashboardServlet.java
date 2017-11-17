@@ -65,6 +65,10 @@ public class AdminDashboardServlet extends HttpServlet {
                 RequestDispatcher view8 = request.getRequestDispatcher("adminAnnualReport.jsp");
                 view8.forward(request, response);
                 break;
+            case "backPage":
+                RequestDispatcher view9 = request.getRequestDispatcher("adminPage.jsp");
+                view9.forward(request, response);
+                break;
         }
     }
 

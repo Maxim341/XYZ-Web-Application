@@ -19,3 +19,7 @@
 * Updated **errorPage.jsp** in line with the 'theme' we've adopted.
 * Changed background image on **login.jsp** for higher resolution image (image labelled for non-commercial reuse)
 * Minor updates to **memberPage.jsp**, in line with style changes.
+
+17/11/17 - _James_
+* Added back button to all of the admin pages. (Modified the switch statement in the `AdminDashbordServlet.java`)
+* Modified buttons on Login Page.

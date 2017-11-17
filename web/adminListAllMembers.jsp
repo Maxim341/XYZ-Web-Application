@@ -145,6 +145,17 @@
                             
 
                            -->Add text here  <--
+                            <br>
+                            <br>
+                           
+                           <form action="AdminDashboardServlet" method="post">
+                               <button type="Submit" Value="backPage" name="button" class='button'>
+                                   Back 
+                               </button>
+                           </form>
+
+                            <br>
+                            <br>
 
 
                         </div>
