@@ -89,6 +89,12 @@ public class RegServlet extends HttpServlet {
                 RequestDispatcher view = request.getRequestDispatcher("login.jsp");
                 view.forward(request, response);
                 break;
+                case "backPage":
+                RequestDispatcher view2 = request.getRequestDispatcher("login.jsp");
+                view2.forward(request, response);
+                break;
+                
+                
             default:
                 break;
         }
