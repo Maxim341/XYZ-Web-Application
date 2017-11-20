@@ -67,12 +67,12 @@ public class authentificationFilter implements Filter {
         User u = (User)session.getAttribute("user");  
         
         //Check if password equals admin. (We will want this to check if status is an admin in future)
-        if(u.getStatus().trim().equals("ADMIN")){  
+        if(u != null && u.getStatus().trim().equals("ADMIN")){  
             chain.doFilter(request, response);//sends request to next resource  
         }  
         else{  
             RequestDispatcher rd = request.getRequestDispatcher("errorPage.jsp");  
-            rd.include(request, response);  
+            rd.forward(request, response);  
         } 
     }
 

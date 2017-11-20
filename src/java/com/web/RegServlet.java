@@ -70,7 +70,7 @@ public class RegServlet extends HttpServlet {
                     rd.forward(request, response);
                 } else {
                     Date dor = new Date();
-                    Member m = new Member(userID, fullName, new Address(Integer.parseInt(houseNumber), streetName, city, county, postCode), dob, dor, "APPROVED", 0);
+                    Member m = new Member(userID, fullName, new Address(Integer.parseInt(houseNumber), streetName, city, county, postCode), dob, dor, "PROV", 0);
                     User u = new User(userID, User.createPassword(), "PROV");
 
                     //Inserting members with data provided above^^

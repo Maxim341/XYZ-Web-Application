@@ -40,6 +40,26 @@ public class XYZWebApplicationDB {
         }
     }
     
+    public void insertPayment(Payment p)
+    {
+        wrapper.createStatement();
+        try {
+            wrapper.getStatement().executeUpdate("insert into payments values ('" + p.getId() + "', '" + p.getMemid() + "', '" + p.getTypeOfPayment() + "', '" + p.getAmount() + "', '" + p.getDate() + "', '" + p.getTime() + "')");
+        } catch (SQLException ex) {
+            Logger.getLogger(JDBCWrapper.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public void insertClaim(Claim c)
+    {
+        wrapper.createStatement();
+        try {
+            wrapper.getStatement().executeUpdate("insert into claims values ('" + c.getId() + "', '" + c.getMemid() + "', '" + c.getDate() + "', '" + c.getRationale() + "', '" + c.getStatus() + "', '" + c.getAmount() + "')");
+        } catch (SQLException ex) {
+            Logger.getLogger(JDBCWrapper.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
     public User getUser(String id)
     {
         User ret = new User();
@@ -70,6 +90,24 @@ public class XYZWebApplicationDB {
         return ret;
     }
     
+    public ArrayList<Member> getAllUsers()
+    {
+        ArrayList ret = new ArrayList<Member>();
+        wrapper.createStatement();
+        wrapper.createResultSet("SELECT * FROM members");
+        try { 
+            do
+            {
+               String[] addressString = wrapper.getResultSet().getString("address").split(",\\s");
+               Address a = new Address(Integer.parseInt(addressString[0]), addressString[1], addressString[2], addressString[3], addressString[4]);
+               ret.add(new Member(wrapper.getResultSet().getString("id"), wrapper.getResultSet().getString("name"), a, makeDate(wrapper.getResultSet().getString("dob")), makeDate(wrapper.getResultSet().getString("dor")), wrapper.getResultSet().getString("status"), wrapper.getResultSet().getFloat("balance")));
+            }while(wrapper.getResultSet().next());
+        } catch (SQLException ex) {
+            Logger.getLogger(XYZWebApplicationDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return ret;
+    }
+    
     public ArrayList<Claim> getUserClaims(String id)
     {
         ArrayList ret = new ArrayList<Claim>();
@@ -82,6 +120,23 @@ public class XYZWebApplicationDB {
         } catch (SQLException ex) {
             Logger.getLogger(XYZWebApplicationDB.class.getName()).log(Level.SEVERE, null, ex);
         }
+        return ret;
+    }
+    
+    public ArrayList<Claim> getAllClaims()
+    {
+        ArrayList users = getAllUsers();
+        ArrayList ret = new ArrayList<Claim>();
+        
+        for(int i = 0; i != users.size(); ++i)
+        {
+            ArrayList claims = getUserClaims(((Member)users.get(i)).getUsername());
+            for(int j = 0; j != claims.size(); ++j)
+            {
+                ret.add(claims.get(j));
+            }
+        }
+        
         return ret;
     }
     
