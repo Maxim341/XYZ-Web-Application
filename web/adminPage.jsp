@@ -156,8 +156,6 @@
 
                             <br>
 
-
-
                             <form action="AdminDashboardServlet" method="post">
                                 <button type="Submit" Value="listAllMembers" name="button" class='button'>
                                     List all members 
@@ -165,77 +163,54 @@
                             </form>
 
                             <br>
-                            <br>
 
-
-
-                            <br>
                             <form action="AdminDashboardServlet" method="post">
                                 <button type="Submit" Value="listAllOutstanding" name="button" class='button'>
                                     List all outstanding balances
                                 </button>
                             </form>
                             <br>
-                            <br>
 
-
-                            <br>
                             <form action="AdminDashboardServlet" method="post">
                                 <button type="Submit" Value="listAllClaims" name="button" class='button'>
                                     List all claims
                                 </button>
                             </form>
                             <br>
-                            <br>
 
-
-                            <br>
                             <form action="AdminDashboardServlet" method="post">
                                 <button type="Submit" Value="listApplications" name="button" class='button'>
                                     List all provisional applications
                                 </button>
                             </form>
                             <br>
-                            <br>
 
-
-                            <br>
                             <form action="AdminDashboardServlet" method="post">
                                 <button type="Submit" Value="processClaim" name="button" class='button'>
                                     Process a claim
                                 </button>
                             </form>
                             <br>
-                            <br>
 
-
-                            <br>
                             <form action="AdminDashboardServlet" method="post">
                                 <button type="Submit" Value="processApplication" name="button" class='button'>
                                     Process membership application
                                 </button>
                             </form>
                             <br>
-                            <br>
 
-
-                            <br>
                             <form action="AdminDashboardServlet" method="post">
                                 <button type="Submit" Value="suspendResumeMember" name="button" class='button'>
                                     Suspend or resume membership
                                 </button>
                             </form>
                             <br>
-                            <br>
 
-
-                            <br>
                             <form action="AdminDashboardServlet" method="post">
                                 <button type="Submit" Value="annualReport" name="button" class='button'>
                                     Report annual turnover
                                 </button>
                             </form>
-                            <br>
                             <br>
 
                         </div>

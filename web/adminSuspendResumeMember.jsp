@@ -3,7 +3,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-        <title>XYZ Registration Page</title>
+        <title>Suspend member</title>
         <style type="text/css">
             html, #page { padding:0; margin:0;}
             body { margin:0; padding:0; width:100%; color:#959595; font:normal 12px/2.0em Sans-Serif;} 
@@ -57,9 +57,10 @@
 
             /* Clear both sides to assist with div alignment  */
             .clr { clear:both; padding:0; margin:0; width:100%; font-size:0px; line-height:0px;}
-            
-            
-              .button {
+
+
+
+            .button {
                 border: 1px solid #0a3c59;
                 background: #3e779d;
                 background: -webkit-gradient(linear, left top, left bottom, from(#65a9d7), to(#3e779d));
@@ -106,33 +107,31 @@
                 background-image: -ms-linear-gradient(top, #3e779d 0%, #65a9d7 100%);
                 color: #fff;
             }
-            
-            
-            
-            
+
+
         </style>
 
 
     </head>
     <body>
         <div id="page">
-            
             <header id="header">
                 <div id="header-inner">	
                     <div id="logo">
                         <h1><a href="#">XYZ<span>LTD</span></a></h1>
                     </div>
                     <div id="top-nav">
-
+                        <ul>
+                            <li><a href="#">FAQ</a></li>
+                            <li><a href="#">Log Out</a></li>
+                        </ul>
                     </div>
                     <div class="clr"></div>
                 </div>
             </header>
-            
-            
             <div class="feature">
                 <div class="feature-inner">
-                    <h1>XYZ Registration</h1>
+                    <h1>Suspend Members</h1>
                 </div>
             </div>
 
@@ -142,83 +141,23 @@
 
                     <main id="contentbar">
                         <div class="article">
-                            <form action="Registration" method="post">
-                                <table border="1" width="30%" cellpadding="5">
-                                    <thead>
-                                        <tr>
-                                            <th colspan="2">XYZ Registration form</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>User name</td>
-                                            <td><input type="text" name="user ID" placeholder="User ID"></td>
-                                        </tr>
-                                        <tr>
-                                            <td>Full name</td>
-                                            <td><input type="text" name="full name" placeholder="Full Name"></td>
-                                        </tr>
-                                        <tr>
-                                            <td>House Number</td>
-                                            <td><input type="text" name="houseNumber" placeholder="'1'"></td>
-                                        </tr>
-                                        <tr>
-                                            <td>Street Name</td>
-                                            <td><input type="text" name="streetName" placeholder="'Filton Avenue'"></td>
-                                        </tr>
-                                        <tr>
-                                            <td>City</td>
-                                            <td><input type="text" name="city" placeholder="'Bristol'"></td>
-                                        </tr>
-                                        <tr>
-                                            <td>County</td>
-                                            <td><input type="text" name="county" placeholder="'Avon'"></td>
-                                        </tr>
-                                        <tr>
-                                            <td>Post Code</td>
-                                            <td><input type="text" name="postCode" placeholder="'BS1 1AB'"></td>
-                                        </tr>
-                                        <tr>
-                                            <td>DOB</td>
-                                            <td><input type="text" name="DOB" placeholder="DD/MM/YY"></td>
-                                        </tr>
-                                        <tr>
-                                            <td><input type="Submit" value="Register" name="button"></td>
-                                        </tr> 
-                                    </tbody>
-                                </table>
-                            </form>
-                            <p1><%
-                                if (null != request.getAttribute("errorMessage")) {
-                                    out.println(request.getAttribute("errorMessage"));
-                                }
-                                %>
-                            </p1>
-                            <p2>
-                                <%
-                                    if (null != request.getAttribute("errorMessage2")) {
-                                        out.println(request.getAttribute("errorMessage2"));
-                                    }
-                                %>
-                            </p2>
-                            <p3>
-                                <%
-                                    if (null != request.getAttribute("errorMessage3")) {
-                                        out.println(request.getAttribute("errorMessage3"));
-                                    }
-                                %>
-                            </p3>
 
-                            <br>
-                            <br>
                             
-                             <form action="Registration" method="post">
+                           -->Add text here  <--
+                            <br>
+                            <br>
+                           
+                           <form action="AdminDashboardServlet" method="post">
                                <button type="Submit" Value="backPage" name="button" class='button'>
                                    Back 
                                </button>
                            </form>
-                            
-                            
+
+                            <br>
+                            <br>
+
+
+
 
                         </div>
                     </main>

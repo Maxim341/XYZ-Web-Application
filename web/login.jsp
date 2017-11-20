@@ -168,10 +168,12 @@
             <form action="Login" method="post">
                 <input type="text" placeholder="username" name="username"><br>
                 <input type="password" placeholder="password" name="password"><br>
-                <input type="Submit" value="Login" name="button">                      
+                <br>
+                <input type="Submit" value="Login" name="button" style="width: 100px">                      
             </form>
+            <br>
             <form action="Login" method="post">
-                <button type="Submit" value="registration" name="button">
+                <button type="Submit" value="registration" name="button" style="width: 100px">
                     Register
                 </button>
             </form> 
