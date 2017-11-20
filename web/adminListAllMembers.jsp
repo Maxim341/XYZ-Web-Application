@@ -1,3 +1,8 @@
+<%@page import="java.util.ArrayList"%>
+<%@page import="com.model.Member"%>
+<%@page import="com.model.Member"%>
+<%@page import="com.model.XYZWebApplicationDB"%>
+<%@page import="com.model.JDBCWrapper"%>
 <!DOCTYPE html>
 <!-- Template by html.am -->
 <html>
@@ -142,10 +147,14 @@
                     <main id="contentbar">
                         <div class="article">
 
-                            
-
-                           -->Add text here  <--
-                            <br>
+                            <%
+                                JDBCWrapper wrapper = (JDBCWrapper) getServletContext().getAttribute("database");
+                                wrapper.createStatement();
+                                ArrayList<Member> m = new XYZWebApplicationDB(wrapper).getAllUsers();
+                                for(int i = 0; i != m.size(); ++i)
+                                    out.println("Username: " + m.get(i).getUsername() + ", Balance: " + m.get(i).getBalance()  + ", Status: " + m.get(i).getStatus() + "<br />");
+                            %>                            
+<br>
                             <br>
                            
                            <form action="AdminDashboardServlet" method="post">

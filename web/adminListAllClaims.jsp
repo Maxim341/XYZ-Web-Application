@@ -148,11 +148,11 @@
 
                             
                            <% 
-                             JDBCWrapper wrapper = (JDBCWrapper) getServletContext().getAttribute("database");
-                             wrapper.createStatement();
-                             ArrayList<Claim> c = new XYZWebApplicationDB(wrapper).getAllClaims();
-                             for(int i = 0; i != c.size(); ++i)
-                                 out.println("RATIONALE: " + c.get(i).getRationale() + " : " + c.get(i).getDate()  + "<br /> AMOUNT: " + c.get(i).getAmount() + "<br /> STATUS: " + c.get(i).getStatus() + "<br />");
+                                JDBCWrapper wrapper = (JDBCWrapper) getServletContext().getAttribute("database");
+                                wrapper.createStatement();
+                                ArrayList<Claim> c = new XYZWebApplicationDB(wrapper).getAllClaims();
+                                for(int i = 0; i != c.size(); ++i)
+                                    out.println("RATIONALE: " + c.get(i).getRationale() + " : " + c.get(i).getDate()  + "<br /> AMOUNT: " + c.get(i).getAmount() + "<br /> STATUS: " + c.get(i).getStatus() + "<br />");
                             %>
                            
                             <br>

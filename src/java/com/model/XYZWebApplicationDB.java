@@ -96,9 +96,9 @@ public class XYZWebApplicationDB {
         wrapper.createStatement();
         wrapper.createResultSet("SELECT * FROM members");
         try { 
+            wrapper.getResultSet().next();
             do
             {
-              wrapper.getResultSet().next();
                String[] addressString = wrapper.getResultSet().getString("address").split(",");
                Address a = new Address(Integer.parseInt(addressString[0]), addressString[1], addressString[2], addressString[3], addressString[4]);
                ret.add(new Member(wrapper.getResultSet().getString("id"), wrapper.getResultSet().getString("name"), a, makeDate(wrapper.getResultSet().getString("dob")), makeDate(wrapper.getResultSet().getString("dor")), wrapper.getResultSet().getString("status"), wrapper.getResultSet().getFloat("balance")));
