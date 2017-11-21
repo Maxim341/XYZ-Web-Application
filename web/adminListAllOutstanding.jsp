@@ -131,7 +131,7 @@
             </header>
             <div class="feature">
                 <div class="feature-inner">
-                    <h1>Outstanding Orders</h1>
+                    <h1>Outstanding Balances</h1>
                 </div>
             </div>
 

@@ -108,7 +108,22 @@ public class XYZWebApplicationDB {
         }
         return ret;
     }
-    
+
+    public ArrayList<Member> getProvisionalUsers() {
+
+        ArrayList<Member> users;
+        users = getAllUsers();
+
+        ArrayList ret = new ArrayList<Member>();
+
+        for (Member user : users) {
+            if (user.getStatus().equals("PROV")) {
+                ret.add(user);
+            }
+        }
+        return ret;
+    }
+
     public ArrayList<Claim> getUserClaims(String id)
     {
         ArrayList ret = new ArrayList<Claim>();

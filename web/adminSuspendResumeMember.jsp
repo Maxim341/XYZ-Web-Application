@@ -1,3 +1,7 @@
+<%@page import="java.util.ArrayList"%>
+<%@page import="com.model.XYZWebApplicationDB"%>
+<%@page import="com.model.Member"%>
+<%@page import="com.model.JDBCWrapper"%>
 <!DOCTYPE html>
 <!-- Template by html.am -->
 <html>
@@ -34,7 +38,7 @@
 
             /* Content */
             #content-inner { margin:0 auto; padding:10px; width:970px;background:#fff;}
-            #content #contentbar { margin:0; padding:0; float:right; width:760px;}
+            #content #contentbar { margin:0; padding:0; float:left; width:760px;}
             #content #contentbar .article { margin:0 0 24px; padding:0 20px 0 15px; }
             #content #sidebar { padding:0; float:left; width:200px;}
             #content #sidebar .widget { margin:0 0 12px; padding:8px 8px 8px 13px;line-height:1.4em;}
@@ -109,6 +113,34 @@
             }
 
 
+            table {
+                max-width:980px;
+                table-layout:fixed;
+                margin:auto;
+            }
+            th, td {
+                padding:5px 10px;
+                border:0px solid #000;
+            }
+            thead, tfoot {
+                background:#f9f9f9;
+                display:table;
+                width:100%;
+                width:calc(100% - 18px);
+            }
+            tbody {
+                height:300px;
+                overflow:auto;
+                overflow-x:hidden;
+                display:block;
+                width:100%;
+            }
+            tbody tr {
+                display:table;
+                width:100%;
+                table-layout:fixed;
+            }
+
         </style>
 
 
@@ -131,7 +163,7 @@
             </header>
             <div class="feature">
                 <div class="feature-inner">
-                    <h1>Suspend Members</h1>
+                    <h1>Suspend or Resume Members</h1>
                 </div>
             </div>
 
@@ -142,16 +174,44 @@
                     <main id="contentbar">
                         <div class="article">
 
+
+
+                                                        <div id="table-wrapper">
+                                <div id="table-scroll">
+                                    <table>
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">Member ID</th>
+                                                <th scope="col">Full Names</th>
+                                                <th scope="col">Balance</th>
+                                                <th scope="col">Status</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <%
+                                                JDBCWrapper wrapper = (JDBCWrapper) getServletContext().getAttribute("database");
+                                                wrapper.createStatement();
+                                                ArrayList<Member> m = new XYZWebApplicationDB(wrapper).getAllUsers();
+                                                for (int i = 0; i != m.size(); ++i) {
+                                                    out.println("<tr> <td>" + m.get(i).getUsername()+ "</td> <td>" + m.get(i).getFullName()+ "</td> <td>" + m.get(i).getBalance()+ "</td> <td>" + m.get(i).getStatus()+ "</td> </tr>");
+                                                }
+                                            %>         
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
                             
-                           -->Add text here  <--
+                            
                             <br>
                             <br>
-                           
-                           <form action="AdminDashboardServlet" method="post">
-                               <button type="Submit" Value="backPage" name="button" class='button'>
-                                   Back 
-                               </button>
-                           </form>
+                            
+                            
+
+                            <form action="AdminDashboardServlet" method="post">
+                                <button type="Submit" Value="backPage" name="button" class='button'>
+                                    Back 
+                                </button>
+                            </form>
 
                             <br>
                             <br>
