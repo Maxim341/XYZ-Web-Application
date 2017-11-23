@@ -103,7 +103,7 @@
     </button>
        
     
-    <% 
+    <% /*
    
      String username = request.getParameter("username");
      
@@ -118,7 +118,7 @@
                     pass.changePassword(u);
     
 
-
+*/
     
     %>
 

@@ -8,7 +8,7 @@
 
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 
-        <title>Suspend member</title>
+        <title>Dashboard</title>
 
         <style type="text/css">
 
