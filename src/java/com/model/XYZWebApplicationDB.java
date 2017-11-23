@@ -179,7 +179,11 @@ public class XYZWebApplicationDB {
         wrapper.createResultSet("UPDATE users SET \"status\" = 'APPROVED' WHERE \"id\" = '" + u.getId() + "'");      
     }
     
-    
+    public void disapproveMemberApplication(User u)
+    {
+        wrapper.createStatement();
+        wrapper.createResultSet("UPDATE users SET \"status\" = 'DISAPPROVED' WHERE \"id\" = '" + u.getId() + "'");
+    }
     
     
 }
