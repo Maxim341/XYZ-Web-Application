@@ -167,11 +167,10 @@ public class XYZWebApplicationDB {
         return dob;
     }
     
-    public void changePassword(){
-       
-        wrapper.findRecord("Users", "password", "TBC");
-        
-        
+    public void changePassword(User u)
+    {   
+        wrapper.createStatement();
+        wrapper.createResultSet("UPDATE users SET \"password\" = '"+ u.getPassword() +"' WHERE \"id\" = '" + u.getId() + "'");  
     }
     
     public void approveMemberApplication(User u)

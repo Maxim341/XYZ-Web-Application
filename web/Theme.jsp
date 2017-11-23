@@ -103,6 +103,8 @@
             .clr { clear:both; padding:0; margin:0; width:100%; font-size:0px; line-height:0px;}
 
             .button {
+                
+                width: 300px;
 
                 border: 1px solid #0a3c59;
 
