@@ -8,7 +8,7 @@
 
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 
-        <title>Suspend member</title>
+        <title>XYZ Web Application 2017</title>
 
         <style type="text/css">
 
@@ -236,7 +236,7 @@
 
                 <div class="feature-inner">
 
-                    <h1>Members Dashboard</h1>
+                    <h1>Dashboard</h1>
 
                 </div>
 

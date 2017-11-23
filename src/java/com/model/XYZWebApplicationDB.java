@@ -117,7 +117,7 @@ public class XYZWebApplicationDB {
         ArrayList ret = new ArrayList<Member>();
 
         for (Member user : users) {
-            if (user.getStatus().equals("PROV")) {
+            if (user.getStatus().equals("APPLIED")) {
                 ret.add(user);
             }
         }
@@ -178,6 +178,12 @@ public class XYZWebApplicationDB {
     {
         wrapper.createStatement();
         wrapper.createResultSet("UPDATE users SET \"status\" = 'APPROVED' WHERE \"id\" = '" + u.getId() + "'");      
+    }
+    
+    public void suspendMemberApplication(User u)
+    {
+        wrapper.createStatement();
+        wrapper.createResultSet("UPDATE users SET \"status\" = 'SUSPENDED' WHERE \"id\" = '" + u.getId() + "'");      
     }
     
     
