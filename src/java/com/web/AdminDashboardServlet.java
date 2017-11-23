@@ -30,46 +30,42 @@ public class AdminDashboardServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        String page = "/Theme.jsp";
+        String include = "Admin/adminPage.jsp";
         String button = request.getParameter("button");
 
         switch (button) {
             case "listAllMembers":
-                RequestDispatcher view = request.getRequestDispatcher("adminListAllMembers.jsp");
-                view.forward(request, response);
+                include = "Admin/adminListAllMembers.jsp";
                 break;
             case "listAllOutstanding":
-                RequestDispatcher view2 = request.getRequestDispatcher("adminListAllOutstanding.jsp");
-                view2.forward(request, response);
+                include = "Admin/adminListAllOutstanding.jsp";
                 break;
             case "listAllClaims":
-                RequestDispatcher view3 = request.getRequestDispatcher("adminListAllClaims.jsp");
-                view3.forward(request, response);
+                include = "Admin/adminListAllClaims.jsp";
                 break;
             case "listApplications":
-                RequestDispatcher view4 = request.getRequestDispatcher("adminListApplications.jsp");
-                view4.forward(request, response);
+                include = "Admin/adminListApplications.jsp";
                 break;
             case "processClaim":
-                RequestDispatcher view5 = request.getRequestDispatcher("adminProcessClaim.jsp");
-                view5.forward(request, response);
+                include = "Admin/adminProcessClaim.jsp";
                 break;
             case "processApplication":
-                RequestDispatcher view6 = request.getRequestDispatcher("adminProcessApplication.jsp");
-                view6.forward(request, response);
+                include = "Admin/adminProcessApplication.jsp";
                 break;
             case "suspendResumeMember":
-                RequestDispatcher view7 = request.getRequestDispatcher("adminSuspendResumeMember.jsp");
-                view7.forward(request, response);
+                include = "Admin/adminSuspendResumeMember.jsp";
                 break;
             case "annualReport":
-                RequestDispatcher view8 = request.getRequestDispatcher("adminAnnualReport.jsp");
-                view8.forward(request, response);
+                include = "Admin/adminAnnualReport.jsp";
                 break;
             case "backPage":
-                RequestDispatcher view9 = request.getRequestDispatcher("adminPage.jsp");
-                view9.forward(request, response);
+                include = "Admin/adminPage.jsp";
                 break;
         }
+        
+        request.setAttribute("page", include);
+        request.getRequestDispatcher(page).forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

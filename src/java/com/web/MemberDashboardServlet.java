@@ -12,6 +12,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -29,31 +30,31 @@ public class MemberDashboardServlet extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws ServletException, IOException {               
+        String page = "/Theme.jsp";
+        String include = "Member/memberPage.jsp";
         String button = request.getParameter("button");
 
         switch (button) {
             case "outstandingBalance":
-                RequestDispatcher view = request.getRequestDispatcher("OutstandingBalance.jsp");
-                view.forward(request, response);
+                include = "Member/OutstandingBalance.jsp";
                 break;
             case "makePayment":
-                RequestDispatcher view2 = request.getRequestDispatcher("MakePayment.jsp");
-                view2.forward(request, response);
+                include = "Member/MakePayment.jsp";
                 break;
             case "submitClaim":
-                RequestDispatcher view3 = request.getRequestDispatcher("SubmitClaim.jsp");
-                view3.forward(request, response);
+                include = "Member/SubmitClaim.jsp";
                 break;
             case "listAllClaims":
-                RequestDispatcher view4 = request.getRequestDispatcher("ListClaims.jsp");
-                view4.forward(request, response);
+                include = "Member/ListClaims.jsp";
                 break;
             case "changePassword":
-                RequestDispatcher view5 = request.getRequestDispatcher("ChangePassword.jsp");
-                view5.forward(request, response);
+                include = "Member/ChangePassword.jsp";
                 break;
         }
+        
+        request.setAttribute("page", include);
+        request.getRequestDispatcher(page).forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

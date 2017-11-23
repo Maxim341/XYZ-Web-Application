@@ -50,9 +50,9 @@ public class LoginServlet extends HttpServlet {
                     RequestDispatcher view;
                     
                     if (u.getStatus().contains("ADMIN")){
-                        view = request.getRequestDispatcher("adminPage.jsp");
+                        view = request.getRequestDispatcher("AdminDashboardServlet");
                     } else {
-                        view = request.getRequestDispatcher("memberPage.jsp");
+                        view = request.getRequestDispatcher("MemberDashboardServlet");
                     }
                     
                     view.forward(request, response);

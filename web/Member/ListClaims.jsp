@@ -154,7 +154,7 @@
                                 JDBCWrapper wrapper = (JDBCWrapper) getServletContext().getAttribute("database");
                                 //HttpSession session = request.getSession();
                                 wrapper.createStatement();
-                                ArrayList<Claim> c = (new XYZWebApplicationDB(wrapper).getUserClaims(((User)session.getAttribute("user")).getId()));
+                                ArrayList<Claim> c = (new XYZWebApplicationDB(wrapper).getMemberClaims(((User)session.getAttribute("user")).getId()));
                                 for(int i = 0; i != c.size(); ++i)
                                 {
                                     out.println("RATIONALE: " + c.get(i).getRationale() + " : " + c.get(i).getDate()  + "<br /> AMOUNT: " + c.get(i).getAmount() + "<br /> STATUS: " + c.get(i).getStatus() + "<br />");

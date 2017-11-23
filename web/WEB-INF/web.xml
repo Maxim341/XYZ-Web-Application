@@ -42,7 +42,7 @@
         <servlet-class>com.web.RegServlet</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>DashboardServlet</servlet-name>
+        <servlet-name>MemberDashboardServlet</servlet-name>
         <servlet-class>com.web.MemberDashboardServlet</servlet-class>
     </servlet>
     <servlet>
@@ -58,8 +58,8 @@
         <url-pattern>/Registration</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>DashboardServlet</servlet-name>
-        <url-pattern>/DashboardServlet</url-pattern>
+        <servlet-name>MemberDashboardServlet</servlet-name>
+        <url-pattern>/MemberDashboardServlet</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>AdminDashboardServlet</servlet-name>
