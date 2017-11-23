@@ -236,7 +236,7 @@
 
                 <div class="feature-inner">
 
-                    <h1>Members Dashboard test</h1>
+                    <h1>Members Dashboard</h1>
 
                 </div>
 

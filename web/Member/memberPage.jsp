@@ -47,7 +47,7 @@
     <form action="MemberDashboardServlet" method="post">
         <button type="Submit" Value="listAllClaims" name="button" class='button'>
             <% //request.setAttribute("p", "ListClaims"); 
-            session.setAttribute("p", "ListClaims");
+                session.setAttribute("p", "ListClaims");
             %>
             List all claims
         </button>
