@@ -1,3 +1,6 @@
+<%@page import="com.model.XYZWebApplicationDB"%>
+<%@page import="com.model.JDBCWrapper"%>
+<%@page import="com.model.User"%>
 <!DOCTYPE html>
 <!-- Template by html.am -->
 <html>
@@ -95,12 +98,29 @@
 
 
 
+    <button>
+    <div class="popup" value ="ChangePass" name="button" onclick="myFunction()">Submit
+    </button>
+       
+    
+    <% 
+   
+     String username = request.getParameter("username");
+     
+     User u = (new XYZWebApplicationDB((JDBCWrapper) getServletContext().getAttribute("database"))).getUser(username);
+                    session.setAttribute("user", u);
+     
+                    u.setPassword("newP");
+                    
+                    JDBCWrapper wrapper = null;
+                    XYZWebApplicationDB pass = new XYZWebApplicationDB(wrapper);
+                    
+                    pass.changePassword(u);
+    
 
-    <div class="popup" onclick="myFunction()">Submit
 
-        <span class="popuptext" id="myPopup">New Password: </span>
-    </div>
-
+    
+    %>
 
 
 
