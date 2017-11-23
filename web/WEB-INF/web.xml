@@ -22,11 +22,11 @@
     </filter>
     <filter-mapping>
         <filter-name>MemberAuthentificationFilter</filter-name>
-        <url-pattern>/memberPage.jsp</url-pattern>
+        <url-pattern>/Member/*</url-pattern>
     </filter-mapping>
     <filter-mapping>
         <filter-name>authentificationFilter</filter-name>
-        <url-pattern>/adminPage.jsp</url-pattern>
+        <url-pattern>/Admin/*</url-pattern>
     </filter-mapping>
     <listener>
         <listener-class>
