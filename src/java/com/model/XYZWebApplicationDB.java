@@ -90,7 +90,7 @@ public class XYZWebApplicationDB {
         return ret;
     }
     
-    public ArrayList<Member> getAllUsers()
+    public ArrayList<Member> getAllMembers()
     {
         ArrayList ret = new ArrayList<Member>();
         wrapper.createStatement();
@@ -109,10 +109,10 @@ public class XYZWebApplicationDB {
         return ret;
     }
 
-    public ArrayList<Member> getProvisionalUsers() {
+    public ArrayList<Member> getProvisionalMembers() {
 
         ArrayList<Member> users;
-        users = getAllUsers();
+        users = getAllMembers();
 
         ArrayList ret = new ArrayList<Member>();
 
@@ -124,7 +124,7 @@ public class XYZWebApplicationDB {
         return ret;
     }
 
-    public ArrayList<Claim> getUserClaims(String id)
+    public ArrayList<Claim> getMemberClaims(String id)
     {
         ArrayList ret = new ArrayList<Claim>();
         wrapper.findRecord("claims", "mem_id", id);
@@ -141,12 +141,12 @@ public class XYZWebApplicationDB {
     
     public ArrayList<Claim> getAllClaims()
     {
-        ArrayList users = getAllUsers();
+        ArrayList users = getAllMembers();
         ArrayList ret = new ArrayList<Claim>();
         
         for(int i = 0; i != users.size(); ++i)
         {
-            ArrayList claims = getUserClaims(((Member)users.get(i)).getUsername());
+            ArrayList claims = getMemberClaims(((Member)users.get(i)).getUsername());
             for(int j = 0; j != claims.size(); ++j)
             {
                 ret.add(claims.get(j));
@@ -172,6 +172,12 @@ public class XYZWebApplicationDB {
         wrapper.findRecord("Users", "password", "TBC");
         
         
+    }
+    
+    public void approveMemberApplication(User u)
+    {
+        wrapper.createStatement();
+        wrapper.createResultSet("UPDATE users SET \"status\" = 'APPROVED' WHERE \"id\" = '" + u.getId() + "'");      
     }
     
     

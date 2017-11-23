@@ -190,7 +190,7 @@
                                             <%
                                                 JDBCWrapper wrapper = (JDBCWrapper) getServletContext().getAttribute("database");
                                                 wrapper.createStatement();
-                                                ArrayList<Member> m = new XYZWebApplicationDB(wrapper).getAllUsers();
+                                                ArrayList<Member> m = new XYZWebApplicationDB(wrapper).getAllMembers();
                                                 for (int i = 0; i != m.size(); ++i) {
                                                     out.println("<tr> <td>" + m.get(i).getUsername()+ "</td> <td>" + m.get(i).getFullName()+ "</td> <td>" + m.get(i).getBalance()+ "</td> <td>" + m.get(i).getStatus()+ "</td> </tr>");
                                                 }

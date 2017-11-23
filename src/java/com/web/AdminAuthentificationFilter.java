@@ -24,7 +24,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author Harri Renney
  */
-public class authentificationFilter implements Filter {
+public class AdminAuthentificationFilter implements Filter {
     
     private static final boolean debug = true;
 
@@ -33,7 +33,7 @@ public class authentificationFilter implements Filter {
     // configured. 
     private FilterConfig filterConfig = null;
     
-    public authentificationFilter() {
+    public AdminAuthentificationFilter() {
     }    
     
     private void doBeforeProcessing(ServletRequest request, ServletResponse response)

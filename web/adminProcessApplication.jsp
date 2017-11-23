@@ -1,3 +1,6 @@
+<%@page import="com.model.JDBCWrapper"%>
+<%@page import="com.model.XYZWebApplicationDB"%>
+<%@page import="com.model.User"%>
 <!DOCTYPE html>
 <!-- Template by html.am -->
 <html>
@@ -145,6 +148,11 @@
                             
 
                            -->Add text here  <--
+                           <%
+                               JDBCWrapper wrapper = (JDBCWrapper) getServletContext().getAttribute("database");
+                               User u = new User("Hagrid", "UYQC8X", "PROV");
+                               new XYZWebApplicationDB(wrapper).approveMemberApplication(u);
+                               %>
                             <br>
                             <br>
                            
