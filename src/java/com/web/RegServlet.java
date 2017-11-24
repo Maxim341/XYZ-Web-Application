@@ -47,8 +47,8 @@ public class RegServlet extends HttpServlet {
         switch (button) {
             case "Register":
                 // Get parameters
-                String userID = request.getParameter("user ID");
-                String fullName = request.getParameter("full name");
+                String firstName = request.getParameter("firstName");
+                String lastName = request.getParameter("lastName");
                 String houseNumber = request.getParameter("houseNumber");
                 houseNumber = houseNumber.trim();
                 String streetName = request.getParameter("streetName");
@@ -56,11 +56,12 @@ public class RegServlet extends HttpServlet {
                 String county = request.getParameter("county");
                 String postCode = request.getParameter("postCode");
                 postCode = postCode.toUpperCase();
+                String userID = makeUserID(firstName,lastName);
 
                 try {
                     Date dob = makeDate(request.getParameter("DOB"));
                     // Error check
-                    if (isEmpty(userID, fullName, houseNumber, streetName, city, county, postCode)) {
+                    if (isEmpty(firstName, lastName, houseNumber, streetName, city, county, postCode)) {
                         request.setAttribute("errorMessage", "1 or more field has been left blank");
                         RequestDispatcher rd = request.getRequestDispatcher("registrationPage.jsp");
                         rd.forward(request, response);
@@ -71,7 +72,7 @@ public class RegServlet extends HttpServlet {
                     } else {
                         Date dor = new Date();
 
-                        Member m = new Member(userID, fullName, new Address(Integer.parseInt(houseNumber), streetName, city, county, postCode), dob, dor, "APPLIED", 0);
+                        Member m = new Member(userID, firstName + " " + lastName, new Address(Integer.parseInt(houseNumber), streetName, city, county, postCode), dob, dor, "APPLIED", 0);
 
                         User u = new User(userID, User.createPassword(), "APPLIED");
 
@@ -141,6 +142,24 @@ public class RegServlet extends HttpServlet {
             throws ServletException, IOException {
         processRequest(request, response);
 
+    }
+
+    public String makeUserID(String firstName, String lastName) {
+        char initial = firstName.toLowerCase().charAt(0);
+        lastName = lastName.toLowerCase();
+        JDBCWrapper wrapper = (JDBCWrapper) getServletContext().getAttribute("database");
+        int count = 0;
+
+        wrapper.createStatement();
+        if (wrapper.findRecord("users", "id", initial + "-" + lastName)) {
+            count++;
+        }
+
+        if (count == 0) {
+            return initial + "-" + lastName;
+        } else {
+            return initial + "-" + lastName + count;
+        }
     }
 
     public boolean isValidPostcode(String postcode) {

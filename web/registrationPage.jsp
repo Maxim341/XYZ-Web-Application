@@ -151,12 +151,12 @@
                                     </thead>
                                     <tbody>
                                         <tr>
-                                            <td>User name</td>
-                                            <td><input type="text" name="user ID" placeholder="User ID"></td>
+                                            <td>First Name</td>
+                                            <td><input type="text" name="firstName" placeholder="First Name"></td>
                                         </tr>
                                         <tr>
-                                            <td>Full name</td>
-                                            <td><input type="text" name="full name" placeholder="Full Name"></td>
+                                            <td>Last Name</td>
+                                            <td><input type="text" name="lastName" placeholder="Last Name"></td>
                                         </tr>
                                         <tr>
                                             <td>House Number</td>
