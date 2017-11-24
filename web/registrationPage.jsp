@@ -57,9 +57,9 @@
 
             /* Clear both sides to assist with div alignment  */
             .clr { clear:both; padding:0; margin:0; width:100%; font-size:0px; line-height:0px;}
-            
-            
-              .button {
+
+
+            .button {
                 border: 1px solid #0a3c59;
                 background: #3e779d;
                 background: -webkit-gradient(linear, left top, left bottom, from(#65a9d7), to(#3e779d));
@@ -106,17 +106,17 @@
                 background-image: -ms-linear-gradient(top, #3e779d 0%, #65a9d7 100%);
                 color: #fff;
             }
-            
-            
-            
-            
+
+
+
+
         </style>
 
 
     </head>
     <body>
         <div id="page">
-            
+
             <header id="header">
                 <div id="header-inner">	
                     <div id="logo">
@@ -128,8 +128,8 @@
                     <div class="clr"></div>
                 </div>
             </header>
-            
-            
+
+
             <div class="feature">
                 <div class="feature-inner">
                     <h1>XYZ Registration</h1>
@@ -208,17 +208,23 @@
                                     }
                                 %>
                             </p3>
+                            <p4>
+                                <%
+                                    if (null != request.getAttribute("errorMessage4")) {
+                                        out.println(request.getAttribute("errorMessage4"));
+                                    }
+                                %>
+                            </p4>
+                            <br>
+                            <br>
 
-                            <br>
-                            <br>
-                            
-                             <form action="Registration" method="post">
-                               <button type="Submit" Value="backPage" name="button" class='button'>
-                                   Back 
-                               </button>
-                           </form>
-                            
-                            
+                            <form action="Registration" method="post">
+                                <button type="Submit" Value="backPage" name="button" class='button'>
+                                    Back 
+                                </button>
+                            </form>
+
+
 
                         </div>
                     </main>

@@ -33,6 +33,14 @@ public class Claim {
         this.status = status;
         this.amount = amount;
     }
+    
+    public boolean yearPassed() {
+        Date currentDate = new Date(); // current date
+        long difference = currentDate.getTime() - date.getTime();
+        long differenceDays = difference / (1000 * 60 * 60 * 24);
+
+        return differenceDays > 365;
+    }
 
     public int getId() {
         return id;

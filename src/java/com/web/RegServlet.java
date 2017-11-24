@@ -57,44 +57,57 @@ public class RegServlet extends HttpServlet {
                 String postCode = request.getParameter("postCode");
                 postCode = postCode.toUpperCase();
 
-                Date dob = makeDate(request.getParameter("DOB"));
+                try {
+                    Date dob = makeDate(request.getParameter("DOB"));
+                    // Error check
+                    if (isEmpty(userID, fullName, houseNumber, streetName, city, county, postCode)) {
+                        request.setAttribute("errorMessage", "1 or more field has been left blank");
+                        RequestDispatcher rd = request.getRequestDispatcher("registrationPage.jsp");
+                        rd.forward(request, response);
+                    } else if (!isValidPostcode(postCode)) {
+                        request.setAttribute("errorMessage2", "Invalid PostCode");
+                        RequestDispatcher rd = request.getRequestDispatcher("registrationPage.jsp");
+                        rd.forward(request, response);
+                    } else {
+                        Date dor = new Date();
 
-                // Error check
-                if (isEmpty(userID, fullName, houseNumber, streetName, city, county, postCode)) {
-                    request.setAttribute("errorMessage", "1 or more field has been left blank");
+                        Member m = new Member(userID, fullName, new Address(Integer.parseInt(houseNumber), streetName, city, county, postCode), dob, dor, "APPLIED", 0);
+
+                        User u = new User(userID, User.createPassword(), "APPLIED");
+
+                        //Inserting members with data provided above^^
+                        JDBCWrapper wrapper = (JDBCWrapper) getServletContext().getAttribute("database");
+                        new XYZWebApplicationDB(wrapper).insertMember(m);
+                        new XYZWebApplicationDB(wrapper).insertUser(u);
+
+                        request.setAttribute("username", u.getId());
+                        request.setAttribute("password", u.getPassword());
+
+                        RequestDispatcher view = request.getRequestDispatcher("RegistrationSuccess.jsp");
+                        view.forward(request, response);
+                    }
+                } catch (NumberFormatException ex) {
+                    // Catch if the house number is a String
+                    request.setAttribute("errorMessage3", "House number must be a number");
                     RequestDispatcher rd = request.getRequestDispatcher("registrationPage.jsp");
                     rd.forward(request, response);
-                } else if (!isValidPostcode(postCode)) {
-                    request.setAttribute("errorMessage2", "Invalid PostCode");
+                } catch (ParseException ex) {
+                    // Catch if invalid date
+                    request.setAttribute("errorMessage4", "Invalid Date");
                     RequestDispatcher rd = request.getRequestDispatcher("registrationPage.jsp");
                     rd.forward(request, response);
-                } else {
-                    Date dor = new Date();
-                    Member m = new Member(userID, fullName, new Address(Integer.parseInt(houseNumber), streetName, city, county, postCode), dob, dor, "APPLIED", 0);
-                    User u = new User(userID, User.createPassword(), "APPLIED");
-
-                    //Inserting members with data provided above^^
-                    JDBCWrapper wrapper = (JDBCWrapper) getServletContext().getAttribute("database");
-                    new XYZWebApplicationDB(wrapper).insertMember(m);
-                    new XYZWebApplicationDB(wrapper).insertUser(u);
-
-                    request.setAttribute("username", u.getId());
-                    request.setAttribute("password", u.getPassword());
-
-                    RequestDispatcher view = request.getRequestDispatcher("RegistrationSuccess.jsp");
-                    view.forward(request, response);
                 }
                 break;
+
             case "login":
                 RequestDispatcher view = request.getRequestDispatcher("login.jsp");
                 view.forward(request, response);
                 break;
-                case "backPage":
+            case "backPage":
                 RequestDispatcher view2 = request.getRequestDispatcher("login.jsp");
                 view2.forward(request, response);
                 break;
-                
-                
+
             default:
                 break;
         }
@@ -138,14 +151,10 @@ public class RegServlet extends HttpServlet {
         return matcher.matches();
     }
 
-    public Date makeDate(String dateParam) {
+    public Date makeDate(String dateParam) throws ParseException {
         Date dob = new Date();
         DateFormat df = new SimpleDateFormat("dd/MM/yy");
-        try {
-            dob = df.parse(dateParam);
-        } catch (ParseException ex) {
-            System.out.println("Parse exception");
-        }
+        dob = df.parse(dateParam);
         return dob;
     }
 
