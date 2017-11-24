@@ -117,7 +117,7 @@ public class XYZWebApplicationDB {
         ArrayList ret = new ArrayList<Member>();
 
         for (Member user : users) {
-            if (user.getStatus().equals("PROV")) {
+            if (user.getStatus().equals("APPLIED")) {
                 ret.add(user);
             }
         }
@@ -170,19 +170,31 @@ public class XYZWebApplicationDB {
     public void changePassword(User u)
     {   
         wrapper.createStatement();
-        wrapper.createResultSet("UPDATE users SET \"password\" = '"+ u.getPassword() +"' WHERE \"id\" = '" + u.getId() + "'");  
+        try {
+            wrapper.getStatement().executeUpdate("UPDATE users SET \"password\" = '"+ u.getPassword() +"' WHERE \"id\" = '" + u.getId() + "'");
+        } catch (SQLException ex) {
+            Logger.getLogger(JDBCWrapper.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
     public void approveMemberApplication(User u)
     {
-        wrapper.createStatement();
-        wrapper.createResultSet("UPDATE users SET \"status\" = 'APPROVED' WHERE \"id\" = '" + u.getId() + "'");      
+        wrapper.createStatement();   
+        try {
+            wrapper.getStatement().executeUpdate("UPDATE users SET \"status\" = 'APPROVED' WHERE \"id\" = '" + u.getId() + "'");
+            wrapper.getStatement().executeUpdate("UPDATE members SET \"status\" = 'APPROVED' WHERE \"id\" = '" + u.getId() + "'");
+        } catch (SQLException ex) {
+            Logger.getLogger(JDBCWrapper.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
-    
-    public void disapproveMemberApplication(User u)
+    public void suspendMemberApplication(User u)
     {
-        wrapper.createStatement();
-        wrapper.createResultSet("UPDATE users SET \"status\" = 'DISAPPROVED' WHERE \"id\" = '" + u.getId() + "'");
+        wrapper.createStatement();   
+        try {
+            wrapper.getStatement().executeUpdate("UPDATE users SET \"status\" = 'SUSPENDED' WHERE \"id\" = '" + u.getId() + "'");
+        } catch (SQLException ex) {
+            Logger.getLogger(JDBCWrapper.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
     

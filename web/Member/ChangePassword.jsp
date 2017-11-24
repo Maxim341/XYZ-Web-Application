@@ -1,3 +1,6 @@
+<%@page import="com.model.XYZWebApplicationDB"%>
+<%@page import="com.model.JDBCWrapper"%>
+<%@page import="com.model.User"%>
 <!DOCTYPE html>
 <!-- Template by html.am -->
 <html>
@@ -84,23 +87,56 @@
 
 
     <h1>Please enter your details: </h1>
-
+    
+    <%--
     <form>
         <label for="OPass">Current Password</label>
         <input type="text" id="OPass" name="currentP">
         <label for="lname">New Password</label>
         <input type="text" id="NPass" name="newP">
     </form>
-
-
-
-
-
-    <div class="popup" onclick="myFunction()">Submit
-
-        <span class="popuptext" id="myPopup">New Password: </span>
+    
+    <form action="MemberDashboardServlet" method="post">
+        <button type="Submit" Value="password" name="button" class='button'>
+            Change Password
+        </button>
+    </form>
+    --%>
+    
+    <div class="button">
+            <form action="MemberDashboardServlet" method="post">
+                <label for="OPass">Current Password</label>
+                <input type="text" id="OPass" name="currentP">
+                <label for="lname">New Password</label>
+            </form>
+            <br>
+            <form action="MemberDashboardServlet" method="post">
+                <input type="text" placeholder="password" name="newP">
+                <button type="Submit" value="password" name="button" class='button'>
+                    Change Password
+                </button>
+            </form> 
     </div>
+       
+    
+    <% /*
+   
+     String username = request.getParameter("username");
+     
+     User u = (new XYZWebApplicationDB((JDBCWrapper) getServletContext().getAttribute("database"))).getUser(username);
+                    session.setAttribute("user", u);
+     
+                    u.setPassword("newP");
+                    
+                    JDBCWrapper wrapper = null;
+                    XYZWebApplicationDB pass = new XYZWebApplicationDB(wrapper);
+                    
+                    pass.changePassword(u);
+    
 
+*/
+    
+    %>
 
 
 

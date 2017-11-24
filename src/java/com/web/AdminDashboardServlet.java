@@ -5,6 +5,9 @@
  */
 package com.web;
 
+import com.model.JDBCWrapper;
+import com.model.User;
+import com.model.XYZWebApplicationDB;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
@@ -12,6 +15,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -31,40 +35,45 @@ public class AdminDashboardServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String page = "/Theme.jsp";
-        String include = "Admin/adminPage.jsp";
         String button = request.getParameter("button");
+        
+        HttpSession session = request.getSession();
+        session.setAttribute("currentpage", "Admin/adminPage.jsp");
 
         switch (button) {
             case "listAllMembers":
-                include = "Admin/adminListAllMembers.jsp";
+                session.setAttribute("currentpage", "Admin/adminListAllMembers.jsp");
                 break;
             case "listAllOutstanding":
-                include = "Admin/adminListAllOutstanding.jsp";
+                session.setAttribute("currentpage", "Admin/adminListAllOutstanding.jsp");
                 break;
             case "listAllClaims":
-                include = "Admin/adminListAllClaims.jsp";
+                session.setAttribute("currentpage", "Admin/adminListAllClaims.jsp");
                 break;
             case "listApplications":
-                include = "Admin/adminListApplications.jsp";
+                session.setAttribute("currentpage", "Admin/adminListApplications.jsp");
                 break;
             case "processClaim":
-                include = "Admin/adminProcessClaim.jsp";
+                session.setAttribute("currentpage", "Admin/adminProcessClaim.jsp");
                 break;
             case "processApplication":
-                include = "Admin/adminProcessApplication.jsp";
+                session.setAttribute("currentpage", "Admin/adminProcessApplication.jsp");
                 break;
             case "suspendResumeMember":
-                include = "Admin/adminSuspendResumeMember.jsp";
+                session.setAttribute("currentpage", "Admin/adminSuspendResumeMember.jsp");
                 break;
             case "annualReport":
-                include = "Admin/adminAnnualReport.jsp";
+                session.setAttribute("currentpage", "Admin/adminAnnualReport.jsp");
                 break;
             case "backPage":
-                include = "Admin/adminPage.jsp";
+                session.setAttribute("currentpage", "Admin/adminPage.jsp");
+                break;
+            case "approve":
+                User temp = new User(request.getParameter("memberSelected"), "", "");
+                new XYZWebApplicationDB((JDBCWrapper) getServletContext().getAttribute("database")).approveMemberApplication(temp);
                 break;
         }
         
-        request.setAttribute("page", include);
         request.getRequestDispatcher(page).forward(request, response);
     }
 

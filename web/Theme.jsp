@@ -8,7 +8,7 @@
 
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 
-        <title>Suspend member</title>
+        <title>XYZ Web Application 2017</title>
 
         <style type="text/css">
 
@@ -103,6 +103,8 @@
             .clr { clear:both; padding:0; margin:0; width:100%; font-size:0px; line-height:0px;}
 
             .button {
+                
+                width: 300px;
 
                 border: 1px solid #0a3c59;
 
@@ -236,7 +238,7 @@
 
                 <div class="feature-inner">
 
-                    <h1>Members Dashboard</h1>
+                    <h1>Dashboard</h1>
 
                 </div>
 
@@ -254,7 +256,7 @@
 
                             <%-- Get the page to include --%>
 
-                            <% String included = (String) request.getAttribute("page");%>
+                            <% String included = (String) session.getAttribute("currentpage");%>
 
                             <br />
 

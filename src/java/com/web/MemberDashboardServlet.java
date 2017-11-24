@@ -5,6 +5,9 @@
  */
 package com.web;
 
+import com.model.JDBCWrapper;
+import com.model.User;
+import com.model.XYZWebApplicationDB;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
@@ -32,28 +35,33 @@ public class MemberDashboardServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {               
         String page = "/Theme.jsp";
-        String include = "Member/memberPage.jsp";
         String button = request.getParameter("button");
+        
+        HttpSession session = request.getSession();
+        session.setAttribute("currentpage", "Member/memberPage.jsp");
 
         switch (button) {
             case "outstandingBalance":
-                include = "Member/OutstandingBalance.jsp";
+                session.setAttribute("currentpage", "Member/OutstandingBalance.jsp");
                 break;
             case "makePayment":
-                include = "Member/MakePayment.jsp";
+                session.setAttribute("currentpage", "Member/MakePayment.jsp");
                 break;
             case "submitClaim":
-                include = "Member/SubmitClaim.jsp";
+                session.setAttribute("currentpage", "Member/SubmitClaim.jsp");
                 break;
             case "listAllClaims":
-                include = "Member/ListClaims.jsp";
+                session.setAttribute("currentpage", "Member/ListClaims.jsp");
                 break;
             case "changePassword":
-                include = "Member/ChangePassword.jsp";
+                session.setAttribute("currentpage", "Member/ChangePassword.jsp");
+                break;
+            case "password":
+                User u = (User)session.getAttribute("user");
+                u.setPassword(request.getParameter("newP"));
+                new XYZWebApplicationDB((JDBCWrapper) getServletContext().getAttribute("database")).changePassword(u);
                 break;
         }
-        
-        request.setAttribute("page", include);
         request.getRequestDispatcher(page).forward(request, response);
     }
 
