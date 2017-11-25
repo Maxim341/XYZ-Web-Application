@@ -103,10 +103,10 @@
     </form>
     --%>
     
-    <div class="button">
+    
             <form action="MemberDashboardServlet" method="post">
                 <label for="OPass">Current Password</label>
-                <input type="text" id="OPass" name="currentP">
+                <input type="text" id="OPass" placeholder="Current Password" name="currentP">
                 <label for="lname">New Password</label>
             </form>
             <br>
@@ -116,7 +116,7 @@
                     Change Password
                 </button>
             </form> 
-    </div>
+   
        
     
     <% /*
