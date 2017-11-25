@@ -62,7 +62,7 @@
 
 
         input[type=text] {
-            width: 100%;
+            width: 50%;
             padding: 12px 20px;
             margin: 8px 0;
             box-sizing: border-box;
@@ -106,12 +106,16 @@
     
             <form action="MemberDashboardServlet" method="post">
                 <label for="OPass">Current Password</label>
+                <br>
                 <input type="text" id="OPass" placeholder="Current Password" name="currentP">
+                <br>
                 <label for="lname">New Password</label>
+                
             </form>
-            <br>
+           
             <form action="MemberDashboardServlet" method="post">
-                <input type="text" placeholder="password" name="newP">
+                <input type="text" placeholder="New password" name="newP">
+                <br>
                 <button type="Submit" value="password" name="button" class='button'>
                     Change Password
                 </button>
