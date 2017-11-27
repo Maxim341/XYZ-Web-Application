@@ -74,7 +74,7 @@ public class AdminDashboardServlet extends HttpServlet {
                 new XYZWebApplicationDB((JDBCWrapper) getServletContext().getAttribute("database")).approveMemberApplication(u);
                 break;
             case "approveclaim":
-                Claim c = new Claim(Integer.parseInt(request.getParameter("id")), "", null, "", "", (float)0);
+                Claim c = new Claim(Integer.parseInt(request.getParameter("selectedclaim")), "", null, "", "", (float)0);
                 new XYZWebApplicationDB((JDBCWrapper) getServletContext().getAttribute("database")).approveClaim(c);
                 break;
         }

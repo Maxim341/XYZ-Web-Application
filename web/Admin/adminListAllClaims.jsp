@@ -68,7 +68,21 @@
                 </table>
             </div>
         </div>
-        <br>
+        <br>       
+        <form action="AdminDashboardServlet" method="post">
+            <select name="selectedclaim">
+                <%
+                    for (int j = 0; j < c.size(); j++) {
+                        if(c.get(j).getStatus().equals("APPLIED"))
+                            out.println("<option value=\"" + c.get(j).getId() + "\">" + c.get(j).getId() + "</option>");
+                    }
+                %>
+            </select>
+            <br><br>
+            <button type="Submit" value="approveclaim" name="button" class='button'>
+                    Approve Member
+            </button>
+        </form>
         <br>
         <form action="AdminDashboardServlet" method="post">
             <button type="Submit" Value="backPage" name="button" class='button'>
