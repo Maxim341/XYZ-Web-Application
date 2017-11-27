@@ -62,7 +62,7 @@
 
 
         input[type=text] {
-            width: 100%;
+            width: 50%;
             padding: 12px 20px;
             margin: 8px 0;
             box-sizing: border-box;
@@ -103,19 +103,26 @@
     </form>
     --%>
     
-    <div class="button">
+    
             <form action="MemberDashboardServlet" method="post">
                 <label for="OPass">Current Password</label>
-                <input type="text" id="OPass" name="currentP">
+                <br>
+                <input type="text" id="OPass" placeholder="Current Password" name="currentP">
+                <br>
                 <label for="lname">New Password</label>
+                
             </form>
-            <br>
+           
             <form action="MemberDashboardServlet" method="post">
-                <input type="text" placeholder="password" name="newP">
-                <button type="Submit" value="password" name="button" class='button'>
+                <input type="text" placeholder="New password" name="newP">
+                <br>
+                <button type="Submit" value="password" name="button" class='button'class="popup" onclick="myFunction()">
                     Change Password
                 </button>
             </form> 
+   
+    <div class="popup" onclick="myFunction()">Click me!
+        <span class="popuptext" id="myPopup">Popup text...</span>
     </div>
        
     

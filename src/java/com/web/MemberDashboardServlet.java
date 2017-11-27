@@ -32,12 +32,11 @@ public class MemberDashboardServlet extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {               
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {               
         User u;
         String page = "/Theme.jsp";
         String button = request.getParameter("button");
-        
+
         HttpSession session = request.getSession();
         session.setAttribute("currentpage", "Member/memberPage.jsp");
 
@@ -67,7 +66,11 @@ public class MemberDashboardServlet extends HttpServlet {
                 String rationale = request.getParameter("rationale");
                 float amount = Float.parseFloat(request.getParameter("amount"));
                 new XYZWebApplicationDB((JDBCWrapper) getServletContext().getAttribute("database")).makeClaim(u, rationale, amount);
-                
+                break;
+            case "logOut":
+                session.removeAttribute("user");
+                page = "login.jsp";
+                break;
         }
         request.getRequestDispatcher(page).forward(request, response);
     }

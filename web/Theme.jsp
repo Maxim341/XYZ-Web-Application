@@ -103,7 +103,7 @@
             .clr { clear:both; padding:0; margin:0; width:100%; font-size:0px; line-height:0px;}
 
             .button {
-                
+
                 width: 300px;
 
                 border: 1px solid #0a3c59;
@@ -222,7 +222,11 @@
 
                             <li><a href="#">FAQ</a></li>
 
-                            <li><a href="#">Log Out</a></li>
+                            <form action="MemberDashboardServlet" method="post">
+                                <button type="Submit" value="logOut" name="button" style="width: 100px">
+                                    Log Out
+                                </button>
+                            </form> 
 
                         </ul>
 

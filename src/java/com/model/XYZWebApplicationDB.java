@@ -21,7 +21,7 @@ public class XYZWebApplicationDB {
     public void insertMember(Member m)
     {
         java.sql.Date sqlDOB = new java.sql.Date(m.getDOB().getTime());
-        java.sql.Date sqlReg = new java.sql.Date(m.getDOB().getTime());
+        java.sql.Date sqlReg = new java.sql.Date(m.getRegistration().getTime());
         wrapper.createStatement();
         try {
             wrapper.getStatement().executeUpdate("insert into members values ('" + m.getUsername() + "', '" + m.getFullName() + "', '" + m.getAddress() + "', '" + sqlDOB.toString() + "', '" + sqlReg.toString() + "', '" + m.getStatus() + "', " + m.getBalance() + ")");
