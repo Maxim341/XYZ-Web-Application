@@ -2,12 +2,12 @@
 <%@page import="com.model.Claim"%>
 <%@page import="com.model.XYZWebApplicationDB"%>
 <%@page import="com.model.User"%>
-<%@page import="com.model.User"%>
 <%@page import="com.model.JDBCWrapper"%>
 <!DOCTYPE html>
 <!-- Template by html.am -->
 <html>
-          <style type="text/css">
+    
+       <style type="text/css">
             table {
                 max-width:980px;
                 table-layout:fixed;
@@ -36,11 +36,23 @@
                 width:100%;
                 table-layout:fixed;
             }
-        </style>
-    
-    
+        
+        
+         input[type=text] {
+            width: 50%;
+            padding: 12px 20px;
+            margin: 8px 0;
+            box-sizing: border-box;
+        }
+
+    </style>
+
     </head>
     <body>
+        
+        <h1>
+            Showing all claims
+        </h1>
 
         <div id="table-wrapper">
             <div id="table-scroll">
@@ -73,7 +85,27 @@
                 </table>
             </div>
         </div>
-        <br>
-        <br>
+        
+      
+
+
+        <h1>
+            Make a claim
+            
+        </h1>
+
+
+            <form action="MemberDashboardServlet" method="post">
+                <input type="text" placeholder="rationale" name="rationale">
+                <br>
+                <input type="text" placeholder="amount" name="amount">
+                <br>
+                <button type="Submit" value="makeclaim" name="button" class='button'>
+                   Submit Claim
+                </button>
+            </form> 
+   
+
+
 
 </html>

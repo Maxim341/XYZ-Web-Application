@@ -33,15 +33,6 @@
     <br>
 
 
-    <br>
-    <form action="MemberDashboardServlet" method="post">
-        <button type="Submit" Value="submitClaim" name="button" class='button'>
-            Submit a claim
-        </button>
-    </form>
-    <br>
-    <br>
-
 
     <br>
     <form action="MemberDashboardServlet" method="post">
@@ -49,7 +40,7 @@
             <% //request.setAttribute("p", "ListClaims"); 
                 session.setAttribute("p", "ListClaims");
             %>
-            List all claims
+            Claims
         </button>
     </form>
     <br>
