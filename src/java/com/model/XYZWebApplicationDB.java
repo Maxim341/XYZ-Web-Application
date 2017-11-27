@@ -6,6 +6,7 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -240,5 +241,37 @@ public class XYZWebApplicationDB {
         }
     }
     
+    //Generic function checks if date passed is within now and last year.
+    public boolean isWithinLastYear(Date d)
+    {
+        //Work out year in milliseconds.
+        long millisecondsInYear = ( (long)365 * 24 * 60 * 60 * 1000 );
+        Date yearAgo = new Date((new Date().getTime()) - millisecondsInYear);
+
+        //If date passed is within now and a year ago today.
+        if(yearAgo.before(d))
+            return true;
+        return false;
+    }
+    
+    //Checks if user has reached there 2 claims limit.
+    public boolean isClaimLimit(User u)
+    {
+        //Get all users claims.
+        ArrayList<Claim> c = getMemberClaims(u.getId());
+        
+        //Count number of claims in past year.
+        int limit = 0;
+        for(int i = 0; i != c.size(); ++i)
+        {
+            if(isWithinLastYear(c.get(i).getDate()))
+                ++limit;
+        }
+        
+        //If limit equal to or past limit (2) return true.
+        if(limit >= 2)
+            return true;
+        return false;
+    }
     
 }

@@ -33,23 +33,23 @@ public class AdminDashboardServlet extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        XYZWebApplicationDB databaseInterface = new XYZWebApplicationDB((JDBCWrapper)getServletContext().getAttribute("database"));
         String page = "/Theme.jsp";
         String button = request.getParameter("button");
         
         HttpSession session = request.getSession();
         session.setAttribute("currentpage", "Admin/adminPage.jsp");
-
+        
         switch (button) {
-            case "listAllMembers":
-                session.setAttribute("currentpage", "Admin/adminListAllMembers.jsp");
+            case "members":
+                session.setAttribute("currentpage", "Admin/adminMembers.jsp");
                 break;
             case "listAllOutstanding":
                 session.setAttribute("currentpage", "Admin/adminListAllOutstanding.jsp");
                 break;
-            case "listAllClaims":
-                session.setAttribute("currentpage", "Admin/adminListAllClaims.jsp");
+            case "claims":
+                session.setAttribute("currentpage", "Admin/adminClaims.jsp");
                 break;
             case "listApplications":
                 session.setAttribute("currentpage", "Admin/adminListApplications.jsp");
@@ -71,11 +71,11 @@ public class AdminDashboardServlet extends HttpServlet {
                 break;
             case "approvemember":
                 User u = new User(request.getParameter("memberSelected"), "", "");
-                new XYZWebApplicationDB((JDBCWrapper) getServletContext().getAttribute("database")).approveMemberApplication(u);
+                databaseInterface.approveMemberApplication(u);
                 break;
             case "approveclaim":
                 Claim c = new Claim(Integer.parseInt(request.getParameter("selectedclaim")), "", null, "", "", (float)0);
-                new XYZWebApplicationDB((JDBCWrapper) getServletContext().getAttribute("database")).approveClaim(c);
+                databaseInterface.approveClaim(c);
                 break;
         }
         

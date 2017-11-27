@@ -75,8 +75,8 @@
         <br>
 
         <form action="AdminDashboardServlet" method="post">
-            <button type="Submit" Value="listAllMembers" name="button" class='button'>
-                List all members 
+            <button type="Submit" Value="members" name="button" class='button'>
+                Members
             </button>
         </form>
 
@@ -90,8 +90,8 @@
         <br>
 
         <form action="AdminDashboardServlet" method="post">
-            <button type="Submit" Value="listAllClaims" name="button" class='button'>
-                List all claims
+            <button type="Submit" Value="claims" name="button" class='button'>
+                Claims
             </button>
         </form>
         <br>

@@ -1,14 +1,13 @@
-<%@page import="java.util.ArrayList"%>
-<%@page import="com.model.Member"%>
-<%@page import="com.model.JDBCWrapper"%>
 <%@page import="com.model.XYZWebApplicationDB"%>
-<%@page import="com.model.User"%>
+<%@page import="com.model.Claim"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="com.model.JDBCWrapper"%>
 <!DOCTYPE html>
 <!-- Template by html.am -->
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-        <title>Process Applications</title>
+        <title>XYZ List All Claims</title>
         <style type="text/css">
             table {
                 max-width:980px;
@@ -43,14 +42,16 @@
 
     </head>
     <body>
+
         <div id="table-wrapper">
             <div id="table-scroll">
                 <table>
                     <thead>
                         <tr>
                             <th scope="col">Member ID</th>
-                            <th scope="col">Full Names</th>
-                            <th scope="col">Balance</th>
+                            <th scope="col">Date</th>
+                            <th scope="col">Amount (£)</th>
+                            <th scope="col">Rationale</th>
                             <th scope="col">Status</th>
                         </tr>
                     </thead>
@@ -58,43 +59,36 @@
                         <%
                             JDBCWrapper wrapper = (JDBCWrapper) getServletContext().getAttribute("database");
                             wrapper.createStatement();
-                            ArrayList<Member> m = new XYZWebApplicationDB(wrapper).getProvisionalMembers();
-                            for (int i = 0; i != m.size(); ++i) {
-                                out.println("<tr> <td>" + m.get(i).getUsername() + "</td> <td>" + m.get(i).getFullName() + "</td> <td>" + m.get(i).getBalance() + "</td> <td>" + m.get(i).getStatus() + "</td> </tr>");
+                            ArrayList<Claim> c = new XYZWebApplicationDB(wrapper).getAllClaims();
+                            for (int i = 0; i != c.size(); ++i) {
+                                out.println("<tr> <td> " + c.get(i).getMemid() + "</td> <td>" + c.get(i).getDate() + "</td> <td>" + c.get(i).getAmount() + "</td> <td>" + c.get(i).getRationale() + "</td> <td>" + c.get(i).getStatus() + "</td> </tr>");
                             }
-                        %>       
+                        %>
                     </tbody>
                 </table>
             </div>
         </div>
-        <br>
-        <h2>Approve member:</h2>
-        <h4>Any useful notes to the user to go here...</h4>
-
+        <br>       
         <form action="AdminDashboardServlet" method="post">
-            <select name="memberSelected">
+            <select name="selectedclaim">
                 <%
-                    for (int j = 0; j < m.size(); j++) {
-                        out.println("<option value=\"" + m.get(j).getUsername() + "\">" + m.get(j).getUsername() + "</option>");
+                    for (int j = 0; j < c.size(); j++) {
+                        if(c.get(j).getStatus().equals("APPLIED"))
+                            out.println("<option value=\"" + c.get(j).getId() + "\">" + c.get(j).getId() + "</option>");
                     }
                 %>
             </select>
             <br><br>
-            <button type="Submit" value="approve" name="button" class='button'>
-                    Approve Member
+            <button type="Submit" value="approveclaim" name="button" class='button'>
+                    Approve Claim
             </button>
         </form>
-
-        -->Add text here  <--
         <br>
-        <br>
-
         <form action="AdminDashboardServlet" method="post">
             <button type="Submit" Value="backPage" name="button" class='button'>
                 Back 
             </button>
         </form>
-
         <br>
         <br>
 
