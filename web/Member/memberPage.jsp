@@ -14,7 +14,7 @@
 
     <form action="MemberDashboardServlet" method="post">
         <button type="Submit" Value="outstandingBalance" name="button" class='button'>
-            Check for outstanding balance 
+            Check outstanding balance 
         </button>
     </form>
 
@@ -23,15 +23,7 @@
 
 
 
-    <br>
-    <form action="MemberDashboardServlet" method="post">
-        <button type="Submit" Value="makePayment" name="button" class='button'>
-            Make a payment 
-        </button>
-    </form>
-    <br>
-    <br>
-
+  
 
 
     <br>
