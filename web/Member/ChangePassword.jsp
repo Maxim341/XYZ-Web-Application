@@ -116,11 +116,14 @@
             <form action="MemberDashboardServlet" method="post">
                 <input type="text" placeholder="New password" name="newP">
                 <br>
-                <button type="Submit" value="password" name="button" class='button'>
+                <button type="Submit" value="password" name="button" class='button'class="popup" onclick="myFunction()">
                     Change Password
                 </button>
             </form> 
    
+    <div class="popup" onclick="myFunction()">Click me!
+        <span class="popuptext" id="myPopup">Popup text...</span>
+    </div>
        
     
     <% /*

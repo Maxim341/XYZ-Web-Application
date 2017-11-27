@@ -7,6 +7,53 @@
 <!DOCTYPE html>
 <!-- Template by html.am -->
 <html>
+          <style type="text/css">
+            table {
+                max-width:980px;
+                table-layout:fixed;
+                margin:auto;
+                margin-left: -200px;
+            }
+            th, td {
+                padding:5px 10px;
+                border:0px solid #000;
+            }
+            thead, tfoot {
+                background:#f9f9f9;
+                display:table;
+                width:100%;
+                width:calc(100% - 18px);
+            }
+            tbody {
+                height:300px;
+                overflow:auto;
+                overflow-x:hidden;
+                display:block;
+                width:100%;
+            }
+            tbody tr {
+                display:table;
+                width:100%;
+                table-layout:fixed;
+            }
+        </style>
+    
+    
+    </head>
+    <body>
+
+        <div id="table-wrapper">
+            <div id="table-scroll">
+                <table>
+                    <thead>
+                        <tr>
+                            <th scope="col">Rationale</th>
+                            <th scope="col">Date</th>
+                            <th scope="col">Amount (£)</th>
+                            <th scope="col">Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
 
 
 
@@ -17,11 +64,16 @@
             wrapper.createStatement();
             ArrayList<Claim> c = (new XYZWebApplicationDB(wrapper).getMemberClaims(((User) session.getAttribute("user")).getId()));
             for (int i = 0; i != c.size(); ++i) {
-                out.println("RATIONALE: " + c.get(i).getRationale() + " : " + c.get(i).getDate() + "<br /> AMOUNT: " + c.get(i).getAmount() + "<br /> STATUS: " + c.get(i).getStatus() + "<br />");
+                out.println("<tr> <td>  " + c.get(i).getRationale() + "</td> <td> <td>" + c.get(i).getDate() + "</td> <td> <td>" + c.get(i).getAmount() + "</td> <td> <td> " + c.get(i).getStatus());
 
             }
         %>
     </h2>
-
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <br>
+        <br>
 
 </html>
