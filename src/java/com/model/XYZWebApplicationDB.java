@@ -124,6 +124,23 @@ public class XYZWebApplicationDB {
         }
         return ret;
     }
+    
+        public ArrayList<Payment> getAllPayments()
+    {
+        ArrayList ret = new ArrayList<Payment>();
+        wrapper.createStatement();
+        wrapper.createResultSet("SELECT * FROM payments");
+        try { 
+            wrapper.getResultSet().next();
+            do
+            {
+               ret.add(new Payment(wrapper.getResultSet().getInt("id"), wrapper.getResultSet().getString("mem_id"), wrapper.getResultSet().getString("type_of_payment"), wrapper.getResultSet().getFloat("amount"), wrapper.getResultSet().getTime("time"), wrapper.getResultSet().getDate("date")));
+            }while(wrapper.getResultSet().next());
+        } catch (SQLException ex) {
+            Logger.getLogger(XYZWebApplicationDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return ret;
+    }
 
     public ArrayList<Member> getProvisionalMembers() {
 
@@ -147,7 +164,7 @@ public class XYZWebApplicationDB {
         try { 
             do
             {
-               ret.add(new Claim(wrapper.getResultSet().getInt("id"), wrapper.getResultSet().getString("mem_id"), makeDate(wrapper.getResultSet().getString("date")), wrapper.getResultSet().getString("rationale"),wrapper.getResultSet().getString("status"), wrapper.getResultSet().getFloat("amount")));
+               ret.add(new Claim(wrapper.getResultSet().getInt("id"), wrapper.getResultSet().getString("mem_id"), wrapper.getResultSet().getDate("date"), wrapper.getResultSet().getString("rationale"),wrapper.getResultSet().getString("status"), wrapper.getResultSet().getFloat("amount")));
             }while(wrapper.getResultSet().next());
         } catch (SQLException ex) {
             Logger.getLogger(XYZWebApplicationDB.class.getName()).log(Level.SEVERE, null, ex);
@@ -157,18 +174,18 @@ public class XYZWebApplicationDB {
     
     public ArrayList<Claim> getAllClaims()
     {
-        ArrayList users = getAllMembers();
-        ArrayList ret = new ArrayList<Claim>();
-        
-        for(int i = 0; i != users.size(); ++i)
-        {
-            ArrayList claims = getMemberClaims(((Member)users.get(i)).getUsername());
-            for(int j = 0; j != claims.size(); ++j)
+        ArrayList ret = new ArrayList<Member>();
+        wrapper.createStatement();
+        wrapper.createResultSet("SELECT * FROM claims");
+        try { 
+            wrapper.getResultSet().next();
+            do
             {
-                ret.add(claims.get(j));
-            }
+               ret.add(new Claim(wrapper.getResultSet().getInt("id"), wrapper.getResultSet().getString("mem_id"), wrapper.getResultSet().getDate("date"), wrapper.getResultSet().getString("rationale"),wrapper.getResultSet().getString("status"), wrapper.getResultSet().getFloat("amount")));
+            }while(wrapper.getResultSet().next());
+        } catch (SQLException ex) {
+            Logger.getLogger(XYZWebApplicationDB.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
         return ret;
     }
     

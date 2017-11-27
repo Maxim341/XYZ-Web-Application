@@ -23,13 +23,26 @@
 	webservice.WS port = service.getWSPort();
 	// TODO process result here
 	float result = port.reportAnnualPayouts();
-	out.println("Result = "+result);
+	out.println("Annual Payouts = "+result);
     } catch (Exception ex) {
 	// TODO handle custom exceptions here
     }
     %>
     <%-- end web service invocation --%><hr/>
 
+    <%-- start web service invocation --%><hr/>
+    <%
+    try {
+	webservice.WS_Service service = new webservice.WS_Service();
+	webservice.WS port = service.getWSPort();
+	// TODO process result here
+	float result = port.reportAnnualIncome();
+	out.println("Annual Income = "+result);
+    } catch (Exception ex) {
+	// TODO handle custom exceptions here
+    }
+    %>
+    <%-- end web service invocation --%><hr/>
 
         
         <br>

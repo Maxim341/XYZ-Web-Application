@@ -10,15 +10,34 @@
 <message name="reportAnnualPayoutsResponse">
 <part name="parameters" element="tns:reportAnnualPayoutsResponse"/>
 </message>
+<message name="reportAnnualIncome">
+<part name="parameters" element="tns:reportAnnualIncome"/>
+</message>
+<message name="reportAnnualIncomeResponse">
+<part name="parameters" element="tns:reportAnnualIncomeResponse"/>
+</message>
 <portType name="WS">
 <operation name="reportAnnualPayouts">
 <input wsam:Action="http://WebService/WS/reportAnnualPayoutsRequest" message="tns:reportAnnualPayouts"/>
 <output wsam:Action="http://WebService/WS/reportAnnualPayoutsResponse" message="tns:reportAnnualPayoutsResponse"/>
 </operation>
+<operation name="reportAnnualIncome">
+<input wsam:Action="http://WebService/WS/reportAnnualIncomeRequest" message="tns:reportAnnualIncome"/>
+<output wsam:Action="http://WebService/WS/reportAnnualIncomeResponse" message="tns:reportAnnualIncomeResponse"/>
+</operation>
 </portType>
 <binding name="WSPortBinding" type="tns:WS">
 <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
 <operation name="reportAnnualPayouts">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+</operation>
+<operation name="reportAnnualIncome">
 <soap:operation soapAction=""/>
 <input>
 <soap:body use="literal"/>
