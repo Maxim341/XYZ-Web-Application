@@ -61,7 +61,7 @@
                             wrapper.createStatement();
                             ArrayList<Claim> c = new XYZWebApplicationDB(wrapper).getAllClaims();
                             for (int i = 0; i != c.size(); ++i) {
-                                out.println("<tr> <td>" + c.get(i).getMemid() + "</td> <td>" + c.get(i).getDate() + "</td> <td>" + c.get(i).getAmount() + "</td> <td>" + c.get(i).getRationale() + "</td> <td>" + c.get(i).getStatus() + "</td> </tr>");
+                                out.println("<tr> <td> " + c.get(i).getMemid() + "</td> <td>" + c.get(i).getDate() + "</td> <td>" + c.get(i).getAmount() + "</td> <td>" + c.get(i).getRationale() + "</td> <td>" + c.get(i).getStatus() + "</td> </tr>");
                             }
                         %>
                     </tbody>
