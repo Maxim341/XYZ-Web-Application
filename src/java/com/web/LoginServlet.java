@@ -35,23 +35,24 @@ public class LoginServlet extends HttpServlet {
 
         switch (button) {
             case "Login":
+                // Get user input
                 String username = request.getParameter("username");
                 String password = request.getParameter("password");
                 boolean success = authenticate(username, password);
                 if (success) {
-                    //Be nice to change this to setting a user object instead.
                     HttpSession session = request.getSession();
                     User u = (new XYZWebApplicationDB((JDBCWrapper) getServletContext().getAttribute("database"))).getUser(username);
                     session.setAttribute("user", u);
                     
                     // Modified below section of code to direct the user to the admin or member page, depending on the status of their
                     // account.
-                    
                     RequestDispatcher view;
                     
                     if (u.getStatus().contains("ADMIN")){
+                        // If admin goto admin dashboard
                         view = request.getRequestDispatcher("AdminDashboardServlet");
                     } else {
+                        // if member goto member dashboard
                         view = request.getRequestDispatcher("MemberDashboardServlet");
                     }
                     
@@ -110,6 +111,12 @@ public class LoginServlet extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
+    /*
+    Name: authenticate
+    Parameters: id, password : String
+    Returns: boolean
+    Comments: Takes in id and password and checks if valid
+    */
     public boolean authenticate(String id, String password) {
         JDBCWrapper wrapper = (JDBCWrapper) getServletContext().getAttribute("database");
         wrapper.createStatement();
