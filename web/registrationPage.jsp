@@ -152,15 +152,15 @@
                                     <tbody>
                                         <tr>
                                             <td>First Name</td>
-                                            <td><input type="text" name="firstName" placeholder="First Name"></td>
+                                            <td><input type="text" name="firstName" placeholder="John"></td>
                                         </tr>
                                         <tr>
                                             <td>Last Name</td>
-                                            <td><input type="text" name="lastName" placeholder="Last Name"></td>
+                                            <td><input type="text" name="lastName" placeholder="Smith"></td>
                                         </tr>
                                         <tr>
                                             <td>House Number</td>
-                                            <td><input type="text" name="houseNumber" placeholder="'1'"></td>
+                                            <td><input type="text" name="houseNumber" placeholder="'101'"></td>
                                         </tr>
                                         <tr>
                                             <td>Street Name</td>

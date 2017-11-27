@@ -32,7 +32,7 @@ public class MemberDashboardServlet extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {               
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         User u;
         String page = "/Theme.jsp";
         String button = request.getParameter("button");
@@ -57,12 +57,28 @@ public class MemberDashboardServlet extends HttpServlet {
                 session.setAttribute("currentpage", "Member/ChangePassword.jsp");
                 break;
             case "password":
-                u = (User)session.getAttribute("user");
-                u.setPassword(request.getParameter("newP"));
-                new XYZWebApplicationDB((JDBCWrapper) getServletContext().getAttribute("database")).changePassword(u);
-                break;
+                String currentPass = request.getParameter("currentP");
+                String newPass = request.getParameter("newP");
+                JDBCWrapper wrapper = (JDBCWrapper) getServletContext().getAttribute("database");
+                wrapper.createStatement();
+
+                if (currentPass.trim().isEmpty() || newPass.trim().isEmpty()) {
+                    request.setAttribute("errorMessage", "1 or more field has been left blank");
+                    session.setAttribute("currentpage", "Member/ChangePassword.jsp");
+                    break;
+                } else if (!(wrapper.findRecord("users", "password", currentPass))) {
+                    request.setAttribute("errorMessage2", "Invalid Current Password");
+                    session.setAttribute("currentpage", "Member/ChangePassword.jsp");
+                    break;
+                } else {
+                    u = (User) session.getAttribute("user");
+                    u.setPassword(request.getParameter("newP"));
+                    new XYZWebApplicationDB((JDBCWrapper) getServletContext().getAttribute("database")).changePassword(u);
+                    break;
+                }
+
             case "makeclaim":
-                u = (User)session.getAttribute("user");
+                u = (User) session.getAttribute("user");
                 String rationale = request.getParameter("rationale");
                 float amount = Float.parseFloat(request.getParameter("amount"));
                 new XYZWebApplicationDB((JDBCWrapper) getServletContext().getAttribute("database")).makeClaim(u, rationale, amount);

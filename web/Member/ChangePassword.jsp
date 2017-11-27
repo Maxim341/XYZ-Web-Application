@@ -87,7 +87,7 @@
 
 
     <h1>Please enter your details: </h1>
-    
+
     <%--
     <form>
         <label for="OPass">Current Password</label>
@@ -102,51 +102,34 @@
         </button>
     </form>
     --%>
-    
-    
-            <form action="MemberDashboardServlet" method="post">
-                <label for="OPass">Current Password</label>
-                <br>
-                <input type="text" id="OPass" placeholder="Current Password" name="currentP">
-                <br>
-                <label for="lname">New Password</label>
-                
-            </form>
-           
-            <form action="MemberDashboardServlet" method="post">
-                <input type="text" placeholder="New password" name="newP">
-                <br>
-                <button type="Submit" value="password" name="button" class='button'class="popup" onclick="myFunction()">
-                    Change Password
-                </button>
-            </form> 
-   
-    <div class="popup" onclick="myFunction()">Click me!
-        <span class="popuptext" id="myPopup">Popup text...</span>
+
+    <div>
+        <form action="MemberDashboardServlet" method="post">
+            <label for="OPass">Current Password</label>
+            <br>
+            <input type="text" id="OPass" placeholder="Current Password" name="currentP">
+            <br>
+            <label for="lname">New Password</label>
+            <input type="text" placeholder="New password" name="newP">
+            <br>
+
+            <button type="Submit" value="password" name="button" class='button'class="popup" onclick="myFunction()">
+                Change Password
+            </button>
+        </form> 
     </div>
-       
-    
-    <% /*
-   
-     String username = request.getParameter("username");
-     
-     User u = (new XYZWebApplicationDB((JDBCWrapper) getServletContext().getAttribute("database"))).getUser(username);
-                    session.setAttribute("user", u);
-     
-                    u.setPassword("newP");
-                    
-                    JDBCWrapper wrapper = null;
-                    XYZWebApplicationDB pass = new XYZWebApplicationDB(wrapper);
-                    
-                    pass.changePassword(u);
-    
 
-*/
-    
+    <%
+        if (null != request.getAttribute("errorMessage2")) {
+            out.println(request.getAttribute("errorMessage2"));
+        } 
     %>
-
-
-
-
+    
+    <%
+        if (null != request.getAttribute("errorMessage")) {
+            out.println(request.getAttribute("errorMessage"));
+        } 
+    %>
+   
 
 </html>
