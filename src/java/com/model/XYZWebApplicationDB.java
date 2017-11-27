@@ -50,11 +50,27 @@ public class XYZWebApplicationDB {
         }
     }
     
-    public void insertClaim(Claim c)
+    public void makeClaim(User u, String rationale, float amount)
     {
         wrapper.createStatement();
+        wrapper.createResultSet("SELECT * FROM claims");
+        Date d = new Date();
+        Claim c = new Claim();
         try {
-            wrapper.getStatement().executeUpdate("insert into claims values ('" + c.getId() + "', '" + c.getMemid() + "', '" + c.getDate() + "', '" + c.getRationale() + "', '" + c.getStatus() + "', '" + c.getAmount() + "')");
+            wrapper.getResultSet().last();
+            c = new Claim(wrapper.getResultSet().getInt("id")+1, u.getId(), d, rationale, "APPLIED", amount);
+        } catch (SQLException ex) {
+            Logger.getLogger(XYZWebApplicationDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        insertClaim(c);
+    }
+    
+    public void insertClaim(Claim c)
+    {
+        java.sql.Date sqlDate = new java.sql.Date(c.getDate().getTime());
+        wrapper.createStatement();
+        try {
+            wrapper.getStatement().executeUpdate("insert into claims values (" + c.getId() + ", '" + c.getMemid() + "', '" + sqlDate.toString() + "', '" + c.getRationale() + "', '" + c.getStatus() + "', " + c.getAmount() + ")");
         } catch (SQLException ex) {
             Logger.getLogger(JDBCWrapper.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -192,6 +208,16 @@ public class XYZWebApplicationDB {
         wrapper.createStatement();   
         try {
             wrapper.getStatement().executeUpdate("UPDATE users SET \"status\" = 'SUSPENDED' WHERE \"id\" = '" + u.getId() + "'");
+        } catch (SQLException ex) {
+            Logger.getLogger(JDBCWrapper.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public void approveClaim(Claim c)
+    {
+        wrapper.createStatement();  
+        try {
+            wrapper.getStatement().executeUpdate("UPDATE claims SET \"status\" = 'APPROVED' WHERE \"id\" = " + c.getId() + "");
         } catch (SQLException ex) {
             Logger.getLogger(JDBCWrapper.class.getName()).log(Level.SEVERE, null, ex);
         }

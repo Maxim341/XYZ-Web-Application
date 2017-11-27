@@ -1,3 +1,7 @@
+<%@page import="com.model.XYZWebApplicationDB"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="com.model.Claim"%>
+<%@page import="com.model.JDBCWrapper"%>
 <!DOCTYPE html>
 <!-- Template by html.am -->
 <html>
@@ -11,7 +15,23 @@
 
     </head>
     <body>
-        -->Add text here  <--
+
+    <%-- start web service invocation --%><hr/>
+    <%
+    try {
+	webservice.WS_Service service = new webservice.WS_Service();
+	webservice.WS port = service.getWSPort();
+	// TODO process result here
+	float result = port.reportAnnualPayouts();
+	out.println("Result = "+result);
+    } catch (Exception ex) {
+	// TODO handle custom exceptions here
+    }
+    %>
+    <%-- end web service invocation --%><hr/>
+
+
+        
         <br>
         <br>
 

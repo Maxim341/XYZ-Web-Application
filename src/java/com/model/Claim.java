@@ -24,6 +24,11 @@ public class Claim {
     private String status;
     
     private float amount;
+    
+    public Claim()
+    {
+        
+    }
 
     public Claim(int id, String memId, Date date, String rationale, String status, float amount) {
         this.id = id;

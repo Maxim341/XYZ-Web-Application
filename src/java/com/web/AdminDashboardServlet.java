@@ -5,6 +5,7 @@
  */
 package com.web;
 
+import com.model.Claim;
 import com.model.JDBCWrapper;
 import com.model.User;
 import com.model.XYZWebApplicationDB;
@@ -68,9 +69,13 @@ public class AdminDashboardServlet extends HttpServlet {
             case "backPage":
                 session.setAttribute("currentpage", "Admin/adminPage.jsp");
                 break;
-            case "approve":
-                User temp = new User(request.getParameter("memberSelected"), "", "");
-                new XYZWebApplicationDB((JDBCWrapper) getServletContext().getAttribute("database")).approveMemberApplication(temp);
+            case "approvemember":
+                User u = new User(request.getParameter("memberSelected"), "", "");
+                new XYZWebApplicationDB((JDBCWrapper) getServletContext().getAttribute("database")).approveMemberApplication(u);
+                break;
+            case "approveclaim":
+                Claim c = new Claim(Integer.parseInt(request.getParameter("id")), "", null, "", "", (float)0);
+                new XYZWebApplicationDB((JDBCWrapper) getServletContext().getAttribute("database")).approveClaim(c);
                 break;
         }
         

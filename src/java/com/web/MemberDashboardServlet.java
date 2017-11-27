@@ -34,6 +34,7 @@ public class MemberDashboardServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {               
+        User u;
         String page = "/Theme.jsp";
         String button = request.getParameter("button");
         
@@ -57,10 +58,16 @@ public class MemberDashboardServlet extends HttpServlet {
                 session.setAttribute("currentpage", "Member/ChangePassword.jsp");
                 break;
             case "password":
-                User u = (User)session.getAttribute("user");
+                u = (User)session.getAttribute("user");
                 u.setPassword(request.getParameter("newP"));
                 new XYZWebApplicationDB((JDBCWrapper) getServletContext().getAttribute("database")).changePassword(u);
                 break;
+            case "makeclaim":
+                u = (User)session.getAttribute("user");
+                String rationale = request.getParameter("rationale");
+                float amount = Float.parseFloat(request.getParameter("amount"));
+                new XYZWebApplicationDB((JDBCWrapper) getServletContext().getAttribute("database")).makeClaim(u, rationale, amount);
+                
         }
         request.getRequestDispatcher(page).forward(request, response);
     }

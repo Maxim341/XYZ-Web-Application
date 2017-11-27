@@ -12,7 +12,14 @@
     </head>
     <body>
 
-        -->Add text here  <--
+        <div class="button">
+            <form action="AdminDashboardServlet" method="post">
+                <input type="text" placeholder="Claim id" name="id">
+                <button type="Submit" value="approveclaim" name="button" class='button'>
+                    Change Password
+                </button>
+            </form> 
+    </div>
         <br>
         <br>
 
