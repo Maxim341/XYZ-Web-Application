@@ -75,10 +75,22 @@
 
                 <h2>
                     <%
-                            out.println("<tr> <td><td>  " + ((OutstandingBalance) request.getAttribute("outstandingbalance")).getCharge() + "</td> <td> <td>" + ((OutstandingBalance) request.getAttribute("outstandingbalance")).getPayments()
-                                    + "</td> <td><td> " + ((OutstandingBalance) request.getAttribute("outstandingbalance")).getTotal() + "</td> <td><td> " + ((OutstandingBalance) request.getAttribute("outstandingbalance")).isPaidMembership());
+                        out.println("<tr> <td><td>  " + ((OutstandingBalance) request.getAttribute("outstandingbalance")).getCharge() + "</td> <td> <td>" + ((OutstandingBalance) request.getAttribute("outstandingbalance")).getPayments()
+                                + "</td> <td><td> " + ((OutstandingBalance) request.getAttribute("outstandingbalance")).getTotal() + "</td> <td><td> " + ((OutstandingBalance) request.getAttribute("outstandingbalance")).isPaidMembership());
                     %>
                 </h2>
+
+                <%
+                    if (null != request.getAttribute("errorMessage")) {
+                        out.println(request.getAttribute(""));
+                    }
+                %>
+
+                <%
+                    if (null != request.getAttribute("errorMessage2")) {
+                        out.println(request.getAttribute("errorMessage2"));
+                    }
+                %>
 
 
 
@@ -90,11 +102,11 @@
     <h2>pay amount or pay fee</h2>
 
     <form action="MemberDashboardServlet" method="post">
-           <input type="text" id="amount" placeholder="amount" name="amount">
-    <br>
-    <button type="Submit" value="payAmount" name="button" class='button'>
-        Pay Amount
-    </button>
+        <input type="text" id="amount" placeholder="amount" name="amount">
+        <br>
+        <button type="Submit" value="payAmount" name="button" class='button'>
+            Pay Amount
+        </button>
     </form>
     <br>
     <form action="MemberDashboardServlet" method="post">
