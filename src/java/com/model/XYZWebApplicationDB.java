@@ -519,7 +519,7 @@ public class XYZWebApplicationDB {
         float pays = 0;
         for(int i = 0; i != claims.size(); ++i)
         {
-            charge += claims.get(i).getAmount();
+            charge += claims.get(i).getAmount() * 0.05; //Charged %5
         }
         for(int i = 0; i != payments.size(); ++i)
         {

@@ -91,8 +91,7 @@
             </table>
         </div>   
         <%
-            
-            out.print("Claim subsidy charges: " + ((OutstandingBalance)request.getAttribute("outstandingbalance")).getCharge());
+            out.print("Claim subsidy + fee charges: " + ((OutstandingBalance)request.getAttribute("outstandingbalance")).getCharge());
             out.print("Payments made: " + ((OutstandingBalance)request.getAttribute("outstandingbalance")).getPayments());
             out.print("Outstanding Balance: " + ((OutstandingBalance)request.getAttribute("outstandingbalance")).getTotal());
             out.print("Has paid Membership: " + ((OutstandingBalance)request.getAttribute("outstandingbalance")).isPaidMembership() + "&emsp;");

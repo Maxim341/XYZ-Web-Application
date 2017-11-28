@@ -19,7 +19,7 @@
             for(int i = 0; i != outstandingBalances.size(); ++i)
             {
                 out.print("Username: " + outstandingBalances.get(i).getId() + "&emsp;");
-                out.print("Claim subsidy charges: " + outstandingBalances.get(i).getCharge() + "&emsp;");
+                out.print("Claim subsidy + fee charges: " + outstandingBalances.get(i).getCharge() + "&emsp;");
                 out.print("Payments made: " + outstandingBalances.get(i).getPayments() + "&emsp;");
                 out.print("Outstanding Balance: " + outstandingBalances.get(i).getTotal() + "&emsp;");
                 out.print("Has paid Membership: " + outstandingBalances.get(i).isPaidMembership() + "&emsp;");
