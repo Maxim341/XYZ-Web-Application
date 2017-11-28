@@ -68,22 +68,28 @@
             </div>
         </div>
         <br>
-        <h2>Approve membership application:</h2>
-        <h4>Please select a member from the list to approve their application.</h4>
+        <h2>Select a member to Suspend or Resume:</h2>
+        <h4>Note: You can only suspend or resume membership of an APPROVED member.</h4>
 
         <form action="AdminDashboardServlet" method="post">
             <select name="memberSelected">
                 <%
                     for (int j = 0; j < m.size(); j++) {
-                        if(m.get(j).getStatus().equals("APPLIED"))
+                        if(m.get(j).getStatus().equals("APPLIED")){
+                            // DO NOTHING
+                        } else {
                             out.println("<option value=\"" + m.get(j).getUsername() + "\">" + m.get(j).getUsername() + "</option>");
+                        }
+
                     }
                 %>
             </select>
             <br><br>
-            <button type="Submit" value="approvemember" name="button" class='button'>
-                    Approve Member
+
+            <button type="Submit" value="suspendresumemember" name="button" class='button'>
+                Submit
             </button>
+
         </form>
 
         <br>

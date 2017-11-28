@@ -103,13 +103,6 @@
         <br>
 
         <form action="AdminDashboardServlet" method="post">
-            <button type="Submit" Value="suspendResumeMember" name="button" class='button'>
-                Suspend or resume membership
-            </button>
-        </form>
-        <br>
-
-        <form action="AdminDashboardServlet" method="post">
             <button type="Submit" Value="annualReport" name="button" class='button'>
                 Report annual turnover
             </button>
