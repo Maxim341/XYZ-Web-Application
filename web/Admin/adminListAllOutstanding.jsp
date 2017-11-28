@@ -12,21 +12,49 @@
 
     </head>
     <body>
+        
+        
+        
+        <div id="table-wrapper">
+        <div id="table-scroll">
+            <table>
+                <thead>
+                    <tr>
+                        <th scope="col">Username</th>
+                        <th scope="col">Claim subsidy and fee charges</th>
+                        <th scope="col">Payments made</th>
+                        <th scope="col">Outstanding balance</th>
+                        <th scope="col">membership status</th>
+                        
+                    </tr>
+                </thead>
+                <tbody>
 
-        <%
+
+                <h2>
+                    <%     
+                        
+            {
             ArrayList<OutstandingBalance> outstandingBalances = (ArrayList<OutstandingBalance>)request.getAttribute("outstandingbalances");
             
             for(int i = 0; i != outstandingBalances.size(); ++i)
             {
-                out.print("Username: " + outstandingBalances.get(i).getId() + "&emsp;");
-                out.print("Claim subsidy + fee charges: " + outstandingBalances.get(i).getCharge() + "&emsp;");
-                out.print("Payments made: " + outstandingBalances.get(i).getPayments() + "&emsp;");
-                out.print("Outstanding Balance: " + outstandingBalances.get(i).getTotal() + "&emsp;");
-                out.print("Has paid Membership: " + outstandingBalances.get(i).isPaidMembership() + "&emsp;");
-                out.print("<br>");
+                out.print("<tr> <td><td>  " + outstandingBalances.get(i).getId()  + "<tr> <td><td>  "+ outstandingBalances.get(i).getCharge() + "<tr> <td><td>  " + outstandingBalances.get(i).getPayments()+"<tr> <td><td>  "+ outstandingBalances.get(i).getTotal()+ "<tr> <td><td>  "+
+                        outstandingBalances.get(i).isPaidMembership());
+ 
             }
-            
-        %>
+            }
+                    %>
+                </h2>
+
+
+
+                </tbody>
+            </table>
+        </div>   
+    </div>
+
+        
         <br>
         <br>
 
