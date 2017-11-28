@@ -97,13 +97,12 @@
 
     <h2>pay amount or pay fee</h2>
 
-    <input type="text" id="amount" placeholder="Amount" name="amount">
-    <br>
-
     <form action="MemberDashboardServlet" method="post">
-        <button type="Submit" value="payAmount" name="button" class='button'>
-            Pay Amount
-        </button>
+           <input type="text" id="amount" placeholder="amount" name="amount">
+    <br>
+    <button type="Submit" value="payAmount" name="button" class='button'>
+        Pay Amount
+    </button>
     </form>
     <br>
     <form action="MemberDashboardServlet" method="post">

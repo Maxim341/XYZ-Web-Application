@@ -86,6 +86,9 @@
             <button type="Submit" value="approveclaim" name="button" class='button'>
                     Approve Claim
             </button>
+            <button type="Submit" value="rejectclaim" name="button" class='button'>
+                    Reject Claim
+            </button>
         </form>
         <br>
         <form action="AdminDashboardServlet" method="post">

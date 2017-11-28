@@ -51,9 +51,11 @@ public class LoginServlet extends HttpServlet {
                     if (u.getStatus().contains("ADMIN")){
                         // If admin goto admin dashboard
                         view = request.getRequestDispatcher("AdminDashboardServlet");
+                        session.setAttribute("currentpage", "Admin/adminPage.jsp");                 
                     } else {
                         // if member goto member dashboard
                         view = request.getRequestDispatcher("MemberDashboardServlet");
+                        session.setAttribute("currentpage", "Member/memberPage.jsp");
                     }
                     
                     view.forward(request, response);
