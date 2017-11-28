@@ -44,7 +44,7 @@ public class MemberDashboardServlet extends HttpServlet {
 
         switch (button) {
             case "outstandingBalance":
-                session.setAttribute("currentpage", "Member/OutstandingBalance.jsp");
+                session.setAttribute("currentpage", "Member/OutstandingBalances.jsp");
                 break;
             case "claims":
                 session.setAttribute("currentpage", "Member/memberClaims.jsp");
