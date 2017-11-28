@@ -64,8 +64,9 @@
             <table>
                 <thead>
                     <tr>
-                        <th scope="col">Rationale</th>
-                        <th scope="col">Amount</th>
+                        <th scope="col">Claim subsidy charges</th>
+                        <th scope="col">Payments made</th>
+                        <th scope="col">Outstanding Balance</th>
 
                     </tr>
                 </thead>
@@ -79,7 +80,8 @@
                         wrapper.createStatement();
                         ArrayList<Claim> c = (new XYZWebApplicationDB(wrapper).getMemberClaims(((User) session.getAttribute("user")).getId()));
                         for (int i = 0; i != c.size(); ++i) {
-                            out.println("<tr> <td>  " + c.get(i).getRationale() + "</td> <td> <td>" + c.get(i).getDate());
+                            out.println("<tr> <td><td>  " + ((OutstandingBalance) request.getAttribute("outstandingbalance")).getCharge() + "</td> <td> <td>" + ((OutstandingBalance) request.getAttribute("outstandingbalance")).getPayments()
+                                    + "</td> <td><td> " + ((OutstandingBalance) request.getAttribute("outstandingbalance")).getTotal());
 
                         }
                     %>
@@ -90,13 +92,7 @@
                 </tbody>
             </table>
         </div>   
-        <%
-            
-            out.print("Claim subsidy charges: " + ((OutstandingBalance)request.getAttribute("outstandingbalance")).getCharge());
-            out.print("Payments made: " + ((OutstandingBalance)request.getAttribute("outstandingbalance")).getPayments());
-            out.print("Outstanding Balance: " + ((OutstandingBalance)request.getAttribute("outstandingbalance")).getTotal());
-            
-        %>
+
     </div>
 
     <h2>pay amount or pay fee</h2>
@@ -105,15 +101,15 @@
     <br>
 
     <form action="MemberDashboardServlet" method="post">
-    <button type="Submit" value="payAmount" name="button" class='button'>
-        Pay Amount
-    </button>
+        <button type="Submit" value="payAmount" name="button" class='button'>
+            Pay Amount
+        </button>
     </form>
     <br>
     <form action="MemberDashboardServlet" method="post">
-    <button type="Submit" value="payFee" name="button" class='button'>
-        Pay Fee
-    </button>
+        <button type="Submit" value="payFee" name="button" class='button'>
+            Pay Fee
+        </button>
     </form>
 
 
