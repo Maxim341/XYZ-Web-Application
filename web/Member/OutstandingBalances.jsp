@@ -4,6 +4,7 @@
     Author     : User
 --%>
 
+<%@page import="com.model.OutstandingBalance"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="com.model.Claim"%>
 <%@page import="com.model.XYZWebApplicationDB"%>
@@ -63,9 +64,10 @@
             <table>
                 <thead>
                     <tr>
-                        <th scope="col">Rationale</th>
-                        <th scope="col">Amount</th>
-
+                        <th scope="col">Claim subsidy + Fee charges</th>
+                        <th scope="col">Payments Made</th>
+                        <th scope="col">Outstanding Balance</th>
+                        <th scope="col">Membership Paid</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -73,31 +75,47 @@
 
                 <h2>
                     <%
-                        JDBCWrapper wrapper = (JDBCWrapper) getServletContext().getAttribute("database");
-                        //HttpSession session = request.getSession();
-                        wrapper.createStatement();
-                        ArrayList<Claim> c = (new XYZWebApplicationDB(wrapper).getMemberClaims(((User) session.getAttribute("user")).getId()));
-                        for (int i = 0; i != c.size(); ++i) {
-                            out.println("<tr> <td>  " + c.get(i).getRationale() + "</td> <td> <td>" + c.get(i).getDate());
-
-                        }
+                        out.println("<tr> <td><td>  " + ((OutstandingBalance) request.getAttribute("outstandingbalance")).getCharge() + "</td> <td> <td>" + ((OutstandingBalance) request.getAttribute("outstandingbalance")).getPayments()
+                                + "</td> <td><td> " + ((OutstandingBalance) request.getAttribute("outstandingbalance")).getTotal() + "</td> <td><td> " + ((OutstandingBalance) request.getAttribute("outstandingbalance")).isPaidMembership());
                     %>
                 </h2>
+
+                <%
+                    if (null != request.getAttribute("errorMessage")) {
+                        out.println(request.getAttribute(""));
+                    }
+                %>
+
+                <%
+                    if (null != request.getAttribute("errorMessage2")) {
+                        out.println(request.getAttribute("errorMessage2"));
+                    }
+                %>
 
 
 
                 </tbody>
             </table>
-        </div>
+        </div>   
     </div>
 
-    <button type="Submit" value="payFee" name="button" class='button'>
-        Pay Fee
-    </button>
+    <h2>pay amount or pay fee</h2>
 
-    <button type="Submit" value="PayAmount" name="button" class='button'>
-        Pay Amount
-    </button>
+    <form action="MemberDashboardServlet" method="post">
+        <input type="text" id="amount" placeholder="amount" name="amount">
+        <br>
+        <button type="Submit" value="payAmount" name="button" class='button'>
+            Pay Amount
+        </button>
+    </form>
+    <br>
+    <form action="MemberDashboardServlet" method="post">
+        <button type="Submit" value="payFee" name="button" class='button'>
+            Pay Fee
+        </button>
+    </form>
+
+
 
 
     <form action="MemberDashboardServlet" method="post">

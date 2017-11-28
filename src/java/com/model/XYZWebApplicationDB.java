@@ -53,6 +53,27 @@ public class XYZWebApplicationDB {
         }
     }
     
+        /*
+    Name: makePayment
+    Parameters: u : user, rationale : String, amount : float
+    Returns: void
+    Comments: Makes payment in DB
+    */
+    public void makePayment(User u, String paymentType, float amount)
+    {
+        wrapper.createStatement();
+        wrapper.createResultSet("SELECT * FROM payments");
+        Payment p = new Payment();
+
+        try {
+            wrapper.getResultSet().last();
+            p = new Payment(wrapper.getResultSet().getInt("id")+1, u.getId(), paymentType, amount, new Time(0), new Date());
+        } catch (SQLException ex) {
+            Logger.getLogger(XYZWebApplicationDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        insertPayment(p);
+    }
+    
     /*
     Name: insertPayment
     Parameters: p : Payment
@@ -61,9 +82,11 @@ public class XYZWebApplicationDB {
     */
     public void insertPayment(Payment p)
     {
+        java.sql.Date sqlDate = new java.sql.Date(p.getDate().getTime());
+        java.sql.Time sqlTime = new java.sql.Time(p.getTime().getTime());
         wrapper.createStatement();
         try {
-            wrapper.getStatement().executeUpdate("insert into payments values ('" + p.getId() + "', '" + p.getMemid() + "', '" + p.getTypeOfPayment() + "', '" + p.getAmount() + "', '" + p.getDate() + "', '" + p.getTime() + "')");
+            wrapper.getStatement().executeUpdate("insert into payments values (" + p.getId() + ", '" + p.getMemid() + "', '" + p.getTypeOfPayment() + "', " + p.getAmount() + ", '" + sqlDate.toString() + "', '" + sqlTime.toString() + "')");
         } catch (SQLException ex) {
             Logger.getLogger(JDBCWrapper.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -128,6 +151,27 @@ public class XYZWebApplicationDB {
         return ret;
     }
     
+        /*
+    Name: getMember
+    Parameters: id : String
+    Returns: Member
+    Comments: Gets Member from ID
+    */
+    public Member getMember(String id)
+    {
+        Member ret = new Member();
+        wrapper.createStatement();
+        wrapper.findRecord("members", "id", id);
+        try {
+            String[] addressString = wrapper.getResultSet().getString("address").split(",");
+            Address a = new Address(Integer.parseInt(addressString[0]), addressString[1], addressString[2], addressString[3], addressString[4]);
+            ret = new Member(wrapper.getResultSet().getString("id"), wrapper.getResultSet().getString("name"), a, wrapper.getResultSet().getDate("dob"), wrapper.getResultSet().getDate("dor"), wrapper.getResultSet().getString("status"), wrapper.getResultSet().getFloat("balance"));
+        } catch (SQLException ex) {
+            Logger.getLogger(XYZWebApplicationDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return ret;
+    }
+    
     /*
     Name: getUserPayments
     Parameters: id : String
@@ -166,7 +210,29 @@ public class XYZWebApplicationDB {
             {
                String[] addressString = wrapper.getResultSet().getString("address").split(",");
                Address a = new Address(Integer.parseInt(addressString[0]), addressString[1], addressString[2], addressString[3], addressString[4]);
-               ret.add(new Member(wrapper.getResultSet().getString("id"), wrapper.getResultSet().getString("name"), a, makeDate(wrapper.getResultSet().getString("dob")), makeDate(wrapper.getResultSet().getString("dor")), wrapper.getResultSet().getString("status"), wrapper.getResultSet().getFloat("balance")));
+               ret.add(new Member(wrapper.getResultSet().getString("id"), wrapper.getResultSet().getString("name"), a, wrapper.getResultSet().getDate("dob"), wrapper.getResultSet().getDate("dor"), wrapper.getResultSet().getString("status"), wrapper.getResultSet().getFloat("balance")));
+            }while(wrapper.getResultSet().next());
+        } catch (SQLException ex) {
+            Logger.getLogger(XYZWebApplicationDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return ret;
+    }
+    
+        /*
+    Name: getAllPayments
+    Parameters: none
+    Returns: ArrayList : Payment
+    Comments: Returns list of payments
+    */
+    public ArrayList<Payment> getMemberPayments(String id)
+    {
+        ArrayList ret = new ArrayList<Payment>();
+        wrapper.findRecord("payments", "mem_id", id);
+        try { 
+            //wrapper.getResultSet().next();
+            do
+            {
+               ret.add(new Payment(wrapper.getResultSet().getInt("id"), wrapper.getResultSet().getString("mem_id"), wrapper.getResultSet().getString("type_of_payment"), wrapper.getResultSet().getFloat("amount"), wrapper.getResultSet().getTime("time"), wrapper.getResultSet().getDate("date")));
             }while(wrapper.getResultSet().next());
         } catch (SQLException ex) {
             Logger.getLogger(XYZWebApplicationDB.class.getName()).log(Level.SEVERE, null, ex);
@@ -346,15 +412,49 @@ public class XYZWebApplicationDB {
     }
     
     /*
+    Name: approveClaim
+    Parameters: c : Claim
+    Returnns: void
+    Comments: Takes in claim and approves in DB
+    */
+    public void rejectClaim(Claim c)
+    {
+        wrapper.createStatement();  
+        try {
+            wrapper.getStatement().executeUpdate("UPDATE claims SET \"status\" = 'REJECTED' WHERE \"id\" = " + c.getId() + "");
+        } catch (SQLException ex) {
+            Logger.getLogger(JDBCWrapper.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    /*
     Name: isWithinLastYear
     Parameters: d : Date
     Returns: boolean
-    Comments: Generic function checks if date passed is whinin now and last year
+    Comments: Generic function checks if date passed is within now and last year.
     */
     public boolean isWithinLastYear(Date d)
     {
         //Work out year in milliseconds.
         long millisecondsInYear = ( (long)365 * 24 * 60 * 60 * 1000 );
+        Date yearAgo = new Date((new Date().getTime()) - millisecondsInYear);
+
+        //If date passed is within now and a year ago today.
+        if(yearAgo.before(d))
+            return true;
+        return false;
+    }
+    
+    /*
+    Name: isWithinLastSixMonths
+    Parameters: d : Date
+    Returns: boolean
+    Comments: Generic function checks if date passed is within now and last six months.
+    */
+    public boolean isWithinLastSixMonths(Date d)
+    {
+        //Work out year in milliseconds.
+        long millisecondsInYear = ( (long)180 * 24 * 60 * 60 * 1000 );
         Date yearAgo = new Date((new Date().getTime()) - millisecondsInYear);
 
         //If date passed is within now and a year ago today.
@@ -386,5 +486,67 @@ public class XYZWebApplicationDB {
         if(limit >= 2)
             return true;
         return false;
-    }   
+    }
+    
+    public OutstandingBalance calculateOutstandingBalance(User u)
+    {
+        OutstandingBalance ret = new OutstandingBalance();
+        ret.setId(u.getId());
+        
+        ArrayList<Claim> claims = getMemberClaims(u.getId());
+        ArrayList<Payment> payments = getMemberPayments(u.getId());
+        
+        for(int i = 0; i != claims.size(); ++i)
+        {
+            if(!isWithinLastYear(claims.get(i).getDate()) || !claims.get(i).getStatus().equals("APPROVED"))
+            {
+                claims.remove(i);
+                --i;
+            }
+
+        }
+        for(int i = 0; i != payments.size(); ++i)
+        {
+            if(!isWithinLastYear(payments.get(i).getDate()))
+            {
+                payments.remove(i);
+                --i;
+            }
+        }
+        
+        boolean paidMembership = false;
+        float charge = 10;
+        float pays = 0;
+        for(int i = 0; i != claims.size(); ++i)
+        {
+            charge += claims.get(i).getAmount() * 0.05; //Charged %5
+        }
+        for(int i = 0; i != payments.size(); ++i)
+        {
+            pays += payments.get(i).getAmount();
+            if(payments.get(i).getTypeOfPayment().trim().equals("FEE"))
+                paidMembership = true;
+        }
+        ret.setPaidMembership(paidMembership);
+        ret.setCharge(charge);
+        ret.setPayments(pays);
+        
+        ret.setTotal(pays - charge);
+        
+        return ret;
+    }
+    
+    public ArrayList<OutstandingBalance> getAllOutstandingBalance()
+    {
+        ArrayList ret = new ArrayList<OutstandingBalance>();
+        ArrayList<Member> members = getAllMembers();
+        for(int i = 0; i != members.size(); ++i)
+        {
+            User u = new User();
+            u.setId(members.get(i).getUsername());
+            ret.add(calculateOutstandingBalance(u));
+        }
+        
+        return ret;
+    }
 }

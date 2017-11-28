@@ -6,6 +6,8 @@
 package com.web;
 
 import com.model.JDBCWrapper;
+import com.model.Member;
+import com.model.OutstandingBalance;
 import com.model.User;
 import com.model.XYZWebApplicationDB;
 import java.io.IOException;
@@ -39,14 +41,14 @@ public class MemberDashboardServlet extends HttpServlet {
         String button = request.getParameter("button"); // Get value from button
 
         HttpSession session = request.getSession();
-        session.setAttribute("currentpage", "Member/memberPage.jsp");
 
         switch (button) {
             case "outstandingBalance":
                 session.setAttribute("currentpage", "Member/OutstandingBalances.jsp");
-                break;
-            case "makePayment":
-                session.setAttribute("currentpage", "Member/MakePayment.jsp");
+                //Need to calculate their outstanding balance
+                u = (User) session.getAttribute("user");
+                OutstandingBalance ob = databaseInterface.calculateOutstandingBalance(u);
+                request.setAttribute("outstandingbalance", ob);
                 break;
             case "claims":
                 session.setAttribute("currentpage", "Member/memberClaims.jsp");
@@ -81,13 +83,36 @@ public class MemberDashboardServlet extends HttpServlet {
                 }
             case "makeclaim":
                 u = (User) session.getAttribute("user");
+                Member m = databaseInterface.getMember(u.getId());
                 String rationale = request.getParameter("rationale");
-                float amount = Float.parseFloat(request.getParameter("amount"));
-
-                if (!databaseInterface.isClaimLimit(u)) {
-                    databaseInterface.makeClaim(u, rationale, amount);
+                float claimAmount = Float.parseFloat(request.getParameter("amount"));
+                //Checks if account approved and account is over six months old. (As according to spec)
+                if (u.getStatus().trim().equals("APPROVED") && !databaseInterface.isWithinLastSixMonths(m.getRegistration())) {
+                    databaseInterface.makeClaim(u, rationale, claimAmount);
                 }
                 break;
+            case "payFee":
+                u = (User) session.getAttribute("user");
+                float feeAmount = (float) 10.0;
+                databaseInterface.makePayment(u, "FEE", feeAmount);
+                break;
+            case "payAmount":
+                String amount = request.getParameter("amount");
+                if (amount.trim().isEmpty()) {
+                    request.setAttribute("errorMessage", "1 or more field has been left blank");
+                    session.setAttribute("currentpage", "Member/OutstandingBalances.jsp");
+                    break;
+                }
+                try {
+                    u = (User) session.getAttribute("user");
+                    float payAmount = Float.parseFloat(amount);
+                    databaseInterface.makePayment(u, "SUBSIDY", payAmount);
+                    break;
+                } catch (NumberFormatException ex) {
+                    request.setAttribute("errorMessage2", "Payment must be a number");
+                    session.setAttribute("currentpage", "Member/OutstandingBalances.jsp");
+                    break;
+                }
             case "logOut":
                 session.removeAttribute("user"); // remove user session
                 page = "login.jsp";

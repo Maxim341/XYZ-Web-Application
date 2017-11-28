@@ -7,9 +7,11 @@ package com.web;
 
 import com.model.Claim;
 import com.model.JDBCWrapper;
+import com.model.OutstandingBalance;
 import com.model.User;
 import com.model.XYZWebApplicationDB;
 import java.io.IOException;
+import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -37,7 +39,6 @@ public class AdminDashboardServlet extends HttpServlet {
         String button = request.getParameter("button"); // Get value of button
         
         HttpSession session = request.getSession();
-        session.setAttribute("currentpage", "Admin/adminPage.jsp");
         
         switch (button) {
             case "members":
@@ -45,6 +46,8 @@ public class AdminDashboardServlet extends HttpServlet {
                 break;
             case "listAllOutstanding":
                 session.setAttribute("currentpage", "Admin/adminListAllOutstanding.jsp");
+                ArrayList<OutstandingBalance> ob = databaseInterface.getAllOutstandingBalance();
+                request.setAttribute("outstandingbalances", ob);
                 break;
             case "claims":
                 session.setAttribute("currentpage", "Admin/adminClaims.jsp");
@@ -72,8 +75,12 @@ public class AdminDashboardServlet extends HttpServlet {
                 databaseInterface.approveMemberApplication(u);
                 break;
             case "approveclaim":
-                Claim c = new Claim(Integer.parseInt(request.getParameter("selectedclaim")), "", null, "", "", (float)0);
-                databaseInterface.approveClaim(c);
+                Claim ac = new Claim(Integer.parseInt(request.getParameter("selectedclaim")), "", null, "", "", (float)0);
+                databaseInterface.approveClaim(ac);
+                break;
+            case "rejectclaim":
+                Claim rc = new Claim(Integer.parseInt(request.getParameter("selectedclaim")), "", null, "", "", (float)0);
+                databaseInterface.rejectClaim(rc);
                 break;
             case "suspendresumemember":
                 String userID = request.getParameter("memberSelected");
