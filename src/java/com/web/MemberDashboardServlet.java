@@ -7,6 +7,7 @@ package com.web;
 
 import com.model.JDBCWrapper;
 import com.model.Member;
+import com.model.OutstandingBalance;
 import com.model.User;
 import com.model.XYZWebApplicationDB;
 import java.io.IOException;
@@ -45,6 +46,10 @@ public class MemberDashboardServlet extends HttpServlet {
         switch (button) {
             case "outstandingBalance":
                 session.setAttribute("currentpage", "Member/OutstandingBalances.jsp");
+                //Need to calculate their outstanding balance
+                u = (User) session.getAttribute("user");
+                OutstandingBalance ob = databaseInterface.calculateOutstandingBalance(u);
+                request.setAttribute("outstandingbalance", ob);
                 break;
             case "claims":
                 session.setAttribute("currentpage", "Member/memberClaims.jsp");
@@ -84,7 +89,7 @@ public class MemberDashboardServlet extends HttpServlet {
                 float amount = Float.parseFloat(request.getParameter("amount"));
                 
                 //Checks if limit exceeded and account is over six months old. (As according to spec)
-                if(!databaseInterface.isClaimLimit(u) && !databaseInterface.isWithinLastSixMonths(m.getRegistration()))
+                if(u.getStatus().equals("APPROVED") && !databaseInterface.isWithinLastSixMonths(m.getRegistration()))
                     databaseInterface.makeClaim(u, rationale, amount);
                 break;
             case "logOut":

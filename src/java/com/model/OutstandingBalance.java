@@ -14,6 +14,9 @@ public class OutstandingBalance {
     private float payments;
     private float total;
 
+    public OutstandingBalance() {
+    }
+
     public OutstandingBalance(float charge, float payments, float total) {
         this.charge = charge;
         this.payments = payments;

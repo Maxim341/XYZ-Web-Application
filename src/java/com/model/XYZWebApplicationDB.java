@@ -195,6 +195,28 @@ public class XYZWebApplicationDB {
         return ret;
     }
     
+        /*
+    Name: getAllPayments
+    Parameters: none
+    Returns: ArrayList : Payment
+    Comments: Returns list of payments
+    */
+    public ArrayList<Payment> getMemberPayments(String id)
+    {
+        ArrayList ret = new ArrayList<Payment>();
+        wrapper.findRecord("payments", "mem_id", id);
+        try { 
+            wrapper.getResultSet().next();
+            do
+            {
+               ret.add(new Payment(wrapper.getResultSet().getInt("id"), wrapper.getResultSet().getString("mem_id"), wrapper.getResultSet().getString("type_of_payment"), wrapper.getResultSet().getFloat("amount"), wrapper.getResultSet().getTime("time"), wrapper.getResultSet().getDate("date")));
+            }while(wrapper.getResultSet().next());
+        } catch (SQLException ex) {
+            Logger.getLogger(XYZWebApplicationDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return ret;
+    }
+    
     /*
     Name: getAllPayments
     Parameters: none
@@ -424,5 +446,46 @@ public class XYZWebApplicationDB {
         if(limit >= 2)
             return true;
         return false;
-    }   
+    }
+    
+    public OutstandingBalance calculateOutstandingBalance(User u)
+    {
+        OutstandingBalance ret = new OutstandingBalance();
+        
+        ArrayList<Claim> claims = getMemberClaims(u.getId());
+        ArrayList<Payment> payments = getMemberPayments(u.getId());
+        
+        for(int i = 0; i != claims.size(); ++i)
+        {
+            if(!isWithinLastYear(claims.get(i).getDate()))
+                claims.remove(i);
+        }
+        for(int i = 0; i != payments.size(); ++i)
+        {
+            if(!isWithinLastYear(payments.get(i).getDate()))
+                claims.remove(i);
+        }
+        
+        boolean paidMembership = false;
+        float charge = 0;
+        float pays = 0;
+        for(int i = 0; i != claims.size(); ++i)
+        {
+            charge += claims.get(i).getAmount();
+        }
+        for(int i = 0; i != payments.size(); ++i)
+        {
+            pays += payments.get(i).getAmount();
+            if(payments.get(i).getTypeOfPayment().equals("FEE"))
+                paidMembership = true;
+        }
+        if(!paidMembership)
+            charge += 10.0;
+        ret.setCharge(charge);
+        ret.setPayments(pays);
+        
+        ret.setTotal(pays - charge);
+        
+        return ret;
+    }
 }
