@@ -323,6 +323,7 @@ public class XYZWebApplicationDB {
         wrapper.createStatement();   
         try {
             wrapper.getStatement().executeUpdate("UPDATE users SET \"status\" = 'SUSPENDED' WHERE \"id\" = '" + u.getId() + "'");
+            wrapper.getStatement().executeUpdate("UPDATE members SET \"status\" = 'SUSPENDED' WHERE \"id\" = '" + u.getId() + "'");
         } catch (SQLException ex) {
             Logger.getLogger(JDBCWrapper.class.getName()).log(Level.SEVERE, null, ex);
         }
