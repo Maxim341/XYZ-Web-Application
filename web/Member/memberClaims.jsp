@@ -44,8 +44,16 @@
             margin: 8px 0;
             box-sizing: border-box;
         }
+        
+        
+        
+        
 
-    </style>
+</style>
+        
+        
+    
+
 
     </head>
     <body>
@@ -100,12 +108,19 @@
                 <br>
                 <input type="text" placeholder="amount" name="amount">
                 <br>
-                <button type="Submit" value="makeclaim" name="button" class='button'>
+                <button type="Submit" value="makeclaim" name="button" class='button' onclick="myFunction()">
                    Submit Claim
                 </button>
             </form> 
    
 
+
+<script>
+function myFunction() {
+    
+    alert("I need coding to only come up when claims exceeded");
+}
+</script>
 
 
 </html>
