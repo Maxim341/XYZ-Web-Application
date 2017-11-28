@@ -18,7 +18,13 @@ public class XYZWebApplicationDB {
     {
         wrapper = w;
     }
-    
+      
+    /*
+    Name: insertMember
+    Parameters: m : Member
+    Returns: void
+    Comments: Inserts member to DB
+    */
     public void insertMember(Member m)
     {
         java.sql.Date sqlDOB = new java.sql.Date(m.getDOB().getTime());
@@ -31,6 +37,12 @@ public class XYZWebApplicationDB {
         }
     }
     
+    /*
+    Name: insertUser
+    Parameters: u : User
+    Returns: void
+    Comments: inserts user to DB
+    */
     public void insertUser(User u)
     {
         wrapper.createStatement();
@@ -41,6 +53,12 @@ public class XYZWebApplicationDB {
         }
     }
     
+    /*
+    Name: insertPayment
+    Parameters: p : Payment
+    Returns: void
+    Comments: Inserts payment to DB
+    */
     public void insertPayment(Payment p)
     {
         wrapper.createStatement();
@@ -51,6 +69,12 @@ public class XYZWebApplicationDB {
         }
     }
     
+    /*
+    Name: makeClaim
+    Parameters: u : user, rationale : String, amount : float
+    Returns: void
+    Comments: Makes claim in DB
+    */
     public void makeClaim(User u, String rationale, float amount)
     {
         wrapper.createStatement();
@@ -66,6 +90,12 @@ public class XYZWebApplicationDB {
         insertClaim(c);
     }
     
+    /*
+    Name: insertClaim
+    Parameters: c : Claim
+    Returns: void
+    Comments: inserts claim from param
+    */   
     public void insertClaim(Claim c)
     {
         java.sql.Date sqlDate = new java.sql.Date(c.getDate().getTime());
@@ -77,6 +107,12 @@ public class XYZWebApplicationDB {
         }
     }
     
+    /*
+    Name: getUser
+    Parameters: id : String
+    Returns: User
+    Comments: Gets User from ID
+    */
     public User getUser(String id)
     {
         User ret = new User();
@@ -92,6 +128,12 @@ public class XYZWebApplicationDB {
         return ret;
     }
     
+    /*
+    Name: getUserPayments
+    Parameters: id : String
+    Returns: ArrayList : Payment
+    Comments: Takes ID and returns list of user payments
+    */
     public ArrayList<Payment> getUserPayments(String id)
     {
         ArrayList ret = new ArrayList<Payment>();
@@ -107,6 +149,12 @@ public class XYZWebApplicationDB {
         return ret;
     }
     
+    /*
+    Name: getAllMembers
+    Parameters: none
+    Returns: ArrayList : Member
+    Comments: Returns arraylist of Members
+    */
     public ArrayList<Member> getAllMembers()
     {
         ArrayList ret = new ArrayList<Member>();
@@ -126,6 +174,12 @@ public class XYZWebApplicationDB {
         return ret;
     }
     
+    /*
+    Name: getAllPayments
+    Parameters: none
+    Returns: ArrayList : Payment
+    Comments: Returns list of payments
+    */
         public ArrayList<Payment> getAllPayments()
     {
         ArrayList ret = new ArrayList<Payment>();
@@ -142,7 +196,13 @@ public class XYZWebApplicationDB {
         }
         return ret;
     }
-
+        
+        /*
+    Name: getProvisionalMembers
+    Parameters: none
+    Returns: ArrayList : Member
+    Comments: Returns Members "applied" 
+    */
     public ArrayList<Member> getProvisionalMembers() {
 
         ArrayList<Member> users;
@@ -157,7 +217,13 @@ public class XYZWebApplicationDB {
         }
         return ret;
     }
-
+    
+    /*
+    Name: getMemberClaims
+    Parameters: id : String
+    Returns: ArrayList
+    Comments: takes in ID and returns claims of the Member
+    */
     public ArrayList<Claim> getMemberClaims(String id)
     {
         ArrayList ret = new ArrayList<Claim>();
@@ -173,6 +239,12 @@ public class XYZWebApplicationDB {
         return ret;
     }
     
+    /*
+    Name: getAllClaims
+    Parameters: none
+    Returns: ArratList : Claim
+    Comments: Gets claims from DB and returns arrayList
+    */
     public ArrayList<Claim> getAllClaims()
     {
         ArrayList ret = new ArrayList<Member>();
@@ -190,6 +262,12 @@ public class XYZWebApplicationDB {
         return ret;
     }
     
+    /*
+    Name: makeDate
+    Parameters: date : String
+    Returns: date : Date
+    Comments: takes in String and returns Date
+    */
     public Date makeDate(String dateParam) {
         Date dob = new Date();
         DateFormat df = new SimpleDateFormat("dd/MM/yy");
@@ -201,6 +279,12 @@ public class XYZWebApplicationDB {
         return dob;
     }
     
+    /*
+    Name: changePassword
+    Parameters: u : User
+    Returns: void
+    Comments: Takes in user and changes password in DB
+    */
     public void changePassword(User u)
     {   
         wrapper.createStatement();
@@ -211,6 +295,12 @@ public class XYZWebApplicationDB {
         }
     }
     
+    /*
+    Name: approveMemberApplication
+    Parameters: u : User
+    Returns: void
+    Comments: Takes in user and approves application
+    */
     public void approveMemberApplication(User u)
     {
         wrapper.createStatement();   
@@ -221,6 +311,13 @@ public class XYZWebApplicationDB {
             Logger.getLogger(JDBCWrapper.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    
+    /*
+    Name: suspendMemberApplication
+    Parameters: u : User
+    Returns: void
+    Comments: Takes in user and suspends application in DB
+    */
     public void suspendMemberApplication(User u)
     {
         wrapper.createStatement();   
@@ -231,6 +328,12 @@ public class XYZWebApplicationDB {
         }
     }
     
+    /*
+    Name: approveClaim
+    Parameters: c : Claim
+    Returnns: void
+    Comments: Takes in claim and approves in DB
+    */
     public void approveClaim(Claim c)
     {
         wrapper.createStatement();  
@@ -241,7 +344,12 @@ public class XYZWebApplicationDB {
         }
     }
     
-    //Generic function checks if date passed is within now and last year.
+    /*
+    Name: isWithinLastYear
+    Parameters: d : Date
+    Returns: boolean
+    Comments: Generic function checks if date passed is whinin now and last year
+    */
     public boolean isWithinLastYear(Date d)
     {
         //Work out year in milliseconds.
@@ -254,7 +362,12 @@ public class XYZWebApplicationDB {
         return false;
     }
     
-    //Checks if user has reached there 2 claims limit.
+    /*
+    Name: isClaimLimit
+    Parameters: u : User
+    Returns: boolean
+    Comments: checks if user has reacher their 2 claim limit
+    */
     public boolean isClaimLimit(User u)
     {
         //Get all users claims.
@@ -272,6 +385,5 @@ public class XYZWebApplicationDB {
         if(limit >= 2)
             return true;
         return false;
-    }
-    
+    }   
 }

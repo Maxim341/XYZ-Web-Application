@@ -220,7 +220,6 @@
 
                         <ul>
 
-                            <li><a href="#">FAQ</a></li>
 
                             <form action="MemberDashboardServlet" method="post">
                                 <button type="Submit" value="logOut" name="button" style="width: 100px">

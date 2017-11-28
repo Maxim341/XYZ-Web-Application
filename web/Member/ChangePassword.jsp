@@ -110,6 +110,7 @@
             <input type="text" id="OPass" placeholder="Current Password" name="currentP">
             <br>
             <label for="lname">New Password</label>
+            <br>
             <input type="text" placeholder="New password" name="newP">
             <br>
 

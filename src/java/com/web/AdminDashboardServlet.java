@@ -10,8 +10,6 @@ import com.model.JDBCWrapper;
 import com.model.User;
 import com.model.XYZWebApplicationDB;
 import java.io.IOException;
-import java.io.PrintWriter;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -36,7 +34,7 @@ public class AdminDashboardServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         XYZWebApplicationDB databaseInterface = new XYZWebApplicationDB((JDBCWrapper)getServletContext().getAttribute("database"));
         String page = "/Theme.jsp";
-        String button = request.getParameter("button");
+        String button = request.getParameter("button"); // Get value of button
         
         HttpSession session = request.getSession();
         session.setAttribute("currentpage", "Admin/adminPage.jsp");
@@ -76,6 +74,16 @@ public class AdminDashboardServlet extends HttpServlet {
             case "approveclaim":
                 Claim c = new Claim(Integer.parseInt(request.getParameter("selectedclaim")), "", null, "", "", (float)0);
                 databaseInterface.approveClaim(c);
+                break;
+            case "suspendresumemember":
+                String userID = request.getParameter("memberSelected");
+                User usr = databaseInterface.getUser(userID);
+                
+                if(usr.getStatus().contains("APPROVED")){
+                    databaseInterface.suspendMemberApplication(usr);
+                } else {
+                    databaseInterface.approveMemberApplication(usr);
+                }
                 break;
         }
         

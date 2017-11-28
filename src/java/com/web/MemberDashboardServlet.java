@@ -36,7 +36,7 @@ public class MemberDashboardServlet extends HttpServlet {
         XYZWebApplicationDB databaseInterface = new XYZWebApplicationDB((JDBCWrapper)getServletContext().getAttribute("database"));
         User u;
         String page = "/Theme.jsp";
-        String button = request.getParameter("button");
+        String button = request.getParameter("button"); // Get value from button
 
         HttpSession session = request.getSession();
         session.setAttribute("currentpage", "Member/memberPage.jsp");
@@ -52,20 +52,25 @@ public class MemberDashboardServlet extends HttpServlet {
                 session.setAttribute("currentpage", "Member/ChangePassword.jsp");
                 break;
             case "password":
+                // Get user input
                 String currentPass = request.getParameter("currentP");
                 String newPass = request.getParameter("newP");
+                // Connect to DB
                 JDBCWrapper wrapper = (JDBCWrapper) getServletContext().getAttribute("database");
                 wrapper.createStatement();
 
                 if (currentPass.trim().isEmpty() || newPass.trim().isEmpty()) {
+                    // Check if user input is empty
                     request.setAttribute("errorMessage", "1 or more field has been left blank");
                     session.setAttribute("currentpage", "Member/ChangePassword.jsp");
                     break;
                 } else if (!(wrapper.findRecord("users", "password", currentPass))) {
+                    // Check if currentPass is valid
                     request.setAttribute("errorMessage2", "Invalid Current Password");
                     session.setAttribute("currentpage", "Member/ChangePassword.jsp");
                     break;
                 } else {
+                    // If valid add new pass to DB
                     u = (User) session.getAttribute("user");
                     u.setPassword(request.getParameter("newP"));
                     databaseInterface.changePassword(u);
@@ -80,7 +85,7 @@ public class MemberDashboardServlet extends HttpServlet {
                     databaseInterface.makeClaim(u, rationale, amount);
                 break;
             case "logOut":
-                session.removeAttribute("user");
+                session.removeAttribute("user"); // remove user session
                 page = "login.jsp";
                 break;
         }
