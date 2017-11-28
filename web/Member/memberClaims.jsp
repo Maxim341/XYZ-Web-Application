@@ -124,7 +124,7 @@
 
     <script>
         function myFunction() {
-
+            
             alert("I need coding to only come up when claims exceeded");
         }
     </script>

@@ -64,9 +64,10 @@
             <table>
                 <thead>
                     <tr>
-                        <th scope="col">Rationale</th>
-                        <th scope="col">Amount</th>
-
+                        <th scope="col">Claim subsidy + Fee charges</th>
+                        <th scope="col">Payments Made</th>
+                        <th scope="col">Outstanding Balance</th>
+                        <th scope="col">Membership Paid</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -74,14 +75,8 @@
 
                 <h2>
                     <%
-                        JDBCWrapper wrapper = (JDBCWrapper) getServletContext().getAttribute("database");
-                        //HttpSession session = request.getSession();
-                        wrapper.createStatement();
-                        ArrayList<Claim> c = (new XYZWebApplicationDB(wrapper).getMemberClaims(((User) session.getAttribute("user")).getId()));
-                        for (int i = 0; i != c.size(); ++i) {
-                            out.println("<tr> <td>  " + c.get(i).getRationale() + "</td> <td> <td>" + c.get(i).getDate());
-
-                        }
+                            out.println("<tr> <td><td>  " + ((OutstandingBalance) request.getAttribute("outstandingbalance")).getCharge() + "</td> <td> <td>" + ((OutstandingBalance) request.getAttribute("outstandingbalance")).getPayments()
+                                    + "</td> <td><td> " + ((OutstandingBalance) request.getAttribute("outstandingbalance")).getTotal() + "</td> <td><td> " + ((OutstandingBalance) request.getAttribute("outstandingbalance")).isPaidMembership());
                     %>
                 </h2>
 
@@ -90,12 +85,6 @@
                 </tbody>
             </table>
         </div>   
-        <%
-            out.print("Claim subsidy + fee charges: " + ((OutstandingBalance)request.getAttribute("outstandingbalance")).getCharge());
-            out.print("Payments made: " + ((OutstandingBalance)request.getAttribute("outstandingbalance")).getPayments());
-            out.print("Outstanding Balance: " + ((OutstandingBalance)request.getAttribute("outstandingbalance")).getTotal());
-            out.print("Has paid Membership: " + ((OutstandingBalance)request.getAttribute("outstandingbalance")).isPaidMembership() + "&emsp;");
-        %>
     </div>
 
     <h2>pay amount or pay fee</h2>
@@ -109,9 +98,9 @@
     </form>
     <br>
     <form action="MemberDashboardServlet" method="post">
-    <button type="Submit" value="payFee" name="button" class='button'>
-        Pay Fee
-    </button>
+        <button type="Submit" value="payFee" name="button" class='button'>
+            Pay Fee
+        </button>
     </form>
 
 
