@@ -33,7 +33,7 @@ public class MemberDashboardServlet extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        XYZWebApplicationDB databaseInterface = new XYZWebApplicationDB((JDBCWrapper)getServletContext().getAttribute("database"));
+        XYZWebApplicationDB databaseInterface = new XYZWebApplicationDB((JDBCWrapper) getServletContext().getAttribute("database"));
         User u;
         String page = "/Theme.jsp";
         String button = request.getParameter("button"); // Get value from button
@@ -83,13 +83,17 @@ public class MemberDashboardServlet extends HttpServlet {
                 u = (User) session.getAttribute("user");
                 String rationale = request.getParameter("rationale");
                 float amount = Float.parseFloat(request.getParameter("amount"));
-                
-                if(!databaseInterface.isClaimLimit(u))
+
+                if (!databaseInterface.isClaimLimit(u)) {
                     databaseInterface.makeClaim(u, rationale, amount);
+                }
                 break;
             case "logOut":
                 session.removeAttribute("user"); // remove user session
                 page = "login.jsp";
+                break;
+            case "backPage":
+                session.setAttribute("currentpage", "Member/memberPage.jsp");
                 break;
         }
         request.getRequestDispatcher(page).forward(request, response);
