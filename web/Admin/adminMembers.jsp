@@ -68,8 +68,8 @@
             </div>
         </div>
         <br>
-        <h2>Approve member:</h2>
-        <h4>Any useful notes to the user to go here...</h4>
+        <h2>Approve membership application:</h2>
+        <h4>Please select a member from the list to approve their application.</h4>
 
         <form action="AdminDashboardServlet" method="post">
             <select name="memberSelected">
@@ -86,7 +86,6 @@
             </button>
         </form>
 
-        -->Add text here  <--
         <br>
         <br>
 

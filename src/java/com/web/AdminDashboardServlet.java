@@ -75,6 +75,16 @@ public class AdminDashboardServlet extends HttpServlet {
                 Claim c = new Claim(Integer.parseInt(request.getParameter("selectedclaim")), "", null, "", "", (float)0);
                 databaseInterface.approveClaim(c);
                 break;
+            case "suspendresumemember":
+                String userID = request.getParameter("memberSelected");
+                User usr = databaseInterface.getUser(userID);
+                
+                if(usr.getStatus().contains("APPROVED")){
+                    databaseInterface.suspendMemberApplication(usr);
+                } else {
+                    databaseInterface.approveMemberApplication(usr);
+                }
+                break;
         }
         
         request.getRequestDispatcher(page).forward(request, response);

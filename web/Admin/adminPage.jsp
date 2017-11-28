@@ -79,7 +79,13 @@
                 Members
             </button>
         </form>
+        <br>
 
+        <form action="AdminDashboardServlet" method="post">
+            <button type="Submit" Value="listApplications" name="button" class='button'>
+                List all provisional applications
+            </button>
+        </form>
         <br>
 
         <form action="AdminDashboardServlet" method="post">
@@ -92,27 +98,6 @@
         <form action="AdminDashboardServlet" method="post">
             <button type="Submit" Value="claims" name="button" class='button'>
                 Claims
-            </button>
-        </form>
-        <br>
-
-        <form action="AdminDashboardServlet" method="post">
-            <button type="Submit" Value="listApplications" name="button" class='button'>
-                List all provisional applications
-            </button>
-        </form>
-        <br>
-
-        <form action="AdminDashboardServlet" method="post">
-            <button type="Submit" Value="processClaim" name="button" class='button'>
-                Process a claim
-            </button>
-        </form>
-        <br>
-
-        <form action="AdminDashboardServlet" method="post">
-            <button type="Submit" Value="processApplication" name="button" class='button'>
-                Process membership application
             </button>
         </form>
         <br>

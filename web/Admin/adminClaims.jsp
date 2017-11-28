@@ -68,13 +68,17 @@
                 </table>
             </div>
         </div>
-        <br>       
+        <br>   
+        
+        <h2>Approve membership application:</h2>
+        <h4>Please select a member from the list to approve their application.</h4>
+        
         <form action="AdminDashboardServlet" method="post">
             <select name="selectedclaim">
                 <%
                     for (int j = 0; j < c.size(); j++) {
                         if(c.get(j).getStatus().equals("APPLIED"))
-                            out.println("<option value=\"" + c.get(j).getId() + "\">" + c.get(j).getId() + "</option>");
+                            out.println("<option value=\"" + c.get(j).getId() + "\">" + c.get(j).getDate() + " (" + c.get(j).getRationale() + ")</option>");
                     }
                 %>
             </select>

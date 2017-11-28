@@ -1,4 +1,4 @@
- <%@page import="java.util.ArrayList"%>
+<%@page import="java.util.ArrayList"%>
 <%@page import="com.model.XYZWebApplicationDB"%>
 <%@page import="com.model.Member"%>
 <%@page import="com.model.JDBCWrapper"%>
@@ -37,16 +37,7 @@
                 width:100%;
                 table-layout:fixed;
             }
-            h2 {
-                text-align: left;
-                margin-left: -200px;
-            }
-            
-            h4 {
-                text-align: left;
-                margin-left: -200px;
-            }
-            
+
         </style>
     </head>
     <body>
@@ -74,22 +65,31 @@
                 </table>
             </div>
         </div>
-                    <br>
-                    <h2>Select a member:</h2>
-                    <h4>Note: You can only suspend or resume membership of an APPROVED member.</h4>
-                    
-                    <form action="adminDashboardServlet" method="post">
-                        <select name="memberSelected">
-                            <%
-                                for (int j = 0; j < m.size(); j++) {
-                                        out.println("<option value=\"" + m.get(j).getUsername() + "\">" + m.get(j).getUsername() + "</option>");
-                                    }
-                            %>
-                        </select>
-                        <br><br>
-                        <input type="submit" >
-                    </form>
-                    
+        <br>
+        <h2>Select a member to Suspend or Resume:</h2>
+        <h4>Note: You can only suspend or resume membership of an APPROVED member.</h4>
+
+        <form action="AdminDashboardServlet" method="post">
+            <select name="memberSelected">
+                <%
+                    for (int j = 0; j < m.size(); j++) {
+                        if(m.get(j).getStatus().equals("APPLIED")){
+                            // DO NOTHING
+                        } else {
+                            out.println("<option value=\"" + m.get(j).getUsername() + "\">" + m.get(j).getUsername() + "</option>");
+                        }
+
+                    }
+                %>
+            </select>
+            <br><br>
+
+            <button type="Submit" value="suspendresumemember" name="button" class='button'>
+                Submit
+            </button>
+
+        </form>
+
         <br>
         <br>
         <form action="AdminDashboardServlet" method="post">
