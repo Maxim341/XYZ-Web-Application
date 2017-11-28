@@ -20,6 +20,11 @@ public class Member {
     
     private String status;
     private float balance;
+
+    public Member() {
+    }
+    
+    
   
     //Constructor
     public Member(String username, String fullName, Address address, Date DOB, Date registration, String status, float balance) {

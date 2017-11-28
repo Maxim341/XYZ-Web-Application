@@ -128,6 +128,27 @@ public class XYZWebApplicationDB {
         return ret;
     }
     
+        /*
+    Name: getMember
+    Parameters: id : String
+    Returns: Member
+    Comments: Gets Member from ID
+    */
+    public Member getMember(String id)
+    {
+        Member ret = new Member();
+        wrapper.createStatement();
+        wrapper.findRecord("members", "id", id);
+        try {
+            String[] addressString = wrapper.getResultSet().getString("address").split(",");
+            Address a = new Address(Integer.parseInt(addressString[0]), addressString[1], addressString[2], addressString[3], addressString[4]);
+            ret = new Member(wrapper.getResultSet().getString("id"), wrapper.getResultSet().getString("name"), a, wrapper.getResultSet().getDate("dob"), wrapper.getResultSet().getDate("dor"), wrapper.getResultSet().getString("status"), wrapper.getResultSet().getFloat("balance"));
+        } catch (SQLException ex) {
+            Logger.getLogger(XYZWebApplicationDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return ret;
+    }
+    
     /*
     Name: getUserPayments
     Parameters: id : String
@@ -166,7 +187,7 @@ public class XYZWebApplicationDB {
             {
                String[] addressString = wrapper.getResultSet().getString("address").split(",");
                Address a = new Address(Integer.parseInt(addressString[0]), addressString[1], addressString[2], addressString[3], addressString[4]);
-               ret.add(new Member(wrapper.getResultSet().getString("id"), wrapper.getResultSet().getString("name"), a, makeDate(wrapper.getResultSet().getString("dob")), makeDate(wrapper.getResultSet().getString("dor")), wrapper.getResultSet().getString("status"), wrapper.getResultSet().getFloat("balance")));
+               ret.add(new Member(wrapper.getResultSet().getString("id"), wrapper.getResultSet().getString("name"), a, wrapper.getResultSet().getDate("dob"), wrapper.getResultSet().getDate("dor"), wrapper.getResultSet().getString("status"), wrapper.getResultSet().getFloat("balance")));
             }while(wrapper.getResultSet().next());
         } catch (SQLException ex) {
             Logger.getLogger(XYZWebApplicationDB.class.getName()).log(Level.SEVERE, null, ex);
@@ -348,9 +369,27 @@ public class XYZWebApplicationDB {
     Name: isWithinLastYear
     Parameters: d : Date
     Returns: boolean
-    Comments: Generic function checks if date passed is whinin now and last year
+    Comments: Generic function checks if date passed is within now and last year.
     */
     public boolean isWithinLastYear(Date d)
+    {
+        //Work out year in milliseconds.
+        long millisecondsInYear = ( (long)365 * 24 * 60 * 60 * 1000 );
+        Date yearAgo = new Date((new Date().getTime()) - millisecondsInYear);
+
+        //If date passed is within now and a year ago today.
+        if(yearAgo.before(d))
+            return true;
+        return false;
+    }
+    
+    /*
+    Name: isWithinLastSixMonths
+    Parameters: d : Date
+    Returns: boolean
+    Comments: Generic function checks if date passed is within now and last six months.
+    */
+    public boolean isWithinLastSixMonths(Date d)
     {
         //Work out year in milliseconds.
         long millisecondsInYear = ( (long)365 * 24 * 60 * 60 * 1000 );

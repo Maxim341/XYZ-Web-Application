@@ -6,6 +6,7 @@
 package com.web;
 
 import com.model.JDBCWrapper;
+import com.model.Member;
 import com.model.User;
 import com.model.XYZWebApplicationDB;
 import java.io.IOException;
@@ -78,10 +79,12 @@ public class MemberDashboardServlet extends HttpServlet {
                 }
             case "makeclaim":
                 u = (User) session.getAttribute("user");
+                Member m = databaseInterface.getMember(u.getId());
                 String rationale = request.getParameter("rationale");
                 float amount = Float.parseFloat(request.getParameter("amount"));
                 
-                if(!databaseInterface.isClaimLimit(u))
+                //Checks if limit exceeded and account is over six months old. (As according to spec)
+                if(!databaseInterface.isClaimLimit(u) && !databaseInterface.isWithinLastSixMonths(m.getRegistration()))
                     databaseInterface.makeClaim(u, rationale, amount);
                 break;
             case "logOut":
