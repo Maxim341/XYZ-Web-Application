@@ -91,13 +91,20 @@
         </div>
     </div>
 
-    <button type="Submit" value="payFee" name="button" class='button'>
-        Pay Fee
-    </button>
+    <h2>pay amount or pay fee</h2>
+
+    <input type="text" id="amount" placeholder="Amount" name="amount">
+    <br>
 
     <button type="Submit" value="PayAmount" name="button" class='button'>
         Pay Amount
     </button>
+    <br>
+    <button type="Submit" value="payFee" name="button" class='button'>
+        Pay Fee
+    </button>
+
+
 
 
     <form action="MemberDashboardServlet" method="post">
