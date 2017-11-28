@@ -39,7 +39,6 @@ public class AdminDashboardServlet extends HttpServlet {
         String button = request.getParameter("button"); // Get value of button
         
         HttpSession session = request.getSession();
-        session.setAttribute("currentpage", "Admin/adminPage.jsp");
         
         switch (button) {
             case "members":
@@ -76,8 +75,12 @@ public class AdminDashboardServlet extends HttpServlet {
                 databaseInterface.approveMemberApplication(u);
                 break;
             case "approveclaim":
-                Claim c = new Claim(Integer.parseInt(request.getParameter("selectedclaim")), "", null, "", "", (float)0);
-                databaseInterface.approveClaim(c);
+                Claim ac = new Claim(Integer.parseInt(request.getParameter("selectedclaim")), "", null, "", "", (float)0);
+                databaseInterface.approveClaim(ac);
+                break;
+            case "rejectclaim":
+                Claim rc = new Claim(Integer.parseInt(request.getParameter("selectedclaim")), "", null, "", "", (float)0);
+                databaseInterface.rejectClaim(rc);
                 break;
             case "suspendresumemember":
                 String userID = request.getParameter("memberSelected");

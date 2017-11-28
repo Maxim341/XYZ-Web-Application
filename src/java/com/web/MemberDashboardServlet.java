@@ -41,7 +41,6 @@ public class MemberDashboardServlet extends HttpServlet {
         String button = request.getParameter("button"); // Get value from button
 
         HttpSession session = request.getSession();
-        session.setAttribute("currentpage", "Member/memberPage.jsp");
 
         switch (button) {
             case "outstandingBalance":
@@ -86,14 +85,20 @@ public class MemberDashboardServlet extends HttpServlet {
                 u = (User) session.getAttribute("user");
                 Member m = databaseInterface.getMember(u.getId());
                 String rationale = request.getParameter("rationale");
-                float amount = Float.parseFloat(request.getParameter("amount"));              
+                float claimAmount = Float.parseFloat(request.getParameter("amount"));              
                 //Checks if account approved and account is over six months old. (As according to spec)
                 if(u.getStatus().trim().equals("APPROVED") && !databaseInterface.isWithinLastSixMonths(m.getRegistration()))
-                    databaseInterface.makeClaim(u, rationale, amount);
+                    databaseInterface.makeClaim(u, rationale, claimAmount);
                 break;
             case "payFee":
                 u = (User) session.getAttribute("user");
-                databaseInterface.makePayment(u, (float)10.0);
+                float feeAmount = (float)10.0;
+                databaseInterface.makePayment(u, "FEE", feeAmount);
+                break;
+            case "payAmount":
+                u = (User) session.getAttribute("user");
+                float payAmount = Float.parseFloat(request.getParameter("amount"));
+                databaseInterface.makePayment(u, "SUBSIDY", payAmount);
                 break;
             case "logOut":
                 session.removeAttribute("user"); // remove user session

@@ -59,7 +59,7 @@ public class XYZWebApplicationDB {
     Returns: void
     Comments: Makes payment in DB
     */
-    public void makePayment(User u, float amount)
+    public void makePayment(User u, String paymentType, float amount)
     {
         wrapper.createStatement();
         wrapper.createResultSet("SELECT * FROM payments");
@@ -67,7 +67,7 @@ public class XYZWebApplicationDB {
 
         try {
             wrapper.getResultSet().last();
-            p = new Payment(wrapper.getResultSet().getInt("id")+1, u.getId(), "FEE", amount, new Time(0), new Date());
+            p = new Payment(wrapper.getResultSet().getInt("id")+1, u.getId(), paymentType, amount, new Time(0), new Date());
         } catch (SQLException ex) {
             Logger.getLogger(XYZWebApplicationDB.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -406,6 +406,22 @@ public class XYZWebApplicationDB {
         wrapper.createStatement();  
         try {
             wrapper.getStatement().executeUpdate("UPDATE claims SET \"status\" = 'APPROVED' WHERE \"id\" = " + c.getId() + "");
+        } catch (SQLException ex) {
+            Logger.getLogger(JDBCWrapper.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    /*
+    Name: approveClaim
+    Parameters: c : Claim
+    Returnns: void
+    Comments: Takes in claim and approves in DB
+    */
+    public void rejectClaim(Claim c)
+    {
+        wrapper.createStatement();  
+        try {
+            wrapper.getStatement().executeUpdate("UPDATE claims SET \"status\" = 'REJECTED' WHERE \"id\" = " + c.getId() + "");
         } catch (SQLException ex) {
             Logger.getLogger(JDBCWrapper.class.getName()).log(Level.SEVERE, null, ex);
         }

@@ -95,16 +95,15 @@
             out.print("Claim subsidy charges: " + ((OutstandingBalance)request.getAttribute("outstandingbalance")).getCharge());
             out.print("Payments made: " + ((OutstandingBalance)request.getAttribute("outstandingbalance")).getPayments());
             out.print("Outstanding Balance: " + ((OutstandingBalance)request.getAttribute("outstandingbalance")).getTotal());
-            
+            out.print("Has paid Membership: " + ((OutstandingBalance)request.getAttribute("outstandingbalance")).isPaidMembership() + "&emsp;");
         %>
     </div>
 
     <h2>pay amount or pay fee</h2>
 
-    <input type="text" id="amount" placeholder="Amount" name="amount">
-    <br>
-
     <form action="MemberDashboardServlet" method="post">
+           <input type="text" id="amount" placeholder="amount" name="amount">
+    <br>
     <button type="Submit" value="payAmount" name="button" class='button'>
         Pay Amount
     </button>

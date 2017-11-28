@@ -5,7 +5,7 @@
 
 
     <h1>
-        Welcome:  <%= ((User) session.getAttribute("user")).getId()%>  
+        Welcome:  <%= ((User) session.getAttribute("user")).getId() + " Account Status: " + ((User) session.getAttribute("user")).getStatus()%>  
     </h1>
 
     <br>
