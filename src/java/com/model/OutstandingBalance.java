@@ -10,9 +10,11 @@ package com.model;
  * @author Harri Renney
  */
 public class OutstandingBalance {
+    private String id;
     private float charge;
     private float payments;
     private float total;
+    private boolean paidMembership;
 
     public OutstandingBalance() {
     }
@@ -23,6 +25,16 @@ public class OutstandingBalance {
         this.total = total;
     }
 
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    
+    
     public float getCharge() {
         return charge;
     }
@@ -45,6 +57,14 @@ public class OutstandingBalance {
 
     public void setTotal(float total) {
         this.total = total;
+    }
+
+    public boolean isPaidMembership() {
+        return paidMembership;
+    }
+
+    public void setPaidMembership(boolean paidMembership) {
+        this.paidMembership = paidMembership;
     }
     
 }

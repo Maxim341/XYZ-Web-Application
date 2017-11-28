@@ -7,9 +7,11 @@ package com.web;
 
 import com.model.Claim;
 import com.model.JDBCWrapper;
+import com.model.OutstandingBalance;
 import com.model.User;
 import com.model.XYZWebApplicationDB;
 import java.io.IOException;
+import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -45,6 +47,8 @@ public class AdminDashboardServlet extends HttpServlet {
                 break;
             case "listAllOutstanding":
                 session.setAttribute("currentpage", "Admin/adminListAllOutstanding.jsp");
+                ArrayList<OutstandingBalance> ob = databaseInterface.getAllOutstandingBalance();
+                request.setAttribute("outstandingbalances", ob);
                 break;
             case "claims":
                 session.setAttribute("currentpage", "Admin/adminClaims.jsp");

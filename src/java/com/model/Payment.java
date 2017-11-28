@@ -25,6 +25,11 @@ public class Payment {
     
     private Date date;
 
+    public Payment() {
+    }
+    
+    
+
     public Payment(int id, String memid, String typeOfPayment, float amount, Time time, Date date) {
         this.id = id;
         this.memId = memid;

@@ -53,6 +53,27 @@ public class XYZWebApplicationDB {
         }
     }
     
+        /*
+    Name: makePayment
+    Parameters: u : user, rationale : String, amount : float
+    Returns: void
+    Comments: Makes payment in DB
+    */
+    public void makePayment(User u, float amount)
+    {
+        wrapper.createStatement();
+        wrapper.createResultSet("SELECT * FROM payments");
+        Payment p = new Payment();
+
+        try {
+            wrapper.getResultSet().last();
+            p = new Payment(wrapper.getResultSet().getInt("id")+1, u.getId(), "FEE", amount, new Time(0), new Date());
+        } catch (SQLException ex) {
+            Logger.getLogger(XYZWebApplicationDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        insertPayment(p);
+    }
+    
     /*
     Name: insertPayment
     Parameters: p : Payment
@@ -61,9 +82,11 @@ public class XYZWebApplicationDB {
     */
     public void insertPayment(Payment p)
     {
+        java.sql.Date sqlDate = new java.sql.Date(p.getDate().getTime());
+        java.sql.Time sqlTime = new java.sql.Time(p.getTime().getTime());
         wrapper.createStatement();
         try {
-            wrapper.getStatement().executeUpdate("insert into payments values ('" + p.getId() + "', '" + p.getMemid() + "', '" + p.getTypeOfPayment() + "', '" + p.getAmount() + "', '" + p.getDate() + "', '" + p.getTime() + "')");
+            wrapper.getStatement().executeUpdate("insert into payments values (" + p.getId() + ", '" + p.getMemid() + "', '" + p.getTypeOfPayment() + "', " + p.getAmount() + ", '" + sqlDate.toString() + "', '" + sqlTime.toString() + "')");
         } catch (SQLException ex) {
             Logger.getLogger(JDBCWrapper.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -206,7 +229,7 @@ public class XYZWebApplicationDB {
         ArrayList ret = new ArrayList<Payment>();
         wrapper.findRecord("payments", "mem_id", id);
         try { 
-            wrapper.getResultSet().next();
+            //wrapper.getResultSet().next();
             do
             {
                ret.add(new Payment(wrapper.getResultSet().getInt("id"), wrapper.getResultSet().getString("mem_id"), wrapper.getResultSet().getString("type_of_payment"), wrapper.getResultSet().getFloat("amount"), wrapper.getResultSet().getTime("time"), wrapper.getResultSet().getDate("date")));
@@ -366,6 +389,7 @@ public class XYZWebApplicationDB {
         wrapper.createStatement();   
         try {
             wrapper.getStatement().executeUpdate("UPDATE users SET \"status\" = 'SUSPENDED' WHERE \"id\" = '" + u.getId() + "'");
+            wrapper.getStatement().executeUpdate("UPDATE members SET \"status\" = 'SUSPENDED' WHERE \"id\" = '" + u.getId() + "'");
         } catch (SQLException ex) {
             Logger.getLogger(JDBCWrapper.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -414,7 +438,7 @@ public class XYZWebApplicationDB {
     public boolean isWithinLastSixMonths(Date d)
     {
         //Work out year in milliseconds.
-        long millisecondsInYear = ( (long)365 * 24 * 60 * 60 * 1000 );
+        long millisecondsInYear = ( (long)180 * 24 * 60 * 60 * 1000 );
         Date yearAgo = new Date((new Date().getTime()) - millisecondsInYear);
 
         //If date passed is within now and a year ago today.
@@ -451,23 +475,31 @@ public class XYZWebApplicationDB {
     public OutstandingBalance calculateOutstandingBalance(User u)
     {
         OutstandingBalance ret = new OutstandingBalance();
+        ret.setId(u.getId());
         
         ArrayList<Claim> claims = getMemberClaims(u.getId());
         ArrayList<Payment> payments = getMemberPayments(u.getId());
         
         for(int i = 0; i != claims.size(); ++i)
         {
-            if(!isWithinLastYear(claims.get(i).getDate()))
+            if(!isWithinLastYear(claims.get(i).getDate()) || !claims.get(i).getStatus().equals("APPROVED"))
+            {
                 claims.remove(i);
+                --i;
+            }
+
         }
         for(int i = 0; i != payments.size(); ++i)
         {
             if(!isWithinLastYear(payments.get(i).getDate()))
-                claims.remove(i);
+            {
+                payments.remove(i);
+                --i;
+            }
         }
         
         boolean paidMembership = false;
-        float charge = 0;
+        float charge = 10;
         float pays = 0;
         for(int i = 0; i != claims.size(); ++i)
         {
@@ -476,15 +508,28 @@ public class XYZWebApplicationDB {
         for(int i = 0; i != payments.size(); ++i)
         {
             pays += payments.get(i).getAmount();
-            if(payments.get(i).getTypeOfPayment().equals("FEE"))
+            if(payments.get(i).getTypeOfPayment().trim().equals("FEE"))
                 paidMembership = true;
         }
-        if(!paidMembership)
-            charge += 10.0;
+        ret.setPaidMembership(paidMembership);
         ret.setCharge(charge);
         ret.setPayments(pays);
         
         ret.setTotal(pays - charge);
+        
+        return ret;
+    }
+    
+    public ArrayList<OutstandingBalance> getAllOutstandingBalance()
+    {
+        ArrayList ret = new ArrayList<OutstandingBalance>();
+        ArrayList<Member> members = getAllMembers();
+        for(int i = 0; i != members.size(); ++i)
+        {
+            User u = new User();
+            u.setId(members.get(i).getUsername());
+            ret.add(calculateOutstandingBalance(u));
+        }
         
         return ret;
     }

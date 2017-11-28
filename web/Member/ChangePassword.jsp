@@ -118,19 +118,27 @@
                 Change Password
             </button>
         </form> 
+
+        <form action="MemberDashboardServlet" method="post">
+            <button type="Submit" Value="backPage" name="button">
+                Back 
+            </button>
+        </form>
+
+
     </div>
 
     <%
         if (null != request.getAttribute("errorMessage2")) {
             out.println(request.getAttribute("errorMessage2"));
-        } 
+        }
     %>
-    
+
     <%
         if (null != request.getAttribute("errorMessage")) {
             out.println(request.getAttribute("errorMessage"));
-        } 
+        }
     %>
-   
+
 
 </html>
