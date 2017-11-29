@@ -11,8 +11,6 @@ import com.model.OutstandingBalance;
 import com.model.User;
 import com.model.XYZWebApplicationDB;
 import java.io.IOException;
-import java.io.PrintWriter;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -92,26 +90,51 @@ public class MemberDashboardServlet extends HttpServlet {
                 }
                 break;
             case "payFee":
+                
+                // IF statement to check if FEE exists in database within last year goes here
+                
+                // Pay set Membership fee
                 u = (User) session.getAttribute("user");
                 float feeAmount = (float) 10.0;
                 databaseInterface.makePayment(u, "FEE", feeAmount);
+
+                // Update outstanding balance
+                OutstandingBalance ob2 = databaseInterface.calculateOutstandingBalance(u);
+                request.setAttribute("outstandingbalance", ob2);
                 break;
             case "payAmount":
+                // Get parameters
+                u = (User) session.getAttribute("user");
                 String amount = request.getParameter("amount");
+                session.setAttribute("currentpage", "Member/OutstandingBalances.jsp");
+
                 if (amount.trim().isEmpty()) {
+                    // Error check empty
                     request.setAttribute("errorMessage", "1 or more field has been left blank");
                     session.setAttribute("currentpage", "Member/OutstandingBalances.jsp");
+
+                    // Update table balance
+                    OutstandingBalance ob3 = databaseInterface.calculateOutstandingBalance(u);
+                    request.setAttribute("outstandingbalance", ob3);
                     break;
-                }
-                try {
-                    u = (User) session.getAttribute("user");
-                    float payAmount = Float.parseFloat(amount);
-                    databaseInterface.makePayment(u, "SUBSIDY", payAmount);
-                    break;
-                } catch (NumberFormatException ex) {
-                    request.setAttribute("errorMessage2", "Payment must be a number");
-                    session.setAttribute("currentpage", "Member/OutstandingBalances.jsp");
-                    break;
+                } else {
+                    try {
+                        // Pay amount
+                        u = (User) session.getAttribute("user");
+                        float payAmount = Float.parseFloat(amount);
+                        databaseInterface.makePayment(u, "SUBSIDY", payAmount);
+                        // Update outstanding balance
+                        OutstandingBalance ob3 = databaseInterface.calculateOutstandingBalance(u);
+                        request.setAttribute("outstandingbalance", ob3);
+                        break;
+                    } catch (NumberFormatException ex) {
+                        // Error if User inters String
+                        request.setAttribute("errorMessage2", "Invalid payment - must be a number");
+                        session.setAttribute("currentpage", "Member/OutstandingBalances.jsp");
+                        OutstandingBalance ob3 = databaseInterface.calculateOutstandingBalance(u);
+                        request.setAttribute("outstandingbalance", ob3);
+                        break;
+                    }
                 }
             case "logOut":
                 session.removeAttribute("user"); // remove user session

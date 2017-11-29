@@ -80,17 +80,7 @@
                     %>
                 </h2>
 
-                <%
-                    if (null != request.getAttribute("errorMessage")) {
-                        out.println(request.getAttribute(""));
-                    }
-                %>
 
-                <%
-                    if (null != request.getAttribute("errorMessage2")) {
-                        out.println(request.getAttribute("errorMessage2"));
-                    }
-                %>
 
 
 
@@ -114,6 +104,15 @@
             Pay Fee
         </button>
     </form>
+
+    <br>
+    <%
+        if (null != request.getAttribute("errorMessage")) {
+            out.println(request.getAttribute("errorMessage"));
+        } else if (null != request.getAttribute("errorMessage2")) {
+            out.println(request.getAttribute("errorMessage2"));
+        }
+    %>
 
 
 
