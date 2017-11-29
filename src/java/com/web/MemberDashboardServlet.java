@@ -112,33 +112,20 @@ public class MemberDashboardServlet extends HttpServlet {
                 session.setAttribute("currentpage", "Member/OutstandingBalances.jsp");
 
                 if (amount.trim().isEmpty()) {
-                    // Error check empty
-                    request.setAttribute("errorMessage", "1 or more field has been left blank");
-                    session.setAttribute("currentpage", "Member/OutstandingBalances.jsp");
-
-                    // Update table balance
-                    OutstandingBalance ob3 = databaseInterface.calculateOutstandingBalance(u);
-                    request.setAttribute("outstandingbalance", ob3);
-                    break;
+                    session.setAttribute("error", "T");
                 } else {
                     try {
                         // Pay amount
                         u = (User) session.getAttribute("user");
                         float payAmount = Float.parseFloat(amount);
                         databaseInterface.makePayment(u, "SUBSIDY", payAmount);
-                        // Update outstanding balance
-                        OutstandingBalance ob3 = databaseInterface.calculateOutstandingBalance(u);
-                        request.setAttribute("outstandingbalance", ob3);
-                        break;
                     } catch (NumberFormatException ex) {
-                        // Error if User inters String
-                        request.setAttribute("errorMessage2", "Invalid payment - must be a number");
-                        session.setAttribute("currentpage", "Member/OutstandingBalances.jsp");
-                        OutstandingBalance ob3 = databaseInterface.calculateOutstandingBalance(u);
-                        request.setAttribute("outstandingbalance", ob3);
-                        break;
+                        session.setAttribute("error", "T");
                     }
                 }
+                OutstandingBalance ob3 = databaseInterface.calculateOutstandingBalance(u);
+                request.setAttribute("outstandingbalance", ob3);
+                break;
             case "logOut":
                 session.removeAttribute("user"); // remove user session
                 page = "login.jsp";

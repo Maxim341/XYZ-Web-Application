@@ -123,6 +123,16 @@
             Back 
         </button>
     </form>
+    
+    <script>
+        myFunction();
+        function myFunction() {
+            if('<%=session.getAttribute("error")%>' === "T")
+            {
+                alert("Incorrect or empty input in text field.");
+            }
+        }
+    </script>
 
 
 </html>
