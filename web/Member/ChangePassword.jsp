@@ -131,11 +131,7 @@
     <%
         if (null != request.getAttribute("errorMessage2")) {
             out.println(request.getAttribute("errorMessage2"));
-        }
-    %>
-
-    <%
-        if (null != request.getAttribute("errorMessage")) {
+        } else if (null != request.getAttribute("errorMessage")) {
             out.println(request.getAttribute("errorMessage"));
         }
     %>

@@ -56,11 +56,9 @@ public class RegServlet extends HttpServlet {
                 String county = request.getParameter("county");
                 String postCode = request.getParameter("postCode");
                 postCode = postCode.toUpperCase();
-                String userID = makeUserID(firstName,lastName); // make userID from name
 
                 try {
-                    Date dob = makeDate(request.getParameter("DOB"));
-                    // Error check
+                    
                     if (isEmpty(firstName, lastName, houseNumber, streetName, city, county, postCode)) {
                         // Check if user input is empty
                         request.setAttribute("errorMessage", "1 or more field has been left blank");
@@ -72,7 +70,11 @@ public class RegServlet extends HttpServlet {
                         RequestDispatcher rd = request.getRequestDispatcher("registrationPage.jsp");
                         rd.forward(request, response);
                     } else {
+                        // Error check
                         Date dor = new Date();
+                        String userID = makeUserID(firstName, lastName); // make userID from name
+                        Date dob = makeDate(request.getParameter("DOB"));
+                
                         Member m = new Member(userID, firstName + " " + lastName, new Address(Integer.parseInt(houseNumber), streetName, city, county, postCode), dob, dor, "APPLIED", 0);
                         User u = new User(userID, User.createPassword(), "APPLIED");
 
@@ -143,13 +145,13 @@ public class RegServlet extends HttpServlet {
         processRequest(request, response);
 
     }
-    
+
     /*
     Name: makeuserID
     Parameters: firstName, lastName : String
     Returnns: String
     Comments: Takes in full name, searches DB to check if exists and makes userID
-    */
+     */
     public String makeUserID(String firstName, String lastName) {
         char initial = firstName.toLowerCase().charAt(0);
         lastName = lastName.toLowerCase();
@@ -173,7 +175,7 @@ public class RegServlet extends HttpServlet {
     Parameters: postcode : String
     Returnns: boolean
     Comments: Takes in postcode and returns true if valid within UK
-    */
+     */
     public boolean isValidPostcode(String postcode) {
         String regex = "^[A-Z]{1,2}[0-9R][0-9A-Z]? [0-9][ABD-HJLNP-UW-Z]{2}$";
         Pattern pattern = Pattern.compile(regex);
@@ -181,13 +183,13 @@ public class RegServlet extends HttpServlet {
 
         return matcher.matches();
     }
-    
+
     /*
     Name: makeDate
     Parameters: date : String
     Returnns: date : Date
     Comments: takes String and turns to Date - throws exception if invalid date
-    */
+     */
     public Date makeDate(String dateParam) throws ParseException {
         Date dob = new Date();
         DateFormat df = new SimpleDateFormat("dd/MM/yy");
@@ -200,7 +202,7 @@ public class RegServlet extends HttpServlet {
     Parameters: userID, fullname, houseNumber, streetName, city, county, postCode : String
     Returnns: boolean
     Comments: Returns true if any String is empty
-    */
+     */
     public boolean isEmpty(String userID, String fullName, String houseNumber, String streetName, String city, String county, String postCode) {
         return userID.trim().isEmpty() || fullName.trim().isEmpty() || houseNumber.trim().isEmpty()
                 || streetName.trim().isEmpty() || city.trim().isEmpty() || county.trim().isEmpty() || postCode.trim().isEmpty();

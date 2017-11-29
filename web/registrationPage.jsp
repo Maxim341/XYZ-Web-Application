@@ -191,38 +191,23 @@
                             <p1><%
                                 if (null != request.getAttribute("errorMessage")) {
                                     out.println(request.getAttribute("errorMessage"));
+                                } else if (null != request.getAttribute("errorMessage2")) {
+                                    out.println(request.getAttribute("errorMessage2"));
+                                } else if (null != request.getAttribute("errorMessage3")) {
+                                    out.println(request.getAttribute("errorMessage3"));
+                                } else if (null != request.getAttribute("errorMessage4")) {
+                                    out.println(request.getAttribute("errorMessage4"));
                                 }
                                 %>
-                            </p1>
-                            <p2>
-                                <%
-                                    if (null != request.getAttribute("errorMessage2")) {
-                                        out.println(request.getAttribute("errorMessage2"));
-                                    }
-                                %>
-                            </p2>
-                            <p3>
-                                <%
-                                    if (null != request.getAttribute("errorMessage3")) {
-                                        out.println(request.getAttribute("errorMessage3"));
-                                    }
-                                %>
-                            </p3>
-                            <p4>
-                                <%
-                                    if (null != request.getAttribute("errorMessage4")) {
-                                        out.println(request.getAttribute("errorMessage4"));
-                                    }
-                                %>
-                            </p4>
-                            <br>
-                            <br>
+                                </p1>
+                                <br>
+                                <br>
 
-                            <form action="Registration" method="post">
-                                <button type="Submit" Value="backPage" name="button" class='button'>
-                                    Back 
-                                </button>
-                            </form>
+                                <form action="Registration" method="post">
+                                    <button type="Submit" Value="backPage" name="button" class='button'>
+                                        Back 
+                                    </button>
+                                </form>
 
 
 
