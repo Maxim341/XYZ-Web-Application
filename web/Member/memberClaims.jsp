@@ -108,7 +108,7 @@
         <br>
         <input type="text" placeholder="amount" name="amount">
         <br>
-        <button type="Submit" value="makeclaim" name="button" class='button' onclick="myFunction()">
+        <button type="Submit" value="makeclaim" name="button" class='button' onclick="myFunction()" onclick="test()">
             Submit Claim
         </button>
     </form> 
@@ -131,6 +131,18 @@
             }
         }
     </script>
+    
+    <script>
+        test();
+        function test() {
+            if('<%=session.getAttribute("error")%>' === "T2")
+            {
+                alert("Incorrect or empty input");
+            }
+        }
+    </script>
+    
+    
 </body>
 
 </html>

@@ -81,19 +81,25 @@ public class MemberDashboardServlet extends HttpServlet {
                     break;
                 }
             case "makeclaim":
-                u = (User) session.getAttribute("user");
-                Member m = databaseInterface.getMember(u.getId());
-                String rationale = request.getParameter("rationale");
-                float claimAmount = Float.parseFloat(request.getParameter("amount"));
-                //Checks if account approved and account is over six months old. (As according to spec)
-                if (u.getStatus().trim().equals("APPROVED") && !databaseInterface.isWithinLastSixMonths(m.getRegistration())) {
-                    databaseInterface.makeClaim(u, rationale, claimAmount);
+                try {
+                    u = (User) session.getAttribute("user");
+                    Member m = databaseInterface.getMember(u.getId());
+                    String rationale = request.getParameter("rationale");
+                    float claimAmount = Float.parseFloat(request.getParameter("amount"));
+                    //Checks if account approved and account is over six months old. (As according to spec)
+
+                    if (u.getStatus().trim().equals("APPROVED") && !databaseInterface.isWithinLastSixMonths(m.getRegistration())) {
+                        databaseInterface.makeClaim(u, rationale, claimAmount);
+                    } else {
+                        session.setAttribute("error", "T");
+                    }
+                } catch (NumberFormatException ex) {
+                    session.setAttribute("error", "T2");
                 }
-                else
-                    session.setAttribute("error", "T");
+
                 break;
             case "payFee":
-                
+
                 // IF statement to check if FEE exists in database within last year goes here
                 
                 // Pay set Membership fee
