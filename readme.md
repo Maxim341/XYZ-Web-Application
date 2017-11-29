@@ -15,7 +15,7 @@
 
 29/10/17 - Fraser
 * Initial start
-*Basic login and communication between view/controller/model
+* Basic login and communication between view/controller/model
 
 30/10/17 - Harri
 *creating wrapper class to deal with database
