@@ -180,7 +180,7 @@
                                         </tr>
                                         <tr>
                                             <td>DOB</td>
-                                            <td><input type="text" name="DOB" placeholder="DD/MM/YY"></td>
+                                            <td><input type="text" name="DOB" placeholder="DD-MM-YY"></td>
                                         </tr>
                                         <tr>
                                             <td><input type="Submit" value="Register" name="button"></td>

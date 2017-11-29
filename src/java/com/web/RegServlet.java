@@ -192,7 +192,7 @@ public class RegServlet extends HttpServlet {
      */
     public Date makeDate(String dateParam) throws ParseException {
         Date dob = new Date();
-        DateFormat df = new SimpleDateFormat("dd/MM/yy");
+        DateFormat df = new SimpleDateFormat("dd-MM-yy");
         dob = df.parse(dateParam);
         return dob;
     }
