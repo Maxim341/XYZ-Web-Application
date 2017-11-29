@@ -38,7 +38,8 @@ public class MemberDashboardServlet extends HttpServlet {
         String page = "/Theme.jsp";
         String button = request.getParameter("button"); // Get value from button
 
-        HttpSession session = request.getSession();
+        HttpSession session = request.getSession();      
+        session.setAttribute("error", "F");
 
         switch (button) {
             case "outstandingBalance":
@@ -88,6 +89,8 @@ public class MemberDashboardServlet extends HttpServlet {
                 if (u.getStatus().trim().equals("APPROVED") && !databaseInterface.isWithinLastSixMonths(m.getRegistration())) {
                     databaseInterface.makeClaim(u, rationale, claimAmount);
                 }
+                else
+                    session.setAttribute("error", "T");
                 break;
             case "payFee":
                 

@@ -99,15 +99,16 @@
         </button>
     </form>
     <br>
-    <form action="MemberDashboardServlet" method="post">
-        <button type="Submit" value="payFee" name="button" class='button'>
-            Pay Fee
-        </button>
-    </form>
+
+    <%
+        if (((OutstandingBalance) request.getAttribute("outstandingbalance")).isPaidMembership() == false) {
+            out.print("<form action=\"MemberDashboardServlet\" method=\"post\"><button type=\"Submit\" value=\"payFee\" name=\"button\" class='button'>Pay Fee</button></form>");
+        }
+
+    %>
 
     <br>
-    <%
-        if (null != request.getAttribute("errorMessage")) {
+    <%        if (null != request.getAttribute("errorMessage")) {
             out.println(request.getAttribute("errorMessage"));
         } else if (null != request.getAttribute("errorMessage2")) {
             out.println(request.getAttribute("errorMessage2"));
