@@ -17,12 +17,31 @@
 * Initial start
 *Basic login and communication between view/controller/model
 
+30/10/17 - Harri
+*creating wrapper class to deal with database
+*adding methods as go along
+
+30/10/17 - Max
+*designed login page JSP
+*designed register page
+*created method to produce random password
+
 31/10/17 - Fraser
 * Trying to read Users
+
 
 1/11/17 - Fraser
 * Added servlets
 * Linked on web.xml
+
+5/11/17- Max 
+*Made table on register jsp
+*added nearly all needed jsp's 
+*member dashboard
+
+6/11/17 - Harri
+*started using sessions
+*looking into filtering
 
 08/11/17 - Fraser
 * Made button switch statement in servlets
