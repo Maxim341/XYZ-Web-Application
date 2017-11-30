@@ -111,9 +111,11 @@ public class MemberDashboardServlet extends HttpServlet {
                 String amount = request.getParameter("amount");
                 session.setAttribute("currentpage", "Member/OutstandingBalances.jsp");
 
-                if (amount.trim().isEmpty()) {
+                if (amount.trim().isEmpty()) 
+                {
                     session.setAttribute("error", "T");
-                } else {
+                } 
+                else {
                     try {
                         // Pay amount
                         u = (User) session.getAttribute("user");
