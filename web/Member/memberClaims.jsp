@@ -127,7 +127,7 @@
         function myFunction() {
             if('<%=session.getAttribute("error")%>' === "T")
             {
-                alert("Your account is not approved to make further claims.\n\nAlso your account needs to be at least 6 months old");
+                alert("Your account is not approved to make further claims.");
             }
         }
     </script>

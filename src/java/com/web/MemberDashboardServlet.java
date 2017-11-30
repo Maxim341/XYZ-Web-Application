@@ -88,7 +88,7 @@ public class MemberDashboardServlet extends HttpServlet {
                     float claimAmount = Float.parseFloat(request.getParameter("amount"));
                     //Checks if account approved and account is over six months old. (As according to spec)
 
-                    if (u.getStatus().trim().equals("APPROVED") && !databaseInterface.isWithinLastSixMonths(m.getRegistration())) {
+                    if (u.getStatus().trim().equals("APPROVED")) {
                         databaseInterface.makeClaim(u, rationale, claimAmount);
                     } else {
                         session.setAttribute("error", "T");
